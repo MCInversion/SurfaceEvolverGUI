@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\build\SurfaceEvolverGUI_autogen\mocs_compilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUIDriver.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\ui_SurfaceEvolverGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.ui" />
+    <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{A9691E7D-8D05-3DC0-8EEA-B760A82F3529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7882C854-F2EB-33A7-A088-69AA53FD2558}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,3 @@
+D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/SurfaceEvolverGUI.dir
+D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/ALL_BUILD.dir
+D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/ZERO_CHECK.dir
