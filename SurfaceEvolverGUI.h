@@ -6,6 +6,17 @@
 #include <QMainWindow>
 #include <QColorDialog>
 
+#include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkNamedColors.h>
+#include <vtkNew.h>
+#include <vtkPolyDataMapper.h>
+#include <vtkProperty.h>
+#include <vtkRenderWindow.h>
+#include <vtkRenderer.h>
+#include <vtkRenderWindowInteractor.h>
+#include <vtkSphereSource.h>
+#include <vtkVersion.h>
+
 // Forward Qt class declarations
 class Ui_SurfaceEvolverGUI;
 
@@ -16,9 +27,16 @@ public:
   // Constructor/Destructor
   SurfaceEvolverGUI();
   ~SurfaceEvolverGUI() = default;
-  void updatePipeline();
-  // sss
   QColor bgColor = QColor("black");
+
+  // ===================================
+  vtkNew <vtkNamedColors> colors;
+  vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
+  vtkNew <vtkPolyDataMapper> sceneMapper;
+  vtkNew <vtkActor> sceneActor;
+  vtkNew <vtkSphereSource> sphereSource;
+  vtkNew <vtkRenderer> renderer;
+  // ===================================
 public slots:
 
   void slotExit();
