@@ -1,6 +1,8 @@
 #ifndef SurfaceEvolverGUI_H
 #define SurfaceEvolverGUI_H
 
+#include "SceneObject.h"
+
 #include <vtkSmartPointer.h>
 
 #include <QMainWindow>
@@ -29,22 +31,24 @@ public:
   ~SurfaceEvolverGUI() = default;
   QColor bgColor = QColor("black");
 
-  // ===================================
-  vtkNew <vtkNamedColors> colors;
-  vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
-  vtkNew <vtkPolyDataMapper> sceneMapper;
-  vtkNew <vtkActor> sceneActor;
-  vtkNew <vtkSphereSource> sphereSource;
-  vtkNew <vtkRenderer> renderer;
-  // ===================================
 public slots:
 
   void slotExit();
-  void ActionOpenColorPicker();
+  void ActionRendererBackgroundColor();
 
 private:
+   // render style
+    bool _vertex = true;
+    bool _wireframe = true;
+    bool _surface = true;
+
   // Designer form
   Ui_SurfaceEvolverGUI* ui;
+  
+  std::vector<SceneObject> sceneObjects = { };
+  // === vtk ====
+  vtkNew <vtkGenericOpenGLRenderWindow> renderWindow;
+  vtkNew <vtkRenderer> renderer;
 };
 
 #endif

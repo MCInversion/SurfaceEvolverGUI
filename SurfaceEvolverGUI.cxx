@@ -19,11 +19,51 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
 #else
     this->ui->qvtkWidget->SetRenderWindow(renderWindow);
 #endif
-    sphereSource->Update();
-    sceneMapper->SetInputConnection(sphereSource->GetOutputPort());
-    sceneActor->SetMapper(sceneMapper);
-    sceneActor->GetProperty()->SetColor(colors->GetColor4d("Tomato").GetData());
-    renderer->AddActor(sceneActor);
+
+    vtkNew<vtkNamedColors> colors;
+    vtkNew<vtkSphereSource> source;
+    source->Update();
+
+    if (_vertex) {
+        vtkNew<vtkActor> vertexActor;
+        vtkNew<vtkPolyDataMapper> vertexMapper;
+        vertexMapper->SetInputConnection(source->GetOutputPort());
+        vertexActor->GetProperty()->SetRepresentationToPoints();
+        vertexActor->SetMapper(vertexMapper);
+        vertexActor->GetProperty()->SetAmbient(1.0);
+        vertexActor->GetProperty()->SetDiffuse(0.0);
+        vertexActor->GetProperty()->SetSpecular(0.0);
+        vertexActor->GetProperty()->SetColor(colors->GetColor4d("black").GetData());
+        vertexActor->GetProperty()->SetPointSize(8.0);
+        renderer->AddActor(vertexActor);
+    }
+
+    if (_wireframe) {
+        vtkNew<vtkActor> edgeActor;
+        vtkNew<vtkPolyDataMapper> edgeMapper;
+        edgeMapper->SetInputConnection(source->GetOutputPort());
+        edgeActor->GetProperty()->SetRepresentationToWireframe();
+
+        edgeActor->SetMapper(edgeMapper);
+        edgeActor->GetProperty()->SetAmbient(1.0);
+        edgeActor->GetProperty()->SetDiffuse(0.0);
+        edgeActor->GetProperty()->SetSpecular(0.0);
+        edgeActor->GetProperty()->SetColor(colors->GetColor4d("midnightblue").GetData());
+        edgeActor->GetProperty()->SetLineWidth(2.0);
+        renderer->AddActor(edgeActor);
+    }
+
+    if (_surface) {
+        vtkNew<vtkActor> surfaceActor;
+        vtkNew<vtkPolyDataMapper> surfaceMapper;
+        surfaceMapper->SetInputConnection(source->GetOutputPort());
+        surfaceActor->GetProperty()->SetRepresentationToSurface();
+
+        surfaceActor->SetMapper(surfaceMapper);
+        surfaceActor->GetProperty()->SetColor(colors->GetColor4d("mintcream").GetData());
+        surfaceActor->GetProperty()->SetInterpolationToFlat();
+        renderer->AddActor(surfaceActor);
+    }
 
     double r = (double)this->bgColor.red() / 255.;
     double g = (double)this->bgColor.green() / 255.;
@@ -49,9 +89,9 @@ void SurfaceEvolverGUI::slotExit()
   qApp->exit();
 }
 
-void SurfaceEvolverGUI::ActionOpenColorPicker()
+void SurfaceEvolverGUI::ActionRendererBackgroundColor()
 {
-    this->bgColor = QColorDialog::getColor(Qt::black, this);
+    this->bgColor = QColorDialog::getColor(this->bgColor, this);
 
     // Qt ui update
     QPixmap pixmap(100, 100);

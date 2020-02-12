@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SurfaceEvolverGUI_t {
     QByteArrayData data[4];
-    char stringdata0[50];
+    char stringdata0[58];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,11 +35,11 @@ static const qt_meta_stringdata_SurfaceEvolverGUI_t qt_meta_stringdata_SurfaceEv
 QT_MOC_LITERAL(0, 0, 17), // "SurfaceEvolverGUI"
 QT_MOC_LITERAL(1, 18, 8), // "slotExit"
 QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 21) // "ActionOpenColorPicker"
+QT_MOC_LITERAL(3, 28, 29) // "ActionRendererBackgroundColor"
 
     },
     "SurfaceEvolverGUI\0slotExit\0\0"
-    "ActionOpenColorPicker"
+    "ActionRendererBackgroundColor"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +74,7 @@ void SurfaceEvolverGUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->slotExit(); break;
-        case 1: _t->ActionOpenColorPicker(); break;
+        case 1: _t->ActionRendererBackgroundColor(); break;
         default: ;
         }
     }

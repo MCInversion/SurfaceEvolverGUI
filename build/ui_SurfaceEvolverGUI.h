@@ -130,7 +130,7 @@ public:
         menuFile->addAction(actionSave);
 
         retranslateUi(SurfaceEvolverGUI);
-        QObject::connect(bgColorButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionOpenColorPicker()));
+        QObject::connect(bgColorButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionRendererBackgroundColor()));
 
         QMetaObject::connectSlotsByName(SurfaceEvolverGUI);
     } // setupUi

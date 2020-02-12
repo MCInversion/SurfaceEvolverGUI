@@ -439,8 +439,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\build\SurfaceEvolverGUI_autogen\mocs_compilation.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.cxx" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUIDriver.cxx" />
+    <ClCompile Include="SceneObject.cpp" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\ui_SurfaceEvolverGUI.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.h" />
+    <ClInclude Include="SceneObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\VS_Projects\SurfaceEvolverGUI\build\ZERO_CHECK.vcxproj">
