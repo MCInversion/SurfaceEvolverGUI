@@ -1,5 +1,8 @@
-        horizontalSpacer = new QSpacerItem(150, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
+        
+	// right menu horizontal spacer
+	horizontalSpacer = new QSpacerItem(150, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
+	// bg color button
         QPixmap pixmap(100, 100);
         pixmap.fill(QColor("black"));
         QIcon bgIcon(pixmap);

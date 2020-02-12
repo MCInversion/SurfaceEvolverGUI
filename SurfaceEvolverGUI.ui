@@ -64,6 +64,58 @@
        </layout>
       </item>
       <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>110</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>Render mode:</string>
+        </property>
+        <widget class="QWidget" name="horizontalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>90</width>
+           <height>76</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="checkBoxVertices">
+            <property name="text">
+             <string>Vertices</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxWireframe">
+            <property name="text">
+             <string>Wireframe</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxSurface">
+            <property name="text">
+             <string>Surface</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -167,7 +219,7 @@
    <sender>bgColorButton</sender>
    <signal>clicked()</signal>
    <receiver>SurfaceEvolverGUI</receiver>
-   <slot>ActionOpenColorPicker()</slot>
+   <slot>ActionRendererBackgroundColor()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>513</x>
@@ -179,8 +231,59 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>checkBoxVertices</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionRenderVertices()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>555</x>
+     <y>103</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>519</x>
+     <y>26</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxWireframe</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionRenderWireframe()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>526</x>
+     <y>137</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>530</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxSurface</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionRenderSurface()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>543</x>
+     <y>156</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>88</x>
+     <y>27</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>ActionOpenColorPicker()</slot>
+  <slot>ActionRendererBackgroundColor()</slot>
+  <slot>ActionRenderVertices()</slot>
+  <slot>ActionRenderWireframe()</slot>
+  <slot>ActionRenderSurface()</slot>
  </slots>
 </ui>

@@ -12,6 +12,8 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -42,6 +44,12 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QToolButton *bgColorButton;
     QLabel *bgColorLabel;
+    QGroupBox *groupBox;
+    QWidget *horizontalLayoutWidget;
+    QVBoxLayout *verticalLayout_3;
+    QCheckBox *checkBoxVertices;
+    QCheckBox *checkBoxWireframe;
+    QCheckBox *checkBoxSurface;
     QSpacerItem *horizontalSpacer;
     QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
@@ -89,6 +97,7 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setSizeConstraint(QLayout::SetMaximumSize);
 
+        // bg color button
         QPixmap pixmap(100, 100);
         pixmap.fill(QColor("black"));
         QIcon bgIcon(pixmap);
@@ -106,6 +115,36 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        groupBox = new QGroupBox(centralwidget);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setMinimumSize(QSize(0, 110));
+        horizontalLayoutWidget = new QWidget(groupBox);
+        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(0, 20, 90, 76));
+        verticalLayout_3 = new QVBoxLayout(horizontalLayoutWidget);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        checkBoxVertices = new QCheckBox(horizontalLayoutWidget);
+        checkBoxVertices->setObjectName(QString::fromUtf8("checkBoxVertices"));
+
+        verticalLayout_3->addWidget(checkBoxVertices);
+
+        checkBoxWireframe = new QCheckBox(horizontalLayoutWidget);
+        checkBoxWireframe->setObjectName(QString::fromUtf8("checkBoxWireframe"));
+        checkBoxWireframe->setChecked(true);
+
+        verticalLayout_3->addWidget(checkBoxWireframe);
+
+        checkBoxSurface = new QCheckBox(horizontalLayoutWidget);
+        checkBoxSurface->setObjectName(QString::fromUtf8("checkBoxSurface"));
+        checkBoxSurface->setChecked(true);
+
+        verticalLayout_3->addWidget(checkBoxSurface);
+
+
+        verticalLayout->addWidget(groupBox);
+
+        // right menu horizontal spacer
         horizontalSpacer = new QSpacerItem(150, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
         verticalLayout->addItem(horizontalSpacer);
@@ -131,6 +170,9 @@ public:
 
         retranslateUi(SurfaceEvolverGUI);
         QObject::connect(bgColorButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionRendererBackgroundColor()));
+        QObject::connect(checkBoxVertices, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionRenderVertices()));
+        QObject::connect(checkBoxWireframe, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionRenderWireframe()));
+        QObject::connect(checkBoxSurface, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionRenderSurface()));
 
         QMetaObject::connectSlotsByName(SurfaceEvolverGUI);
     } // setupUi
@@ -152,6 +194,10 @@ public:
 #endif // QT_CONFIG(shortcut)
         bgColorButton->setText(QString());
         bgColorLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Background color", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Render mode:", nullptr));
+        checkBoxVertices->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Vertices", nullptr));
+        checkBoxWireframe->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Wireframe", nullptr));
+        checkBoxSurface->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Surface", nullptr));
         menuFile->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "File", nullptr));
     } // retranslateUi
 

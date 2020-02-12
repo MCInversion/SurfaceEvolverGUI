@@ -19,9 +19,35 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
 #else
     this->ui->qvtkWidget->SetRenderWindow(renderWindow);
 #endif
+    this->updateRenderedObjects();   
 
-    vtkNew<vtkNamedColors> colors;
-    vtkNew<vtkSphereSource> source;
+    double r = (double)this->bgColor.red() / 255.;
+    double g = (double)this->bgColor.green() / 255.;
+    double b = (double)this->bgColor.blue() / 255.;
+    renderer->SetBackground(r, g, b);
+
+    // VTK/Qt wedded
+#if VTK890
+    this->ui->qvtkWidget->renderWindow()->AddRenderer(renderer);
+    this->ui->qvtkWidget->renderWindow()->SetWindowName(
+        "SurfaceEvolverGUI");
+#else
+    this->ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
+    this->ui->qvtkWidget->GetRenderWindow()->SetWindowName(
+        "SurfaceEvolverGUI");
+#endif
+    // Set up action signals and slots
+    connect(this->ui->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
+}
+
+void SurfaceEvolverGUI::slotExit()
+{
+  qApp->exit();
+}
+
+void SurfaceEvolverGUI::updateRenderedObjects()
+{
+    renderer->RemoveAllViewProps();
     source->Update();
 
     if (_vertex) {
@@ -64,29 +90,7 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
         surfaceActor->GetProperty()->SetInterpolationToFlat();
         renderer->AddActor(surfaceActor);
     }
-
-    double r = (double)this->bgColor.red() / 255.;
-    double g = (double)this->bgColor.green() / 255.;
-    double b = (double)this->bgColor.blue() / 255.;
-    renderer->SetBackground(r, g, b);
-
-    // VTK/Qt wedded
-#if VTK890
-    this->ui->qvtkWidget->renderWindow()->AddRenderer(renderer);
-    this->ui->qvtkWidget->renderWindow()->SetWindowName(
-        "SurfaceEvolverGUI");
-#else
-    this->ui->qvtkWidget->GetRenderWindow()->AddRenderer(renderer);
-    this->ui->qvtkWidget->GetRenderWindow()->SetWindowName(
-        "SurfaceEvolverGUI");
-#endif
-    // Set up action signals and slots
-    connect(this->ui->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
-}
-
-void SurfaceEvolverGUI::slotExit()
-{
-  qApp->exit();
+    this->ui->qvtkWidget->GetRenderWindow()->Render();
 }
 
 void SurfaceEvolverGUI::ActionRendererBackgroundColor()
@@ -104,4 +108,22 @@ void SurfaceEvolverGUI::ActionRendererBackgroundColor()
     double b = (double)this->bgColor.blue() / 255.;
     renderer->SetBackground(r, g, b);
     this->ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
+void SurfaceEvolverGUI::ActionRenderVertices()
+{
+    this->_vertex = this->ui->checkBoxVertices->isChecked();
+    this->updateRenderedObjects();
+}
+
+void SurfaceEvolverGUI::ActionRenderWireframe()
+{
+    this->_wireframe = this->ui->checkBoxWireframe->isChecked();
+    this->updateRenderedObjects();
+}
+
+void SurfaceEvolverGUI::ActionRenderSurface()
+{
+    this->_surface = this->ui->checkBoxSurface->isChecked();
+    this->updateRenderedObjects();
 }

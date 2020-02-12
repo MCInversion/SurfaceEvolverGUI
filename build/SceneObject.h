@@ -32,6 +32,9 @@ public:
 	SceneObject();
 	SceneObject(const SceneObject& other);
 	~SceneObject() = default;
+
+	void sendActorToRenderer(int representationId, vtkRenderer* renderer);
+	void initMesh();
 };
 
 #endif
