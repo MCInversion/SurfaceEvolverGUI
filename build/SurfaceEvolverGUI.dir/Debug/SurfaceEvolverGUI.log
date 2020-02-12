@@ -1,5 +1,3 @@
 ﻿  Automatic MOC for target SurfaceEvolverGUI
   SurfaceEvolverGUI.cxx
-  mocs_compilation.cpp
-  Generating Code...
   SurfaceEvolverGUI.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\Debug\SurfaceEvolverGUI.exe

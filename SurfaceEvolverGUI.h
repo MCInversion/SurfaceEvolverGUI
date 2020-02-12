@@ -4,6 +4,7 @@
 #include <vtkSmartPointer.h>
 
 #include <QMainWindow>
+#include <QColorDialog>
 
 // Forward Qt class declarations
 class Ui_SurfaceEvolverGUI;
@@ -15,10 +16,13 @@ public:
   // Constructor/Destructor
   SurfaceEvolverGUI();
   ~SurfaceEvolverGUI() = default;
+  void updatePipeline();
   // sss
+  QColor bgColor = QColor("black");
 public slots:
 
   void slotExit();
+  void ActionOpenColorPicker();
 
 private:
   // Designer form

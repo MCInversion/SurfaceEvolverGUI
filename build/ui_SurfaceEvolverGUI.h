@@ -13,9 +13,13 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "QVTKOpenGLNativeWidget.h"
 
@@ -32,7 +36,14 @@ public:
     QAction *actionSave;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_2;
     QVTKOpenGLNativeWidget *qvtkWidget;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_2;
+    QToolButton *bgColorButton;
+    QLabel *bgColorLabel;
+    QSpacerItem *horizontalSpacer;
+    QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
     QMenu *menuFile;
 
@@ -40,7 +51,8 @@ public:
     {
         if (SurfaceEvolverGUI->objectName().isEmpty())
             SurfaceEvolverGUI->setObjectName(QString::fromUtf8("SurfaceEvolverGUI"));
-        SurfaceEvolverGUI->resize(637, 641);
+        SurfaceEvolverGUI->resize(991, 641);
+        SurfaceEvolverGUI->setMaximumSize(QSize(16777213, 16777215));
         actionOpenFile = new QAction(SurfaceEvolverGUI);
         actionOpenFile->setObjectName(QString::fromUtf8("actionOpenFile"));
         actionOpenFile->setEnabled(true);
@@ -56,17 +68,59 @@ public:
         actionSave->setObjectName(QString::fromUtf8("actionSave"));
         centralwidget = new QWidget(SurfaceEvolverGUI);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        centralwidget->setMaximumSize(QSize(16777215, 16777215));
         horizontalLayout = new QHBoxLayout(centralwidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         qvtkWidget = new QVTKOpenGLNativeWidget(centralwidget);
         qvtkWidget->setObjectName(QString::fromUtf8("qvtkWidget"));
 
-        horizontalLayout->addWidget(qvtkWidget);
+        verticalLayout_2->addWidget(qvtkWidget);
+
+
+        horizontalLayout->addLayout(verticalLayout_2);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetMaximumSize);
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(5);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setSizeConstraint(QLayout::SetMaximumSize);
+
+        QPixmap pixmap(100, 100);
+        pixmap.fill(QColor("black"));
+        QIcon bgIcon(pixmap);
+        bgColorButton = new QToolButton(centralwidget);
+        bgColorButton->setIcon(bgIcon);
+        bgColorButton->setObjectName(QString::fromUtf8("bgColorButton"));
+
+        horizontalLayout_2->addWidget(bgColorButton);
+
+        bgColorLabel = new QLabel(centralwidget);
+        bgColorLabel->setObjectName(QString::fromUtf8("bgColorLabel"));
+
+        horizontalLayout_2->addWidget(bgColorLabel);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalSpacer = new QSpacerItem(150, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
+
+        verticalLayout->addItem(horizontalSpacer);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer);
+
+
+        horizontalLayout->addLayout(verticalLayout);
 
         SurfaceEvolverGUI->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(SurfaceEvolverGUI);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 637, 26));
+        menuBar->setGeometry(QRect(0, 0, 991, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         SurfaceEvolverGUI->setMenuBar(menuBar);
@@ -76,6 +130,7 @@ public:
         menuFile->addAction(actionSave);
 
         retranslateUi(SurfaceEvolverGUI);
+        QObject::connect(bgColorButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionOpenColorPicker()));
 
         QMetaObject::connectSlotsByName(SurfaceEvolverGUI);
     } // setupUi
@@ -95,6 +150,8 @@ public:
 #if QT_CONFIG(shortcut)
         actionSave->setShortcut(QCoreApplication::translate("SurfaceEvolverGUI", "Ctrl+S", nullptr));
 #endif // QT_CONFIG(shortcut)
+        bgColorButton->setText(QString());
+        bgColorLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Background color", nullptr));
         menuFile->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "File", nullptr));
     } // retranslateUi
 
