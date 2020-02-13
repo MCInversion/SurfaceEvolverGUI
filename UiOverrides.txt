@@ -9,3 +9,24 @@
         bgColorButton = new QToolButton(centralwidget);
         bgColorButton->setIcon(bgIcon);
         bgColorButton->setObjectName(QString::fromUtf8("bgColorButton"));
+
+
+        /**/
+        // ========= set camera ================
+        // up vector:
+        double up[3] = { 0., 0., 1. };
+        // distance:
+        polyData->ComputeBounds();
+        double bounds[6]; vtkIdType id = 0;
+        polyData->GetCellBounds(id, bounds);
+        // focus:
+        double focus[3] = { bounds[3] - bounds[0], bounds[4] - bounds[1], 0. };
+        double distance = std::max(focus[0], focus[1]);
+
+        auto camera = renderer->GetActiveCamera();
+        camera->SetFocalPoint(focus);
+        camera->SetViewUp(up);
+        camera->SetDistance(distance);
+        // --------------------------------------
+
+D:\VTK\lib\vtkIOLegacy-8.2.lib

@@ -48,13 +48,23 @@ void SurfaceEvolverGUI::slotExit()
 void SurfaceEvolverGUI::updateRenderedObjects()
 {
     renderer->RemoveAllViewProps();
-    source->Update();
+
+    if (!_polyDataLoaded) {
+        source->Update();
+    }    
 
     if (_vertex) {
         vtkNew<vtkActor> vertexActor;
         vtkNew<vtkPolyDataMapper> vertexMapper;
-        vertexMapper->SetInputConnection(source->GetOutputPort());
+
+        if (_polyDataLoaded) {
+            vertexMapper->SetInputData(polyData);
+        }
+        else {
+            vertexMapper->SetInputConnection(source->GetOutputPort());
+        }        
         vertexActor->GetProperty()->SetRepresentationToPoints();
+
         vertexActor->SetMapper(vertexMapper);
         vertexActor->GetProperty()->SetAmbient(1.0);
         vertexActor->GetProperty()->SetDiffuse(0.0);
@@ -67,7 +77,13 @@ void SurfaceEvolverGUI::updateRenderedObjects()
     if (_wireframe) {
         vtkNew<vtkActor> edgeActor;
         vtkNew<vtkPolyDataMapper> edgeMapper;
-        edgeMapper->SetInputConnection(source->GetOutputPort());
+
+        if (_polyDataLoaded) {
+            edgeMapper->SetInputData(polyData);
+        }
+        else {
+            edgeMapper->SetInputConnection(source->GetOutputPort());
+        }
         edgeActor->GetProperty()->SetRepresentationToWireframe();
 
         edgeActor->SetMapper(edgeMapper);
@@ -82,7 +98,13 @@ void SurfaceEvolverGUI::updateRenderedObjects()
     if (_surface) {
         vtkNew<vtkActor> surfaceActor;
         vtkNew<vtkPolyDataMapper> surfaceMapper;
-        surfaceMapper->SetInputConnection(source->GetOutputPort());
+
+        if (_polyDataLoaded) {
+            surfaceMapper->SetInputData(polyData);
+        }
+        else {
+            surfaceMapper->SetInputConnection(source->GetOutputPort());
+        }
         surfaceActor->GetProperty()->SetRepresentationToSurface();
 
         surfaceActor->SetMapper(surfaceMapper);
@@ -91,6 +113,24 @@ void SurfaceEvolverGUI::updateRenderedObjects()
         renderer->AddActor(surfaceActor);
     }
     this->ui->qvtkWidget->GetRenderWindow()->Render();
+}
+
+void SurfaceEvolverGUI::fitToView()
+{
+    // up vector:
+    double up[3] = { 0., 0., 1. };
+    // distance:
+    polyData->ComputeBounds();
+    double bounds[6]; vtkIdType id = 0;
+    polyData->GetCellBounds(id, bounds);
+    // focus:
+    double focus[3] = { bounds[3] - bounds[0], bounds[4] - bounds[1], 0. };
+    double distance = std::max(focus[0], focus[1]);
+
+    auto camera = renderer->GetActiveCamera();
+    camera->SetFocalPoint(focus);
+    camera->SetViewUp(up);
+    camera->SetDistance(distance);
 }
 
 void SurfaceEvolverGUI::ActionRendererBackgroundColor()
@@ -126,4 +166,56 @@ void SurfaceEvolverGUI::ActionRenderSurface()
 {
     this->_surface = this->ui->checkBoxSurface->isChecked();
     this->updateRenderedObjects();
+}
+
+void SurfaceEvolverGUI::ActionOpenFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "VTK files (*.vtk)");
+    if (!fileName.isEmpty()) {
+        const char* filename = fileName.toStdString().c_str();
+        polyData = ReadPolyData(filename);
+        _polyDataLoaded = true; // polyData->GetVerts()->GetSize() > 0;
+
+        this->updateRenderedObjects();
+        // if (_polyDataLoaded) this->fitToView();
+    }
+}
+
+void SurfaceEvolverGUI::ActionSaveFile()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save VTK file"), "", tr("VTK file (*.vtk)"));
+    if (fileName.isEmpty()) {
+        return;
+    }
+    else {
+        QFile file(fileName);
+    }
+}
+
+namespace {
+    vtkSmartPointer<vtkPolyData> ReadPolyData(const char* fileName)
+    {
+        vtkSmartPointer<vtkPolyData> polyData;
+
+        std::string extension =
+            vtksys::SystemTools::GetFilenameLastExtension(std::string(fileName));
+
+        // Drop the case of the extension
+        std::transform(extension.begin(), extension.end(),
+            extension.begin(), ::tolower);
+
+        if (extension == ".vtk") {
+            auto reader = vtkSmartPointer<vtkPolyDataReader>::New();
+            reader->SetFileName(fileName);
+            reader->Update();
+            polyData = reader->GetOutput();
+        }
+        else {
+            auto source = vtkSmartPointer<vtkSphereSource>::New();
+            source->Update();
+            polyData = source->GetOutput();
+        }
+
+        return polyData;
+    }
 }

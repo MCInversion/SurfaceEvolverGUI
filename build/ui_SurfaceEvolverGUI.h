@@ -30,7 +30,6 @@ QT_BEGIN_NAMESPACE
 class Ui_SurfaceEvolverGUI
 {
 public:
-    QAction *actionOpenFile;
     QAction *actionExit;
     QAction *actionPrint;
     QAction *actionHelp;
@@ -61,9 +60,6 @@ public:
             SurfaceEvolverGUI->setObjectName(QString::fromUtf8("SurfaceEvolverGUI"));
         SurfaceEvolverGUI->resize(991, 641);
         SurfaceEvolverGUI->setMaximumSize(QSize(16777213, 16777215));
-        actionOpenFile = new QAction(SurfaceEvolverGUI);
-        actionOpenFile->setObjectName(QString::fromUtf8("actionOpenFile"));
-        actionOpenFile->setEnabled(true);
         actionExit = new QAction(SurfaceEvolverGUI);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
         actionPrint = new QAction(SurfaceEvolverGUI);
@@ -169,6 +165,11 @@ public:
         menuFile->addAction(actionSave);
 
         retranslateUi(SurfaceEvolverGUI);
+        // file ctrls
+        QObject::connect(actionOpen, SIGNAL(triggered()), SurfaceEvolverGUI, SLOT(ActionOpenFile()));
+        QObject::connect(actionSave, SIGNAL(triggered()), SurfaceEvolverGUI, SLOT(ActionSaveFile()));
+
+        // render ctrls
         QObject::connect(bgColorButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionRendererBackgroundColor()));
         QObject::connect(checkBoxVertices, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionRenderVertices()));
         QObject::connect(checkBoxWireframe, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionRenderWireframe()));
@@ -180,7 +181,6 @@ public:
     void retranslateUi(QMainWindow *SurfaceEvolverGUI)
     {
         SurfaceEvolverGUI->setWindowTitle(QCoreApplication::translate("SurfaceEvolverGUI", "SurfaceEvolverGUI", nullptr));
-        actionOpenFile->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Open File...", nullptr));
         actionExit->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Exit", nullptr));
         actionPrint->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Print", nullptr));
         actionHelp->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Help", nullptr));

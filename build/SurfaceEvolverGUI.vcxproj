@@ -310,7 +310,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PreBuildEvent>
     <Link>
-      <AdditionalDependencies>D:\VTK\lib\vtkGUISupportQt-8.2.lib;D:\VTK\lib\vtkInteractionStyle-8.2.lib;D:\VTK\lib\vtkRenderingContextOpenGL2-8.2.lib;D:\VTK\lib\vtkRenderingContext2D-8.2.lib;D:\VTK\lib\vtkRenderingFreeType-8.2.lib;D:\VTK\lib\vtkfreetype-8.2.lib;D:\VTK\lib\vtkRenderingGL2PSOpenGL2-8.2.lib;D:\VTK\lib\vtkgl2ps-8.2.lib;D:\VTK\lib\vtkpng-8.2.lib;D:\VTK\lib\vtkFiltersExtraction-8.2.lib;D:\VTK\lib\vtkFiltersStatistics-8.2.lib;D:\VTK\lib\vtkImagingFourier-8.2.lib;D:\Qt\5.13.2\msvc2017_64\lib\Qt5Widgets.lib;D:\Qt\5.13.2\msvc2017_64\lib\Qt5Gui.lib;D:\Qt\5.13.2\msvc2017_64\lib\Qt5Core.lib;D:\VTK\lib\vtkImagingCore-8.2.lib;D:\VTK\lib\vtkRenderingOpenGL2-8.2.lib;D:\VTK\lib\vtkRenderingCore-8.2.lib;D:\VTK\lib\vtkFiltersSources-8.2.lib;D:\VTK\lib\vtkFiltersGeneral-8.2.lib;D:\VTK\lib\vtkCommonComputationalGeometry-8.2.lib;D:\VTK\lib\vtkCommonColor-8.2.lib;D:\VTK\lib\vtkFiltersGeometry-8.2.lib;D:\VTK\lib\vtkFiltersCore-8.2.lib;D:\VTK\lib\vtkCommonExecutionModel-8.2.lib;D:\VTK\lib\vtkCommonDataModel-8.2.lib;D:\VTK\lib\vtkCommonTransforms-8.2.lib;D:\VTK\lib\vtkCommonMisc-8.2.lib;D:\VTK\lib\vtkCommonMath-8.2.lib;D:\VTK\lib\vtkCommonSystem-8.2.lib;D:\VTK\lib\vtkCommonCore-8.2.lib;D:\VTK\lib\vtksys-8.2.lib;ws2_32.lib;Psapi.lib;D:\VTK\lib\vtkglew-8.2.lib;D:\VTK\lib\vtkzlib-8.2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>D:\VTK\lib\vtkGUISupportQt-8.2.lib;D:\VTK\lib\vtkInteractionStyle-8.2.lib;D:\VTK\lib\vtkRenderingContextOpenGL2-8.2.lib;D:\VTK\lib\vtkRenderingContext2D-8.2.lib;D:\VTK\lib\vtkRenderingFreeType-8.2.lib;D:\VTK\lib\vtkfreetype-8.2.lib;D:\VTK\lib\vtkRenderingGL2PSOpenGL2-8.2.lib;D:\VTK\lib\vtkgl2ps-8.2.lib;D:\VTK\lib\vtkpng-8.2.lib;D:\VTK\lib\vtkFiltersExtraction-8.2.lib;D:\VTK\lib\vtkFiltersStatistics-8.2.lib;D:\VTK\lib\vtkImagingFourier-8.2.lib;D:\Qt\5.13.2\msvc2017_64\lib\Qt5Widgets.lib;D:\Qt\5.13.2\msvc2017_64\lib\Qt5Gui.lib;D:\Qt\5.13.2\msvc2017_64\lib\Qt5Core.lib;D:\VTK\lib\vtkImagingCore-8.2.lib;D:\VTK\lib\vtkRenderingOpenGL2-8.2.lib;D:\VTK\lib\vtkRenderingCore-8.2.lib;D:\VTK\lib\vtkFiltersSources-8.2.lib;D:\VTK\lib\vtkFiltersGeneral-8.2.lib;D:\VTK\lib\vtkCommonComputationalGeometry-8.2.lib;D:\VTK\lib\vtkCommonColor-8.2.lib;D:\VTK\lib\vtkFiltersGeometry-8.2.lib;D:\VTK\lib\vtkFiltersCore-8.2.lib;D:\VTK\lib\vtkCommonExecutionModel-8.2.lib;D:\VTK\lib\vtkCommonDataModel-8.2.lib;D:\VTK\lib\vtkCommonTransforms-8.2.lib;D:\VTK\lib\vtkCommonMisc-8.2.lib;D:\VTK\lib\vtkCommonMath-8.2.lib;D:\VTK\lib\vtkCommonSystem-8.2.lib;D:\VTK\lib\vtkCommonCore-8.2.lib;D:\VTK\lib\vtksys-8.2.lib;D:\VTK\lib\vtkIOGeometry-8.2.lib;D:\VTK\lib\vtkIOLegacy-8.2.lib;ws2_32.lib;Psapi.lib;D:\VTK\lib\vtkglew-8.2.lib;D:\VTK\lib\vtkzlib-8.2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -318,6 +318,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ImportLibrary>D:/VS_Projects/SurfaceEvolverGUI/build/RelWithDebInfo/SurfaceEvolverGUI.lib</ImportLibrary>
       <ProgramDataBaseFile>D:/VS_Projects/SurfaceEvolverGUI/build/RelWithDebInfo/SurfaceEvolverGUI.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -439,10 +440,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\build\SurfaceEvolverGUI_autogen\mocs_compilation.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.cxx" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUIDriver.cxx" />
-    <ClCompile Include="SceneObject.cpp" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\ui_SurfaceEvolverGUI.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.h" />
-    <ClInclude Include="SceneObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\VS_Projects\SurfaceEvolverGUI\build\ZERO_CHECK.vcxproj">

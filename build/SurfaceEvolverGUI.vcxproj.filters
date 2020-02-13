@@ -10,7 +10,6 @@
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUIDriver.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\ui_SurfaceEvolverGUI.h">
@@ -19,7 +18,6 @@
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SceneObject.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.ui" />
