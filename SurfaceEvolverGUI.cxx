@@ -120,12 +120,23 @@ void SurfaceEvolverGUI::fitToView()
     // up vector:
     double up[3] = { 0., 0., 1. };
     // distance:
-    polyData->ComputeBounds();
-    double bounds[6]; vtkIdType id = 0;
-    polyData->GetCellBounds(id, bounds);
+    double bounds[6]; // vtkIdType id = 0;
+    polyData->GetBounds(bounds);
+    // bounds = {xmin, xmax, ymin, ymax, zmin, zmax};
     // focus:
-    double focus[3] = { bounds[3] - bounds[0], bounds[4] - bounds[1], 0. };
-    double distance = std::max(focus[0], focus[1]);
+    double focus[3] = { 
+        bounds[0] + 0.5 * (bounds[1] - bounds[0]),
+        bounds[2] + 0.5 * (bounds[3] - bounds[2]),
+     0.};
+    double distance = sqrt((bounds[1] - bounds[0]) * (bounds[1] - bounds[0]) +
+        (bounds[5] - bounds[4]) * (bounds[5] - bounds[4]));
+
+    printf_s("bbox:\n min=(%lf, %lf, %lf)\n max=(%lf, %lf, %lf)\n",
+        bounds[0], bounds[2], bounds[4], bounds[1], bounds[3], bounds[5]);
+    printf_s(" ------- Active Camera Settings: -------\n");
+    printf_s("up = (%lf, %lf, %lf)\n", up[0], up[1], up[2]);
+    printf_s("focus = (%lf, %lf, %lf)\n", focus[0], focus[1], focus[2]);
+    printf_s("distance = %lf\n", distance);
 
     auto camera = renderer->GetActiveCamera();
     camera->SetFocalPoint(focus);
@@ -172,12 +183,11 @@ void SurfaceEvolverGUI::ActionOpenFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "VTK files (*.vtk)");
     if (!fileName.isEmpty()) {
-        const char* filename = fileName.toStdString().c_str();
-        polyData = ReadPolyData(filename);
+        polyData = ReadPolyData(fileName.toStdString().c_str());
         _polyDataLoaded = true; // polyData->GetVerts()->GetSize() > 0;
 
         this->updateRenderedObjects();
-        // if (_polyDataLoaded) this->fitToView();
+        if (_polyDataLoaded) this->fitToView();
     }
 }
 

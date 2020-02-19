@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include <vtkDataReader.h>
+#include <vtkSimpleReader.h>
 #include <vtkPolyDataReader.h>
 #include <vtkCamera.h>
 #include <vtkCenterOfMass.h>
