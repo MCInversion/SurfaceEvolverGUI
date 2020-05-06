@@ -1,3 +1,6 @@
 ﻿  Automatic MOC for target SurfaceEvolverGUI
+  mocs_compilation.cpp
   SurfaceEvolverGUI.cxx
+  SurfaceEvolverGUIDriver.cxx
+  Generating Code...
   SurfaceEvolverGUI.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\RelWithDebInfo\SurfaceEvolverGUI.exe

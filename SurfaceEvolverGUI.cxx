@@ -112,6 +112,8 @@ void SurfaceEvolverGUI::updateRenderedObjects()
         surfaceActor->GetProperty()->SetInterpolationToFlat();
         renderer->AddActor(surfaceActor);
     }
+
+    renderer->ResetCamera();
     this->ui->qvtkWidget->GetRenderWindow()->Render();
 }
 
@@ -187,7 +189,6 @@ void SurfaceEvolverGUI::ActionOpenFile()
         _polyDataLoaded = true; // polyData->GetVerts()->GetSize() > 0;
 
         this->updateRenderedObjects();
-        if (_polyDataLoaded) this->fitToView();
     }
 }
 
