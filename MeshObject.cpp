@@ -2,39 +2,7 @@
 
 MeshObject::MeshObject(vtkSmartPointer<vtkPolyData> polyData) : m_polyData{ polyData }
 {
-	m_vertexMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-	m_edgeMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-	m_surfaceMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-
-	m_vertexActor = vtkSmartPointer<vtkActor>::New();
-	m_edgeActor = vtkSmartPointer<vtkActor>::New();
-	m_surfaceActor = vtkSmartPointer<vtkActor>::New();
-
-	m_vertexMapper->SetInputData(m_polyData);
-	m_edgeMapper->SetInputData(m_polyData);
-	m_surfaceMapper->SetInputData(m_polyData);
-
-	m_vertexActor->SetMapper(m_vertexMapper);
-	m_edgeActor->SetMapper(m_edgeMapper);
-	m_surfaceActor->SetMapper(m_surfaceMapper);
-
-	m_vertexActor->GetProperty()->SetRepresentationToPoints();
-
-	m_vertexActor->GetProperty()->SetAmbient(1.0);
-	m_vertexActor->GetProperty()->SetDiffuse(0.0);
-	m_vertexActor->GetProperty()->SetSpecular(0.0);
-	m_vertexActor->GetProperty()->SetPointSize(4.0);
-
-	m_edgeActor->GetProperty()->SetRepresentationToWireframe();
-
-	m_edgeActor->GetProperty()->SetAmbient(1.0);
-	m_edgeActor->GetProperty()->SetDiffuse(0.0);
-	m_edgeActor->GetProperty()->SetSpecular(0.0);
-	m_edgeActor->GetProperty()->SetLineWidth(2.0);
-
-	m_surfaceActor->GetProperty()->SetRepresentationToSurface();
-
-	m_surfaceActor->GetProperty()->SetInterpolationToFlat();
+	initProperties();
 }
 
 MeshObject::MeshObject(Geometry& geometryData)
@@ -83,41 +51,7 @@ MeshObject::MeshObject(Geometry& geometryData)
 	m_polyData->SetPoints(points);
 	m_polyData->SetPolys(cells);
 
-	m_vertexMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-	m_edgeMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-	m_surfaceMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-
-	m_vertexActor = vtkSmartPointer<vtkActor>::New();
-	m_edgeActor = vtkSmartPointer<vtkActor>::New();
-	m_surfaceActor = vtkSmartPointer<vtkActor>::New();
-
-	m_vertexMapper->SetInputData(m_polyData);
-	m_edgeMapper->SetInputData(m_polyData);
-	m_surfaceMapper->SetInputData(m_polyData);
-
-	m_vertexActor->SetMapper(m_vertexMapper);
-	m_edgeActor->SetMapper(m_edgeMapper);
-	m_surfaceActor->SetMapper(m_surfaceMapper);
-
-	m_vertexActor->GetProperty()->SetRepresentationToPoints();
-
-	m_vertexActor->GetProperty()->SetAmbient(1.0);
-	m_vertexActor->GetProperty()->SetDiffuse(0.0);
-	m_vertexActor->GetProperty()->SetSpecular(0.0);
-	m_vertexActor->GetProperty()->SetPointSize(4.0);
-
-	m_edgeActor->GetProperty()->SetRepresentationToWireframe();
-
-	m_edgeActor->GetProperty()->SetAmbient(1.0);
-	m_edgeActor->GetProperty()->SetDiffuse(0.0);
-	m_edgeActor->GetProperty()->SetSpecular(0.0);
-	m_edgeActor->GetProperty()->SetLineWidth(2.0);
-
-	m_surfaceActor->GetProperty()->SetRepresentationToSurface();
-
-	m_surfaceActor->GetProperty()->SetInterpolationToFlat();
-
-	// m_actor->SetPosition(0.0, 0.0, 0.0);
+	initProperties();
 }
 
 const vtkSmartPointer<vtkActor>& MeshObject::getVertexActor() const
@@ -135,17 +69,56 @@ const vtkSmartPointer<vtkActor>& MeshObject::getSurfaceActor() const
 	return m_surfaceActor;
 }
 
-void MeshObject::setVertexColor(const QColor& color)
+void MeshObject::setVertexColor(QColor& color)
 {
 	m_vertexActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
 }
 
-void MeshObject::setEdgeColor(const QColor& color)
+void MeshObject::setEdgeColor(QColor& color)
 {
 	m_edgeActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
 }
 
-void MeshObject::setSurfaceColor(const QColor& color)
+void MeshObject::setSurfaceColor(QColor& color)
 {
 	m_surfaceActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
+}
+
+void MeshObject::initProperties()
+{
+	m_vertexMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	m_edgeMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	m_surfaceMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+
+	m_vertexActor = vtkSmartPointer<vtkActor>::New();
+	m_edgeActor = vtkSmartPointer<vtkActor>::New();
+	m_surfaceActor = vtkSmartPointer<vtkActor>::New();
+
+	m_vertexMapper->SetInputData(m_polyData);
+	m_edgeMapper->SetInputData(m_polyData);
+	m_surfaceMapper->SetInputData(m_polyData);
+
+	m_vertexActor->SetMapper(m_vertexMapper);
+	m_edgeActor->SetMapper(m_edgeMapper);
+	m_surfaceActor->SetMapper(m_surfaceMapper);
+	setVertexColor(m_defaultVertexColor);
+	setEdgeColor(m_defaultEdgeColor);
+	setSurfaceColor(m_defaultSurfaceColor);
+
+	m_vertexActor->GetProperty()->SetRepresentationToPoints();
+
+	m_vertexActor->GetProperty()->SetAmbient(1.0);
+	m_vertexActor->GetProperty()->SetDiffuse(0.0);
+	m_vertexActor->GetProperty()->SetSpecular(0.0);
+	m_vertexActor->GetProperty()->SetPointSize(4.0);
+
+	m_edgeActor->GetProperty()->SetRepresentationToWireframe();
+
+	m_edgeActor->GetProperty()->SetAmbient(1.0);
+	m_edgeActor->GetProperty()->SetDiffuse(0.0);
+	m_edgeActor->GetProperty()->SetSpecular(0.0);
+	m_edgeActor->GetProperty()->SetLineWidth(2.0);
+
+	m_surfaceActor->GetProperty()->SetRepresentationToSurface();
+	m_surfaceActor->GetProperty()->SetInterpolationToFlat();
 }

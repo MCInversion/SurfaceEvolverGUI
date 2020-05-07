@@ -34,7 +34,7 @@ class SurfaceEvolverGUI : public QMainWindow
 public:
   // Constructor/Destructor
   SurfaceEvolverGUI();
-  ~SurfaceEvolverGUI() = default;
+  // ~SurfaceEvolverGUI() = default;
 
 public slots:
 
@@ -54,6 +54,8 @@ private:
 
     // Designer form
     Ui_SurfaceEvolverGUI* ui;
+
+    void setBgColorIcon(QColor color);
 };
 
 #endif

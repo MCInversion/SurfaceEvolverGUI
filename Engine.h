@@ -46,6 +46,8 @@ public:
 	void setWireframeRepresentationOfObject(bool representation, int id);
 	void setSurfaceRepresentationOfObject(bool representation, int id);
 
+	inline QColor bgColor() { return m_bgColor; };
+
 	// === vtk ====
 	vtkSmartPointer<vtkGenericOpenGLRenderWindow> m_renderWindow;
 	vtkSmartPointer<vtkRenderer> m_renderer;

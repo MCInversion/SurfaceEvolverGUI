@@ -26,9 +26,9 @@ public:
 	const vtkSmartPointer<vtkActor>& getEdgeActor() const;
 	const vtkSmartPointer<vtkActor>& getSurfaceActor() const;
 
-	void setVertexColor(const QColor& color);
-	void setEdgeColor(const QColor& color);
-	void setSurfaceColor(const QColor& color);
+	void setVertexColor(QColor& color);
+	void setEdgeColor(QColor& color);
+	void setSurfaceColor(QColor& color);
 
 	inline void setVisible(bool visible) { m_visible = visible; };
 	inline void setVertexRepresentation(bool representation) { m_vertex = representation; };
@@ -62,14 +62,16 @@ private:
 	vtkSmartPointer<vtkActor> m_surfaceActor;
 
 	// representation colors
-	QColor m_defaultVertexColor;
-	QColor m_defaultEdgeColor;
-	QColor m_defaultSurfaceColor;
+	QColor m_defaultVertexColor = QColor(13, 18, 56);
+	QColor m_defaultEdgeColor = QColor(0, 74, 194);
+	QColor m_defaultSurfaceColor = QColor(237, 224, 206);
 
 	// transformation
 	Vector3 m_position = Vector3();
 	Quaternion m_orientation = Quaternion();
 	Vector3 m_scale = Vector3(1.0, 1.0, 1.0);
+	
+	void initProperties();
 };
 
 #endif

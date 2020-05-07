@@ -11,7 +11,7 @@
 // Constructor
 SurfaceEvolverGUI::SurfaceEvolverGUI()
 {
-    this->ui = new Ui_SurfaceEvolverGUI;
+    this->ui = new Ui_SurfaceEvolverGUI();
     this->ui->setupUi(this);
 
     // create engine instance
@@ -19,6 +19,8 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
 
     // Set up action signals and slots
     connect(this->ui->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
+
+    setBgColorIcon(m_engine->bgColor());
 }
 
 void SurfaceEvolverGUI::slotExit()
@@ -29,7 +31,9 @@ void SurfaceEvolverGUI::slotExit()
 
 void SurfaceEvolverGUI::ActionRendererBackgroundColor()
 {
-    m_engine->setBackgroundColor(QColorDialog::getColor(QColor("black"), this));
+    QColor newColor = QColorDialog::getColor(m_engine->bgColor(), this);
+    setBgColorIcon(newColor);
+    m_engine->setBackgroundColor(newColor);
 }
 
 void SurfaceEvolverGUI::ActionRenderVertices()
@@ -69,6 +73,13 @@ void SurfaceEvolverGUI::ActionSaveFile()
     else {
         QFile file(fileName);
     }
+}
+
+void SurfaceEvolverGUI::setBgColorIcon(QColor color)
+{
+    QPixmap px(ui->bgColorButton->size());
+    px.fill(color);
+    ui->bgColorButton->setIcon(px);
 }
 
 namespace {

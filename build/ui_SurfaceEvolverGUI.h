@@ -30,11 +30,12 @@ QT_BEGIN_NAMESPACE
 class Ui_SurfaceEvolverGUI
 {
 public:
+    QAction *actionOpenFile;
     QAction *actionExit;
     QAction *actionPrint;
     QAction *actionHelp;
-    QAction *actionOpen;
-    QAction *actionSave;
+    QAction *ActionOpenFile;
+    QAction *ActionSaveFile;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_2;
@@ -58,18 +59,21 @@ public:
     {
         if (SurfaceEvolverGUI->objectName().isEmpty())
             SurfaceEvolverGUI->setObjectName(QString::fromUtf8("SurfaceEvolverGUI"));
-        SurfaceEvolverGUI->resize(991, 641);
+        SurfaceEvolverGUI->resize(1244, 766);
         SurfaceEvolverGUI->setMaximumSize(QSize(16777213, 16777215));
+        actionOpenFile = new QAction(SurfaceEvolverGUI);
+        actionOpenFile->setObjectName(QString::fromUtf8("actionOpenFile"));
+        actionOpenFile->setEnabled(true);
         actionExit = new QAction(SurfaceEvolverGUI);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
         actionPrint = new QAction(SurfaceEvolverGUI);
         actionPrint->setObjectName(QString::fromUtf8("actionPrint"));
         actionHelp = new QAction(SurfaceEvolverGUI);
         actionHelp->setObjectName(QString::fromUtf8("actionHelp"));
-        actionOpen = new QAction(SurfaceEvolverGUI);
-        actionOpen->setObjectName(QString::fromUtf8("actionOpen"));
-        actionSave = new QAction(SurfaceEvolverGUI);
-        actionSave->setObjectName(QString::fromUtf8("actionSave"));
+        ActionOpenFile = new QAction(SurfaceEvolverGUI);
+        ActionOpenFile->setObjectName(QString::fromUtf8("ActionOpenFile"));
+        ActionSaveFile = new QAction(SurfaceEvolverGUI);
+        ActionSaveFile->setObjectName(QString::fromUtf8("ActionSaveFile"));
         centralwidget = new QWidget(SurfaceEvolverGUI);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setMaximumSize(QSize(16777215, 16777215));
@@ -92,13 +96,7 @@ public:
         horizontalLayout_2->setSpacing(5);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setSizeConstraint(QLayout::SetMaximumSize);
-
-        // bg color button
-        QPixmap pixmap(100, 100);
-        pixmap.fill(QColor("black"));
-        QIcon bgIcon(pixmap);
         bgColorButton = new QToolButton(centralwidget);
-        bgColorButton->setIcon(bgIcon);
         bgColorButton->setObjectName(QString::fromUtf8("bgColorButton"));
 
         horizontalLayout_2->addWidget(bgColorButton);
@@ -140,8 +138,7 @@ public:
 
         verticalLayout->addWidget(groupBox);
 
-        // right menu horizontal spacer
-        horizontalSpacer = new QSpacerItem(150, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         verticalLayout->addItem(horizontalSpacer);
 
@@ -155,21 +152,16 @@ public:
         SurfaceEvolverGUI->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(SurfaceEvolverGUI);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 991, 26));
+        menuBar->setGeometry(QRect(0, 0, 1244, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         SurfaceEvolverGUI->setMenuBar(menuBar);
 
         menuBar->addAction(menuFile->menuAction());
-        menuFile->addAction(actionOpen);
-        menuFile->addAction(actionSave);
+        menuFile->addAction(ActionOpenFile);
+        menuFile->addAction(ActionSaveFile);
 
         retranslateUi(SurfaceEvolverGUI);
-        // file ctrls
-        QObject::connect(actionOpen, SIGNAL(triggered()), SurfaceEvolverGUI, SLOT(ActionOpenFile()));
-        QObject::connect(actionSave, SIGNAL(triggered()), SurfaceEvolverGUI, SLOT(ActionSaveFile()));
-
-        // render ctrls
         QObject::connect(bgColorButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionRendererBackgroundColor()));
         QObject::connect(checkBoxVertices, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionRenderVertices()));
         QObject::connect(checkBoxWireframe, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionRenderWireframe()));
@@ -181,20 +173,21 @@ public:
     void retranslateUi(QMainWindow *SurfaceEvolverGUI)
     {
         SurfaceEvolverGUI->setWindowTitle(QCoreApplication::translate("SurfaceEvolverGUI", "SurfaceEvolverGUI", nullptr));
+        actionOpenFile->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Open File...", nullptr));
         actionExit->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Exit", nullptr));
         actionPrint->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Print", nullptr));
         actionHelp->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Help", nullptr));
-        actionOpen->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Open", nullptr));
+        ActionOpenFile->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Open", nullptr));
 #if QT_CONFIG(shortcut)
-        actionOpen->setShortcut(QCoreApplication::translate("SurfaceEvolverGUI", "Ctrl+O", nullptr));
+        ActionOpenFile->setShortcut(QCoreApplication::translate("SurfaceEvolverGUI", "Ctrl+O", nullptr));
 #endif // QT_CONFIG(shortcut)
-        actionSave->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Save", nullptr));
+        ActionSaveFile->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Save", nullptr));
 #if QT_CONFIG(shortcut)
-        actionSave->setShortcut(QCoreApplication::translate("SurfaceEvolverGUI", "Ctrl+S", nullptr));
+        ActionSaveFile->setShortcut(QCoreApplication::translate("SurfaceEvolverGUI", "Ctrl+S", nullptr));
 #endif // QT_CONFIG(shortcut)
         bgColorButton->setText(QString());
         bgColorLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Background color", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Render mode:", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Mesh render mode:", nullptr));
         checkBoxVertices->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Vertices", nullptr));
         checkBoxWireframe->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Wireframe", nullptr));
         checkBoxSurface->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Surface", nullptr));
