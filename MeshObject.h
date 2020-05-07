@@ -30,8 +30,26 @@ public:
 	void setEdgeColor(const QColor& color);
 	void setSurfaceColor(const QColor& color);
 
+	inline void setVisible(bool visible) { m_visible = visible; };
+	inline void setVertexRepresentation(bool representation) { m_vertex = representation; };
+	inline void setWireframeRepresentation(bool representation) { m_wireframe = representation; };
+	inline void setSurfaceRepresentation(bool representation) { m_surface = representation; };
+
+	inline bool isVisible() { return m_visible; };
+
+	inline bool vertexRender() { return m_vertex; };
+	inline bool edgeRender() { return m_wireframe; };
+	inline bool surfaceRender() { return m_surface; };
 private:
 	vtkSmartPointer<vtkPolyData> m_polyData;
+
+	// visibility
+	bool m_visible = true;
+
+	// render style
+	bool m_vertex = false;
+	bool m_wireframe = true;
+	bool m_surface = true;
 
 	// mesh mappers
 	vtkSmartPointer<vtkPolyDataMapper> m_vertexMapper;
@@ -43,9 +61,15 @@ private:
 	vtkSmartPointer<vtkActor> m_edgeActor;
 	vtkSmartPointer<vtkActor> m_surfaceActor;
 
+	// representation colors
 	QColor m_defaultVertexColor;
 	QColor m_defaultEdgeColor;
 	QColor m_defaultSurfaceColor;
+
+	// transformation
+	Vector3 m_position = Vector3();
+	Quaternion m_orientation = Quaternion();
+	Vector3 m_scale = Vector3(1.0, 1.0, 1.0);
 };
 
 #endif

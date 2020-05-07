@@ -11,20 +11,9 @@
 #include <vtkSimpleReader.h>
 #include <vtkPolyDataReader.h>
 #include <vtkCamera.h>
-#include <vtkCenterOfMass.h>
-#include <vtkBoundingBox.h>
-
-#include <vtkNew.h>
 #include <vtkSmartPointer.h>
 #include <vtkGenericOpenGLRenderWindow.h>
-#include <vtkNamedColors.h>
 #include <vtkPolyDataMapper.h>
-#include <vtkProperty.h>
-#include <vtkRenderWindow.h>
-#include <vtkRenderer.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkSphereSource.h>
-#include <vtkVersion.h>
 
 #include <vtksys/SystemTools.hxx>
 
@@ -37,6 +26,7 @@ namespace
 
 // Forward Qt class declarations
 class Ui_SurfaceEvolverGUI;
+class Engine;
 
 class SurfaceEvolverGUI : public QMainWindow
 {
@@ -45,10 +35,6 @@ public:
   // Constructor/Destructor
   SurfaceEvolverGUI();
   ~SurfaceEvolverGUI() = default;
-  QColor bgColor = QColor("black");
-
-  void updateRenderedObjects();
-  void fitToView();
 
 public slots:
 
@@ -63,26 +49,11 @@ public slots:
   void ActionSaveFile();
 
 private:
-   // render style
-    bool _vertex = false;
-    bool _wireframe = true;
-    bool _surface = true;
-
     // Engine
-    Engine m_engine;
+    std::shared_ptr<Engine> m_engine;
 
     // Designer form
     Ui_SurfaceEvolverGUI* ui;
-  
-    // === vtk ====
-    vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
-    vtkNew<vtkRenderer> renderer;
-
-    vtkNew<vtkNamedColors> colors;
-    vtkNew<vtkSphereSource> source;
-
-    bool _polyDataLoaded = false;
-    vtkSmartPointer<vtkPolyData> polyData = vtkSmartPointer<vtkPolyData>::New();
 };
 
 #endif

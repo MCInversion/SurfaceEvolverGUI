@@ -1,6 +1,270 @@
 ﻿  Automatic MOC for target SurfaceEvolverGUI
-  MeshObject.cpp
+  Engine.cpp
+D:\VS_Projects\SurfaceEvolverGUI\EvolutionCore\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  mocs_compilation.cpp
+D:\VS_Projects\SurfaceEvolverGUI\EvolutionCore\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  SurfaceEvolverGUI.cxx
 D:\VS_Projects\SurfaceEvolverGUI\EvolutionCore\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   SurfaceEvolverGUIDriver.cxx
+D:\VS_Projects\SurfaceEvolverGUI\EvolutionCore\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
+  
+  Searching libraries
+      Searching D:\VTK\lib\vtkGUISupportQt-8.2.lib:
+      Searching D:\VTK\lib\vtkInteractionStyle-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContextOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContext2D-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingFreeType-8.2.lib:
+      Searching D:\VTK\lib\vtkfreetype-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingGL2PSOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkgl2ps-8.2.lib:
+      Searching D:\VTK\lib\vtkpng-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersExtraction-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersStatistics-8.2.lib:
+      Searching D:\VTK\lib\vtkImagingFourier-8.2.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Widgets.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Gui.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Core.lib:
+      Searching D:\VTK\lib\vtkImagingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersSources-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeneral-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonComputationalGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonColor-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersCore-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonExecutionModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonDataModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonTransforms-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMisc-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMath-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonSystem-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonCore-8.2.lib:
+      Searching D:\VTK\lib\vtksys-8.2.lib:
+      Searching D:\VTK\lib\vtkIOGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkIOLegacy-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ws2_32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\Psapi.lib:
+      Searching D:\VTK\lib\vtkglew-8.2.lib:
+      Searching D:\VTK\lib\vtkzlib-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\advapi32.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\msvcprt.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\MSVCRT.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\OLDNAMES.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\vcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\ucrt\x64\ucrt.lib:
+      Searching D:\VTK\lib\vtkGUISupportQt-8.2.lib:
+      Searching D:\VTK\lib\vtkInteractionStyle-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContextOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContext2D-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingFreeType-8.2.lib:
+      Searching D:\VTK\lib\vtkfreetype-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingGL2PSOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkgl2ps-8.2.lib:
+      Searching D:\VTK\lib\vtkpng-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersExtraction-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersStatistics-8.2.lib:
+      Searching D:\VTK\lib\vtkImagingFourier-8.2.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Widgets.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Gui.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Core.lib:
+      Searching D:\VTK\lib\vtkImagingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersSources-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeneral-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonComputationalGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonColor-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersCore-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonExecutionModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonDataModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonTransforms-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMisc-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMath-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonSystem-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonCore-8.2.lib:
+      Searching D:\VTK\lib\vtksys-8.2.lib:
+      Searching D:\VTK\lib\vtkIOGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkIOLegacy-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ws2_32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\Psapi.lib:
+      Searching D:\VTK\lib\vtkglew-8.2.lib:
+      Searching D:\VTK\lib\vtkzlib-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\advapi32.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\msvcprt.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\MSVCRT.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\OLDNAMES.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\vcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\ucrt\x64\ucrt.lib:
+      Searching D:\VTK\lib\vtkGUISupportQt-8.2.lib:
+      Searching D:\VTK\lib\vtkInteractionStyle-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContextOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContext2D-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingFreeType-8.2.lib:
+      Searching D:\VTK\lib\vtkfreetype-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingGL2PSOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkgl2ps-8.2.lib:
+      Searching D:\VTK\lib\vtkpng-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersExtraction-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersStatistics-8.2.lib:
+      Searching D:\VTK\lib\vtkImagingFourier-8.2.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Widgets.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Gui.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Core.lib:
+      Searching D:\VTK\lib\vtkImagingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersSources-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeneral-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonComputationalGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonColor-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersCore-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonExecutionModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonDataModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonTransforms-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMisc-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMath-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonSystem-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonCore-8.2.lib:
+      Searching D:\VTK\lib\vtksys-8.2.lib:
+      Searching D:\VTK\lib\vtkIOGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkIOLegacy-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ws2_32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\Psapi.lib:
+      Searching D:\VTK\lib\vtkglew-8.2.lib:
+      Searching D:\VTK\lib\vtkzlib-8.2.lib:
+  
+  Finished searching libraries
+  
+  Searching libraries
+      Searching D:\VTK\lib\vtkGUISupportQt-8.2.lib:
+      Searching D:\VTK\lib\vtkInteractionStyle-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContextOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContext2D-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingFreeType-8.2.lib:
+      Searching D:\VTK\lib\vtkfreetype-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingGL2PSOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkgl2ps-8.2.lib:
+      Searching D:\VTK\lib\vtkpng-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersExtraction-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersStatistics-8.2.lib:
+      Searching D:\VTK\lib\vtkImagingFourier-8.2.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Widgets.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Gui.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Core.lib:
+      Searching D:\VTK\lib\vtkImagingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersSources-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeneral-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonComputationalGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonColor-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersCore-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonExecutionModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonDataModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonTransforms-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMisc-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMath-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonSystem-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonCore-8.2.lib:
+      Searching D:\VTK\lib\vtksys-8.2.lib:
+      Searching D:\VTK\lib\vtkIOGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkIOLegacy-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ws2_32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\Psapi.lib:
+      Searching D:\VTK\lib\vtkglew-8.2.lib:
+      Searching D:\VTK\lib\vtkzlib-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\advapi32.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\msvcprt.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\MSVCRT.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\OLDNAMES.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\vcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\ucrt\x64\ucrt.lib:
+  
+  Finished searching libraries
+  
+  Searching libraries
+      Searching D:\VTK\lib\vtkGUISupportQt-8.2.lib:
+      Searching D:\VTK\lib\vtkInteractionStyle-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContextOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingContext2D-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingFreeType-8.2.lib:
+      Searching D:\VTK\lib\vtkfreetype-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingGL2PSOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkgl2ps-8.2.lib:
+      Searching D:\VTK\lib\vtkpng-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersExtraction-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersStatistics-8.2.lib:
+      Searching D:\VTK\lib\vtkImagingFourier-8.2.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Widgets.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Gui.lib:
+      Searching D:\Qt\5.13.2\msvc2017_64\lib\Qt5Core.lib:
+      Searching D:\VTK\lib\vtkImagingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingOpenGL2-8.2.lib:
+      Searching D:\VTK\lib\vtkRenderingCore-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersSources-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeneral-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonComputationalGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonColor-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkFiltersCore-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonExecutionModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonDataModel-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonTransforms-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMisc-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonMath-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonSystem-8.2.lib:
+      Searching D:\VTK\lib\vtkCommonCore-8.2.lib:
+      Searching D:\VTK\lib\vtksys-8.2.lib:
+      Searching D:\VTK\lib\vtkIOGeometry-8.2.lib:
+      Searching D:\VTK\lib\vtkIOLegacy-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ws2_32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\Psapi.lib:
+      Searching D:\VTK\lib\vtkglew-8.2.lib:
+      Searching D:\VTK\lib\vtkzlib-8.2.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.18362.0\um\x64\advapi32.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\msvcprt.lib:
+      Searching D:\VS Community\VC\Tools\MSVC\14.24.28314\lib\x64\MSVCRT.lib:
+  
+  Finished searching libraries
   SurfaceEvolverGUI.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\RelWithDebInfo\SurfaceEvolverGUI.exe
