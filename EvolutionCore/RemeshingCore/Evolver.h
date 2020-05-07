@@ -3,7 +3,7 @@
 
 #include <chrono>
 #include "Parameters.h"
-#include "../Utils/LinearSolver.h"
+#include "../Numerical/LinearSolver.h"
 #include "../SDF/Grid.h"
 #include "../Geometry/Geometry.h"
 #include "../GeometryObject/Icosphere.h"

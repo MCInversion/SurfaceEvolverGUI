@@ -14,6 +14,8 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
     this->ui = new Ui_SurfaceEvolverGUI;
     this->ui->setupUi(this);
 
+    m_engine = Engine();
+
 #if VTK890
     this->ui->qvtkWidget->setRenderWindow(renderWindow);
 #else

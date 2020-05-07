@@ -28,6 +28,8 @@
 
 #include <vtksys/SystemTools.hxx>
 
+#include <Engine.h>
+
 namespace
 {
     vtkSmartPointer<vtkPolyData> ReadPolyData(const char* fileName);
@@ -65,6 +67,9 @@ private:
     bool _vertex = false;
     bool _wireframe = true;
     bool _surface = true;
+
+    // Engine
+    Engine m_engine;
 
     // Designer form
     Ui_SurfaceEvolverGUI* ui;
