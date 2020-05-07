@@ -437,9 +437,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Engine.cpp" />
+    <ClCompile Include="..\MeshObject.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\build\SurfaceEvolverGUI_autogen\mocs_compilation.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.cxx" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUIDriver.cxx" />
+    <ClInclude Include="..\Engine.h" />
+    <ClInclude Include="..\MeshObject.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\ui_SurfaceEvolverGUI.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\SurfaceEvolverGUI.h" />
   </ItemGroup>
