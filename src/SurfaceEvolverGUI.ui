@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>SurfaceEvolverGUI</string>
   </property>
+  <property name="toolTip">
+   <string/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="maximumSize">
     <size>
@@ -29,6 +32,9 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMaximumSize</enum>
+      </property>
       <item>
        <widget class="QVTKOpenGLNativeWidget" name="qvtkWidget" native="true"/>
       </item>
@@ -71,7 +77,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>110</height>
+          <height>170</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -81,7 +87,7 @@
          </size>
         </property>
         <property name="title">
-         <string>Mesh render mode:</string>
+         <string>Mesh render:</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
@@ -115,8 +121,145 @@
            </item>
           </layout>
          </item>
+         <item row="0" column="1">
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="2" column="1">
+            <widget class="QToolButton" name="surfaceColorButton">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="vertexLabel">
+             <property name="text">
+              <string>vertex color:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="edgeLabel">
+             <property name="text">
+              <string>edge color:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="surfaceLabel">
+             <property name="text">
+              <string>surface color:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QToolButton" name="vertexColorButton">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QToolButton" name="edgeColorButton">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="opacityLabel">
+             <property name="text">
+              <string>opacity:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="opacitySpinBox">
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.010000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Scene objects:</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QListWidget" name="libraryListWidget">
+             <property name="selectionMode">
+              <enum>QAbstractItemView::MultiSelection</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QToolButton" name="deleteButton">
+               <property name="toolTip">
+                <string>Remove Selected</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../trash.ico</normaloff>../trash.ico</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="clearButton">
+               <property name="toolTip">
+                <string>Clear All</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../resources/clear.ico</normaloff>../resources/clear.ico</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <spacer name="horizontalSpacer">
@@ -130,19 +273,6 @@
          <size>
           <width>40</width>
           <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
          </size>
         </property>
        </spacer>
@@ -167,7 +297,15 @@
     <addaction name="actionOpen_File"/>
     <addaction name="actionSave_File"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionSigned_Distance_Function"/>
+    <addaction name="actionSurface_Evolution"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
   </widget>
   <action name="actionOpenFile">
    <property name="enabled">
@@ -223,6 +361,16 @@
     <string>DoSomething</string>
    </property>
   </action>
+  <action name="actionSigned_Distance_Function">
+   <property name="text">
+    <string>Signed Distance Function</string>
+   </property>
+  </action>
+  <action name="actionSurface_Evolution">
+   <property name="text">
+    <string>Surface Evolution</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -240,8 +388,8 @@
    <slot>ActionRendererBackgroundColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>654</x>
-     <y>59</y>
+     <x>48</x>
+     <y>64</y>
     </hint>
     <hint type="destinationlabel">
      <x>8</x>
@@ -256,8 +404,8 @@
    <slot>ActionRenderVertices()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>715</x>
-     <y>107</y>
+     <x>592</x>
+     <y>134</y>
     </hint>
     <hint type="destinationlabel">
      <x>519</x>
@@ -272,8 +420,8 @@
    <slot>ActionRenderWireframe()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>715</x>
-     <y>133</y>
+     <x>592</x>
+     <y>174</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
@@ -288,12 +436,124 @@
    <slot>ActionRenderSurface()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>715</x>
-     <y>159</y>
+     <x>592</x>
+     <y>214</y>
     </hint>
     <hint type="destinationlabel">
      <x>88</x>
      <y>27</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>vertexColorButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionVertexColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1131</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1175</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>edgeColorButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionEdgeColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1131</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1176</x>
+     <y>56</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surfaceColorButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionSurfaceColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1124</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1173</x>
+     <y>84</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>opacitySpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionOpacity()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1142</x>
+     <y>220</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1178</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>libraryListWidget</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionSelectLibraryObject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>178</x>
+     <y>480</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>323</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>deleteButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionRemoveSelectedObjects()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>694</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>355</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionClearAllObjects()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>221</x>
+     <y>698</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>385</y>
     </hint>
    </hints>
   </connection>
@@ -303,5 +563,13 @@
   <slot>ActionRenderVertices()</slot>
   <slot>ActionRenderWireframe()</slot>
   <slot>ActionRenderSurface()</slot>
+  <slot>ActionVertexColor()</slot>
+  <slot>ActionEdgeColor()</slot>
+  <slot>ActionSurfaceColor()</slot>
+  <slot>ActionOpacity()</slot>
+  <slot>ActionSelectLibraryObject()</slot>
+  <slot>ActionRemoveAllObjects()</slot>
+  <slot>ActionRemoveSelectedObjects()</slot>
+  <slot>ActionClearAllObjects()</slot>
  </slots>
 </ui>

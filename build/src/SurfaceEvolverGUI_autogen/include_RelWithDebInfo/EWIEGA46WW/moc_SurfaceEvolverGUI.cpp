@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SurfaceEvolverGUI_t {
-    QByteArrayData data[9];
-    char stringdata0[153];
+    QByteArrayData data[16];
+    char stringdata0[296];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,13 +40,24 @@ QT_MOC_LITERAL(4, 44, 15), // "actionSave_File"
 QT_MOC_LITERAL(5, 60, 29), // "ActionRendererBackgroundColor"
 QT_MOC_LITERAL(6, 90, 20), // "ActionRenderVertices"
 QT_MOC_LITERAL(7, 111, 21), // "ActionRenderWireframe"
-QT_MOC_LITERAL(8, 133, 19) // "ActionRenderSurface"
+QT_MOC_LITERAL(8, 133, 19), // "ActionRenderSurface"
+QT_MOC_LITERAL(9, 153, 17), // "ActionVertexColor"
+QT_MOC_LITERAL(10, 171, 15), // "ActionEdgeColor"
+QT_MOC_LITERAL(11, 187, 18), // "ActionSurfaceColor"
+QT_MOC_LITERAL(12, 206, 13), // "ActionOpacity"
+QT_MOC_LITERAL(13, 220, 25), // "ActionSelectLibraryObject"
+QT_MOC_LITERAL(14, 246, 27), // "ActionRemoveSelectedObjects"
+QT_MOC_LITERAL(15, 274, 21) // "ActionClearAllObjects"
 
     },
     "SurfaceEvolverGUI\0slotExit\0\0actionOpen_File\0"
     "actionSave_File\0ActionRendererBackgroundColor\0"
     "ActionRenderVertices\0ActionRenderWireframe\0"
-    "ActionRenderSurface"
+    "ActionRenderSurface\0ActionVertexColor\0"
+    "ActionEdgeColor\0ActionSurfaceColor\0"
+    "ActionOpacity\0ActionSelectLibraryObject\0"
+    "ActionRemoveSelectedObjects\0"
+    "ActionClearAllObjects"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +67,7 @@ static const uint qt_meta_data_SurfaceEvolverGUI[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,15 +75,29 @@ static const uint qt_meta_data_SurfaceEvolverGUI[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x0a /* Public */,
-       3,    0,   50,    2, 0x0a /* Public */,
-       4,    0,   51,    2, 0x0a /* Public */,
-       5,    0,   52,    2, 0x0a /* Public */,
-       6,    0,   53,    2, 0x0a /* Public */,
-       7,    0,   54,    2, 0x0a /* Public */,
-       8,    0,   55,    2, 0x0a /* Public */,
+       1,    0,   84,    2, 0x0a /* Public */,
+       3,    0,   85,    2, 0x0a /* Public */,
+       4,    0,   86,    2, 0x0a /* Public */,
+       5,    0,   87,    2, 0x0a /* Public */,
+       6,    0,   88,    2, 0x0a /* Public */,
+       7,    0,   89,    2, 0x0a /* Public */,
+       8,    0,   90,    2, 0x0a /* Public */,
+       9,    0,   91,    2, 0x0a /* Public */,
+      10,    0,   92,    2, 0x0a /* Public */,
+      11,    0,   93,    2, 0x0a /* Public */,
+      12,    0,   94,    2, 0x0a /* Public */,
+      13,    0,   95,    2, 0x0a /* Public */,
+      14,    0,   96,    2, 0x0a /* Public */,
+      15,    0,   97,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -97,6 +122,13 @@ void SurfaceEvolverGUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 4: _t->ActionRenderVertices(); break;
         case 5: _t->ActionRenderWireframe(); break;
         case 6: _t->ActionRenderSurface(); break;
+        case 7: _t->ActionVertexColor(); break;
+        case 8: _t->ActionEdgeColor(); break;
+        case 9: _t->ActionSurfaceColor(); break;
+        case 10: _t->ActionOpacity(); break;
+        case 11: _t->ActionSelectLibraryObject(); break;
+        case 12: _t->ActionRemoveSelectedObjects(); break;
+        case 13: _t->ActionClearAllObjects(); break;
         default: ;
         }
     }
@@ -132,13 +164,13 @@ int SurfaceEvolverGUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 14)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 14;
     }
     return _id;
 }

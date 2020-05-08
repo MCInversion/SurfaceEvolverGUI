@@ -84,6 +84,14 @@ void MeshObject::setSurfaceColor(QColor& color)
 	m_surfaceActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
 }
 
+void MeshObject::setOpacity(double opacity)
+{
+	m_opacity = opacity;
+	m_vertexActor->GetProperty()->SetOpacity(m_opacity);
+	m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
+	m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
+}
+
 void MeshObject::initProperties()
 {
 	m_vertexMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
@@ -111,6 +119,7 @@ void MeshObject::initProperties()
 	m_vertexActor->GetProperty()->SetDiffuse(0.0);
 	m_vertexActor->GetProperty()->SetSpecular(0.0);
 	m_vertexActor->GetProperty()->SetPointSize(4.0);
+	m_vertexActor->GetProperty()->SetOpacity(m_opacity);
 
 	m_edgeActor->GetProperty()->SetRepresentationToWireframe();
 
@@ -118,7 +127,9 @@ void MeshObject::initProperties()
 	m_edgeActor->GetProperty()->SetDiffuse(0.0);
 	m_edgeActor->GetProperty()->SetSpecular(0.0);
 	m_edgeActor->GetProperty()->SetLineWidth(2.0);
+	m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
 
 	m_surfaceActor->GetProperty()->SetRepresentationToSurface();
 	m_surfaceActor->GetProperty()->SetInterpolationToFlat();
+	m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
 }

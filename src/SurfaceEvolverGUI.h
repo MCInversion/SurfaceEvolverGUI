@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QColorDialog>
 #include <QFileDialog>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QDebug>
 
 #include <iostream>
 
@@ -41,6 +44,16 @@ public slots:
   void ActionRenderWireframe();
   void ActionRenderSurface();
 
+  void ActionVertexColor();
+  void ActionEdgeColor();
+  void ActionSurfaceColor();
+
+  void ActionOpacity();
+  
+  void ActionSelectLibraryObject();
+  void ActionRemoveSelectedObjects();
+  void ActionClearAllObjects();
+
 private:
     // Engine
     std::shared_ptr<Engine> m_engine;
@@ -48,7 +61,11 @@ private:
     // Designer form
     Ui_SurfaceEvolverGUI* ui;
 
-    void setBgColorIcon(QColor color);
+    void setColorIcon(QToolButton* button, QColor color);
+    void setToolIcon(QToolButton* button, QString name);
+
+    void removeSelectedObjects();
+    bool eventFilter(QObject* object, QEvent* event);
 };
 
 /**/

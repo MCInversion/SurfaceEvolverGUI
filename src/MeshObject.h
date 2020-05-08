@@ -30,6 +30,8 @@ public:
 	void setEdgeColor(QColor& color);
 	void setSurfaceColor(QColor& color);
 
+	void setOpacity(double opacity);
+
 	inline void setVisible(bool visible) { m_visible = visible; };
 	inline void setVertexRepresentation(bool representation) { m_vertex = representation; };
 	inline void setWireframeRepresentation(bool representation) { m_wireframe = representation; };
@@ -50,6 +52,8 @@ private:
 	bool m_vertex = false;
 	bool m_wireframe = true;
 	bool m_surface = true;
+
+	double m_opacity = 1.0;
 
 	// mesh mappers
 	vtkSmartPointer<vtkPolyDataMapper> m_vertexMapper;

@@ -1,11 +1,6 @@
 ﻿  Automatic MOC for target SurfaceEvolverGUI
-  mocs_compilation.cpp
+  Engine.cpp
 D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  SurfaceEvolverGUI.cpp
-D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  main.cpp
-D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
   SurfaceEvolverGUI.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\src\RelWithDebInfo\SurfaceEvolverGUI.exe
   Win deploy qt
   D:\VS_Projects\SurfaceEvolverGUI\build\src\RelWithDebInfo\SurfaceEvolverGUI.exe 64 bit, release executable
