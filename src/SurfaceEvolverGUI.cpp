@@ -111,7 +111,7 @@ void SurfaceEvolverGUI::ActionClearAllObjects()
 
 void SurfaceEvolverGUI::setColorIcon(QToolButton* button, QColor color)
 {
-    QPixmap px(button->size());
+    QPixmap px(QSize(20, 20));
     px.fill(color);
     button->setIcon(px);
 }
