@@ -108,6 +108,21 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=SurfaceEvolverGUI
 
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION:STATIC=1.0.0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_MAJOR:STATIC=1
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_MINOR:STATIC=0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_PATCH:STATIC=0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_TWEAK:STATIC=
+
 //RC compiler
 CMAKE_RC_COMPILER:FILEPATH=rc
 
@@ -189,10 +204,13 @@ Qt5Gui_DIR:PATH=D:/Qt/5.13.2/msvc2017_64/lib/cmake/Qt5Gui
 Qt5Widgets_DIR:PATH=D:/Qt/5.13.2/msvc2017_64/lib/cmake/Qt5Widgets
 
 //Value Computed by CMake
-SurfaceEvolverGUI_BINARY_DIR:STATIC=D:/VS_Projects/SurfaceEvolverGUI/build
+SurfaceEvolverGUI_BINARY_DIR:STATIC=D:/VS_Projects/SurfaceEvolverGUI/build/src
+
+//Dependencies for the target
+SurfaceEvolverGUI_LIB_DEPENDS:STATIC=general;Qt5::Core;general;Qt5::Gui;general;vtkGUISupportQt;general;vtkCommonCore;general;vtksys;general;vtkCommonDataModel;general;vtkCommonMath;general;vtkCommonMisc;general;vtkCommonSystem;general;vtkCommonTransforms;general;vtkFiltersExtraction;general;vtkCommonExecutionModel;general;vtkFiltersCore;general;vtkFiltersGeneral;general;vtkCommonComputationalGeometry;general;vtkFiltersStatistics;general;vtkImagingFourier;general;vtkImagingCore;general;vtkInteractionStyle;general;vtkFiltersSources;general;vtkRenderingCore;general;vtkCommonColor;general;vtkFiltersGeometry;general;vtkRenderingOpenGL2;general;vtkglew;general;vtkRenderingContextOpenGL2;general;vtkRenderingContext2D;general;vtkRenderingFreeType;general;vtkfreetype;general;vtkzlib;general;vtkRenderingGL2PSOpenGL2;general;vtkgl2ps;general;vtkpng;
 
 //Value Computed by CMake
-SurfaceEvolverGUI_SOURCE_DIR:STATIC=D:/VS_Projects/SurfaceEvolverGUI
+SurfaceEvolverGUI_SOURCE_DIR:STATIC=D:/VS_Projects/SurfaceEvolverGUI/src
 
 //The directory containing a CMake configuration file for VTK.
 VTK_DIR:PATH=D:/VTK/lib/cmake/vtk-8.2
@@ -280,7 +298,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_COMPILER

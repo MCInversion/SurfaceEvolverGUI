@@ -1,0 +1,20 @@
+^D:\VS_PROJECTS\SURFACEEVOLVERGUI\SRC\SURFACEEVOLVERGUI.UI
+setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SurfaceEvolverGUI.h D:/VS_Projects/SurfaceEvolverGUI/src/SurfaceEvolverGUI.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\VS_PROJECTS\SURFACEEVOLVERGUI\SRC\CMAKELISTS.TXT
+setlocal
+D:\Cmake\bin\cmake.exe -SD:/VS_Projects/SurfaceEvolverGUI -BD:/VS_Projects/SurfaceEvolverGUI/build --check-stamp-file D:/VS_Projects/SurfaceEvolverGUI/build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

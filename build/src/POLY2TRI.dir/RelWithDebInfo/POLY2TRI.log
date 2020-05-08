@@ -1,0 +1,15 @@
+﻿  Automatic MOC for target POLY2TRI
+  Building Custom Rule D:/VS_Projects/SurfaceEvolverGUI/src/CMakeLists.txt
+  mocs_compilation.cpp
+  shapes.cc
+  advancing_front.cc
+  cdt.cc
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  sweep.cc
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  sweep_context.cc
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.cc(105,35): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep.cc(773): warning C4715: 'p2t::Sweep::NextFlipPoint': not all control paths return a value
+  POLY2TRI.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\src\RelWithDebInfo\POLY2TRI.lib
