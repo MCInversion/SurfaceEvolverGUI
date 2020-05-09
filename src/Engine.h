@@ -36,9 +36,12 @@ private:
 	bool m_vertex = false;
 	bool m_wireframe = true;
 	bool m_surface = true;
+
+	// === vtk ====
+	vtkSmartPointer<vtkGenericOpenGLRenderWindow> m_renderWindow;
+	vtkSmartPointer<vtkRenderer> m_renderer;
 public:
 	Engine(QVTKOpenGLNativeWidget* parent);
-
 
 	void updateRenderedObjects();
 	void setBackgroundColor(QColor color = QColor("black"));
@@ -64,9 +67,11 @@ public:
 	void setWireframeRepresentationOfObject(bool representation, int id);
 	void setSurfaceRepresentationOfObject(bool representation, int id);
 
+	inline bool libraryEmpty() { return m_objects.empty(); };
+
 	inline bool vertexRender() { return m_vertex; };
 	inline bool edgeRender() { return m_wireframe; };
-	inline bool surfaceRender() { return m_surface; };
+	inline bool surfaceRender() { return m_surface; };	
 
 	inline QColor bgColor() { return m_bgColor; };
 	inline QColor vertexColor() { return m_vertexColor; };
@@ -74,10 +79,6 @@ public:
 	inline QColor surfaceColor() { return m_surfaceColor; };
 
 	inline double opacity() { return m_opacity; };
-
-	// === vtk ====
-	vtkSmartPointer<vtkGenericOpenGLRenderWindow> m_renderWindow;
-	vtkSmartPointer<vtkRenderer> m_renderer;
 };
 
 #endif

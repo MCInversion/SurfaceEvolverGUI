@@ -332,7 +332,13 @@ public:
         ActionSaveFile->setShortcut(QCoreApplication::translate("SurfaceEvolverGUI", "Ctrl+S", nullptr));
 #endif // QT_CONFIG(shortcut)
         actionOpen_File->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Open File", nullptr));
+#if QT_CONFIG(shortcut)
+        actionOpen_File->setShortcut(QCoreApplication::translate("SurfaceEvolverGUI", "Ctrl+O", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionSave_File->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Save File", nullptr));
+#if QT_CONFIG(shortcut)
+        actionSave_File->setShortcut(QCoreApplication::translate("SurfaceEvolverGUI", "Ctrl+S", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionDoSomething->setText(QCoreApplication::translate("SurfaceEvolverGUI", "DoSomething", nullptr));
         actionSigned_Distance_Function->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Signed Distance Function", nullptr));
         actionSurface_Evolution->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Surface Evolution", nullptr));

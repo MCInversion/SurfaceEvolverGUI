@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QColorDialog>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QEvent>
 #include <QKeyEvent>
 #include <QDebug>
@@ -39,6 +40,9 @@ public slots:
   void actionOpen_File();
   void actionSave_File();
 
+  void actionSigned_Distance_Function();
+  void actionSurface_Evolution();
+
   void ActionRendererBackgroundColor();
   void ActionRenderVertices();
   void ActionRenderWireframe();
@@ -66,8 +70,9 @@ private:
     Ui_SurfaceEvolverGUI* ui;
 
     void setColorIcon(QToolButton* button, QColor color);
-    void setToolIcon(QToolButton* button, QString name);
-    void setObjectIcon(QListWidgetItem* item, QString name);
+    void setToolIcon(QToolButton* button, QString name, QString extension = ".ico");
+    void setObjectIcon(QListWidgetItem* item, QString name, QString extension = ".ico");
+    void setActionIcon(QAction* action, QString name, QString extension = ".ico");
 
     void removeSelectedObjects();
     bool eventFilter(QObject* object, QEvent* event);
@@ -78,6 +83,8 @@ private:
     void updateMeshUiToDefault();
 
     std::vector<int> getSelectionIndices();
+
+    int filterSelectionForProcessing();
 };
 
 /**/

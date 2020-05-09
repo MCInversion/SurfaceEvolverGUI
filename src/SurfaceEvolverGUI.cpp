@@ -15,13 +15,15 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
     m_engine = std::shared_ptr<Engine>(new Engine(this->ui->qvtkWidget));
 
     // right menu horizontal spacer
-    // QSpacerItem(150, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
     ui->horizontalSpacer->changeSize(150, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
     // Set up action signals and slots
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
     connect(ui->actionOpen_File, SIGNAL(triggered()), this, SLOT(actionOpen_File()));
     connect(ui->actionSave_File, SIGNAL(triggered()), this, SLOT(actionSave_File()));
+
+    connect(ui->actionSigned_Distance_Function, SIGNAL(triggered()), this, SLOT(actionSigned_Distance_Function()));
+    connect(ui->actionSurface_Evolution, SIGNAL(triggered()), this, SLOT(actionSurface_Evolution()));
 
     setColorIcon(ui->bgColorButton, m_engine->bgColor());
     setColorIcon(ui->vertexColorButton, m_engine->vertexColor());
@@ -31,6 +33,11 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
 
     setToolIcon(ui->deleteButton, "trash");
     setToolIcon(ui->clearButton, "clear");
+    setActionIcon(ui->menuFile->actions().at(0), "file-folder", ".png");
+    setActionIcon(ui->menuFile->actions().at(1), "save-file", ".png");
+
+    setActionIcon(ui->menuTools->actions().at(0), "sdf", ".png");
+    setActionIcon(ui->menuTools->actions().at(1), "evolution", ".png");
 }
 
 void SurfaceEvolverGUI::slotExit()
@@ -130,20 +137,28 @@ void SurfaceEvolverGUI::setColorIcon(QToolButton* button, QColor color)
     button->setIcon(px);
 }
 
-void SurfaceEvolverGUI::setToolIcon(QToolButton* button, QString name)
+void SurfaceEvolverGUI::setToolIcon(QToolButton* button, QString name, QString extension)
 {
     QIcon icon;
-    QString path = "../../resources/" + name + ".ico";
+    QString path = "../../resources/" + name + extension;
     icon.addFile(path, QSize(20, 20), QIcon::Normal, QIcon::On);
     button->setIcon(icon);
 }
 
-void SurfaceEvolverGUI::setObjectIcon(QListWidgetItem* item, QString name)
+void SurfaceEvolverGUI::setObjectIcon(QListWidgetItem* item, QString name, QString extension)
 {
     QIcon icon;
-    QString path = "../../resources/" + name + ".ico";
+    QString path = "../../resources/" + name + extension;
     icon.addFile(path, QSize(20, 20), QIcon::Normal, QIcon::On);
     item->setIcon(icon);
+}
+
+void SurfaceEvolverGUI::setActionIcon(QAction* action, QString name, QString extension)
+{
+    QIcon icon;
+    QString path = "../../resources/" + name + extension;
+    icon.addFile(path, QSize(20, 20), QIcon::Normal, QIcon::On);
+    action->setIcon(icon);
 }
 
 void SurfaceEvolverGUI::removeSelectedObjects()
@@ -232,6 +247,50 @@ std::vector<int> SurfaceEvolverGUI::getSelectionIndices()
     return selectionIds;
 }
 
+int SurfaceEvolverGUI::filterSelectionForProcessing()
+{
+    if (m_engine->libraryEmpty()) {
+        QMessageBox* msgBox = new QMessageBox();
+        msgBox->setWindowTitle("Library empty");
+        msgBox->setText("There has to be at least one object in the library. Please, import a mesh model for processig.");
+        msgBox->setIcon(QMessageBox::Information);
+        if (msgBox->exec() == QMessageBox::Ok) {
+            return -1;
+        }
+    }
+
+    QList<QListWidgetItem*> selection = ui->libraryListWidget->selectedItems();
+    if (selection.size() > 1) {
+        QMessageBox* msgBox = new QMessageBox();
+        msgBox->setWindowTitle("Multiple selection");
+        msgBox->setText("More than 1 object is selected. Please, select a single scene object in the library.");
+        msgBox->setIcon(QMessageBox::Information);
+        if (msgBox->exec() == QMessageBox::Ok) {
+            return -1;
+        }
+    }
+    else if (selection.isEmpty()) {
+        QMessageBox* msgBox = new QMessageBox();
+        msgBox->setWindowTitle("Empty selection");
+        msgBox->setText("No mesh object is selected. Process the first library object?");
+        msgBox->setStandardButtons(QMessageBox::Yes);
+        msgBox->addButton(QMessageBox::No);
+        msgBox->setDefaultButton(QMessageBox::No);
+        if (msgBox->exec() == QMessageBox::Yes) {
+            QString name = ui->libraryListWidget->item(0)->text();
+            printf("processing %s\n", name.toStdString().c_str());
+            return 0;
+        }
+        else {
+            return -1;
+        }
+    }
+
+    auto found = m_itemValuedObjectIds.find(selection[0]);
+    printf("processing %s\n", selection[0]->text().toStdString().c_str());
+    return found->second;
+}
+
 void SurfaceEvolverGUI::actionOpen_File()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "VTK files (*.vtk)");
@@ -255,6 +314,24 @@ void SurfaceEvolverGUI::actionSave_File()
     }
     else {
         QFile file(fileName);
+    }
+}
+
+void SurfaceEvolverGUI::actionSigned_Distance_Function()
+{
+    int selectedId = filterSelectionForProcessing();
+
+    if (selectedId >= 0) {
+
+    }
+}
+
+void SurfaceEvolverGUI::actionSurface_Evolution()
+{
+    int selectedId = filterSelectionForProcessing();
+
+    if (selectedId >= 0) {
+
     }
 }
 
