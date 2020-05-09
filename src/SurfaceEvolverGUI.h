@@ -54,18 +54,26 @@ public slots:
   void ActionRemoveSelectedObjects();
   void ActionClearAllObjects();
 
+  void ActionObjectVisibility(QListWidgetItem* item);
+
 private:
     // Engine
     std::shared_ptr<Engine> m_engine;
+
+    std::map<QListWidgetItem*, int> m_itemValuedObjectIds;
 
     // Designer form
     Ui_SurfaceEvolverGUI* ui;
 
     void setColorIcon(QToolButton* button, QColor color);
     void setToolIcon(QToolButton* button, QString name);
+    void setObjectIcon(QListWidgetItem* item, QString name);
 
     void removeSelectedObjects();
     bool eventFilter(QObject* object, QEvent* event);
+
+    void addListItem(QString name, int row);
+    void reIndexLibraryItems();
 };
 
 /**/

@@ -236,6 +236,9 @@ public:
         libraryListWidget = new QListWidget(groupBox_2);
         libraryListWidget->setObjectName(QString::fromUtf8("libraryListWidget"));
         libraryListWidget->setSelectionMode(QAbstractItemView::MultiSelection);
+        libraryListWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+        libraryListWidget->setMovement(QListView::Static);
+        libraryListWidget->setSelectionRectVisible(true);
 
         verticalLayout_5->addWidget(libraryListWidget);
 

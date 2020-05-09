@@ -209,6 +209,15 @@
              <property name="selectionMode">
               <enum>QAbstractItemView::MultiSelection</enum>
              </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <property name="movement">
+              <enum>QListView::Static</enum>
+             </property>
+             <property name="selectionRectVisible">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item>
@@ -532,7 +541,7 @@
    <slot>ActionRemoveSelectedObjects()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>122</x>
+     <x>51</x>
      <y>694</y>
     </hint>
     <hint type="destinationlabel">
@@ -548,7 +557,7 @@
    <slot>ActionClearAllObjects()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>221</x>
+     <x>79</x>
      <y>698</y>
     </hint>
     <hint type="destinationlabel">
@@ -571,5 +580,6 @@
   <slot>ActionRemoveAllObjects()</slot>
   <slot>ActionRemoveSelectedObjects()</slot>
   <slot>ActionClearAllObjects()</slot>
+  <slot>ActionObjectVisibility(int)</slot>
  </slots>
 </ui>

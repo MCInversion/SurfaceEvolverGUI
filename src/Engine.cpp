@@ -143,6 +143,7 @@ void Engine::setVisibilityOfObject(bool visible, int id)
 	if (id < 0 || id >= m_objects.size()) return;
 
 	m_objects.at(id)->setVisible(visible);
+	updateRenderedObjects();
 }
 
 void Engine::setVertexRepresentationOfObject(bool representation, int id)

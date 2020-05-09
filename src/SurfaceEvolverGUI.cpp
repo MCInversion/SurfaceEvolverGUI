@@ -27,6 +27,7 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
     setColorIcon(ui->vertexColorButton, m_engine->vertexColor());
     setColorIcon(ui->edgeColorButton, m_engine->edgeColor());
     setColorIcon(ui->surfaceColorButton, m_engine->surfaceColor());
+    connect(ui->libraryListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(ActionObjectVisibility(QListWidgetItem*)));
 
     setToolIcon(ui->deleteButton, "trash");
     setToolIcon(ui->clearButton, "clear");
@@ -109,6 +110,15 @@ void SurfaceEvolverGUI::ActionClearAllObjects()
     ui->libraryListWidget->clear();
 }
 
+void SurfaceEvolverGUI::ActionObjectVisibility(QListWidgetItem* item)
+{
+    auto found = m_itemValuedObjectIds.find(item);
+    if (found != m_itemValuedObjectIds.end()) {
+        int id = found->second;
+        m_engine->setVisibilityOfObject(item->checkState() == Qt::Checked, id);
+    }    
+}
+
 void SurfaceEvolverGUI::setColorIcon(QToolButton* button, QColor color)
 {
     QPixmap px(QSize(20, 20));
@@ -124,14 +134,27 @@ void SurfaceEvolverGUI::setToolIcon(QToolButton* button, QString name)
     button->setIcon(icon);
 }
 
+void SurfaceEvolverGUI::setObjectIcon(QListWidgetItem* item, QString name)
+{
+    QIcon icon;
+    QString path = "../../resources/" + name + ".ico";
+    icon.addFile(path, QSize(20, 20), QIcon::Normal, QIcon::On);
+    item->setIcon(icon);
+}
+
 void SurfaceEvolverGUI::removeSelectedObjects()
 {
-    QModelIndexList selection = ui->libraryListWidget->selectionModel()->selectedIndexes();
+    QList<QListWidgetItem*> selection = ui->libraryListWidget->selectedItems();
     if (!selection.isEmpty()) {
-        for (auto&& item : selection) {
-            m_engine->removeMeshObjectFromLibrary(item.data().toInt());
+        while (!selection.isEmpty()) {
+            QListWidgetItem* item = selection.first();
+            auto found = m_itemValuedObjectIds.find(item);
+            m_engine->removeMeshObjectFromLibrary(found->second);
+            m_itemValuedObjectIds.erase(found);
+            selection.pop_front();
         }
         qDeleteAll(ui->libraryListWidget->selectedItems());
+        reIndexLibraryItems();
     }
 }
 
@@ -149,6 +172,25 @@ bool SurfaceEvolverGUI::eventFilter(QObject* object, QEvent* event)
     return QWidget::eventFilter(object, event);
 }
 
+void SurfaceEvolverGUI::addListItem(QString name, int row)
+{
+    QListWidgetItem* newItem = new QListWidgetItem(name);
+    setObjectIcon(newItem, "geometry");
+    newItem->setFlags(newItem->flags() | Qt::ItemIsUserCheckable);
+    newItem->setCheckState(Qt::Checked);
+
+    m_itemValuedObjectIds.insert({ newItem, row });
+    ui->libraryListWidget->insertItem(row, newItem);
+}
+
+void SurfaceEvolverGUI::reIndexLibraryItems()
+{
+    int id = 0;
+    for (auto&& item : m_itemValuedObjectIds) {
+        item.second = id++;
+    }
+}
+
 void SurfaceEvolverGUI::actionOpen_File()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "VTK files (*.vtk)");
@@ -159,7 +201,8 @@ void SurfaceEvolverGUI::actionOpen_File()
 
         int lastrow = ui->libraryListWidget->count();
         QString name = fileName.split("/").last();
-        ui->libraryListWidget->insertItem(lastrow, name);
+
+        addListItem(name, lastrow);        
     }
 }
 
