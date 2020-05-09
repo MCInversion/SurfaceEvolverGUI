@@ -28,7 +28,8 @@ private:
 
 	double m_opacity = 1.0;
 
-	std::vector<std::shared_ptr<MeshObject>> m_objects;
+	std::vector<std::shared_ptr<MeshObject>> m_libObjects;
+	std::vector<std::shared_ptr<MeshObject>> m_helperObjects;
 
 	int m_objId = 0;
 
@@ -51,11 +52,14 @@ public:
 
 	void setOpacityToObjects(double opacity, std::vector<int> selectedIds = {});
 
-	void addPolyDataObjectToScene(vtkSmartPointer<vtkPolyData> model);
+	void addPolyDataObjectToScene(vtkSmartPointer<vtkPolyData> model, QString filename);
 	void removeMeshObjectFromLibrary(int id);
 	void clearMeshObjectLibrary();
 
 	std::shared_ptr<MeshObject> getLibraryObject(int id);
+
+	void addHelperObjectToScene(std::shared_ptr<MeshObject> helper, QColor helper_color = QColor(52, 235, 180));
+	void clearHelperObjects();
 
 	void setVertexRepresentationOfObjects(bool representation, std::vector<int> selectedIds = {});
 	void setWireframeRepresentationOfObjects(bool representation, std::vector<int> selectedIds = {});
@@ -67,7 +71,7 @@ public:
 	void setWireframeRepresentationOfObject(bool representation, int id);
 	void setSurfaceRepresentationOfObject(bool representation, int id);
 
-	inline bool libraryEmpty() { return m_objects.empty(); };
+	inline bool libraryEmpty() { return m_libObjects.empty(); };
 
 	inline bool vertexRender() { return m_vertex; };
 	inline bool edgeRender() { return m_wireframe; };
@@ -79,6 +83,8 @@ public:
 	inline QColor surfaceColor() { return m_surfaceColor; };
 
 	inline double opacity() { return m_opacity; };
+
+	inline int selectedId() { return m_objId; };
 };
 
 #endif

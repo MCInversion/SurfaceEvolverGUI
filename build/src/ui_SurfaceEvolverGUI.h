@@ -69,7 +69,7 @@ public:
     QLabel *opacityLabel;
     QDoubleSpinBox *opacitySpinBox;
     QVBoxLayout *verticalLayout_4;
-    QGroupBox *groupBox_2;
+    QGroupBox *sceneObjectsGroupBox;
     QVBoxLayout *verticalLayout_5;
     QListWidget *libraryListWidget;
     QHBoxLayout *horizontalLayout_3;
@@ -228,12 +228,12 @@ public:
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        groupBox_2 = new QGroupBox(centralwidget);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setMaximumSize(QSize(300, 16777215));
-        verticalLayout_5 = new QVBoxLayout(groupBox_2);
+        sceneObjectsGroupBox = new QGroupBox(centralwidget);
+        sceneObjectsGroupBox->setObjectName(QString::fromUtf8("sceneObjectsGroupBox"));
+        sceneObjectsGroupBox->setMaximumSize(QSize(300, 16777215));
+        verticalLayout_5 = new QVBoxLayout(sceneObjectsGroupBox);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        libraryListWidget = new QListWidget(groupBox_2);
+        libraryListWidget = new QListWidget(sceneObjectsGroupBox);
         libraryListWidget->setObjectName(QString::fromUtf8("libraryListWidget"));
         libraryListWidget->setSelectionMode(QAbstractItemView::MultiSelection);
         libraryListWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -244,7 +244,7 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        deleteButton = new QToolButton(groupBox_2);
+        deleteButton = new QToolButton(sceneObjectsGroupBox);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
         QIcon icon;
         icon.addFile(QString::fromUtf8("../trash.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -252,7 +252,7 @@ public:
 
         horizontalLayout_3->addWidget(deleteButton);
 
-        clearButton = new QToolButton(groupBox_2);
+        clearButton = new QToolButton(sceneObjectsGroupBox);
         clearButton->setObjectName(QString::fromUtf8("clearButton"));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8("../resources/clear.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -268,7 +268,7 @@ public:
         verticalLayout_5->addLayout(horizontalLayout_3);
 
 
-        verticalLayout_4->addWidget(groupBox_2);
+        verticalLayout_4->addWidget(sceneObjectsGroupBox);
 
 
         verticalLayout->addLayout(verticalLayout_4);
@@ -355,7 +355,7 @@ public:
         vertexColorButton->setText(QString());
         edgeColorButton->setText(QString());
         opacityLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "opacity:", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Scene objects:", nullptr));
+        sceneObjectsGroupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Scene objects:", nullptr));
 #if QT_CONFIG(tooltip)
         deleteButton->setToolTip(QCoreApplication::translate("SurfaceEvolverGUI", "Remove Selected", nullptr));
 #endif // QT_CONFIG(tooltip)

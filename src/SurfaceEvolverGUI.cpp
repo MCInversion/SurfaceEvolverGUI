@@ -130,6 +130,46 @@ void SurfaceEvolverGUI::ActionObjectVisibility(QListWidgetItem* item)
     }    
 }
 
+void SurfaceEvolverGUI::ActionRenderBoundingBox()
+{
+    std::shared_ptr<MeshObject> object = m_engine->getLibraryObject(m_engine->selectedId());
+    Vector3 boxMin = object->getBoxMin();
+    Vector3 boxMax = object->getBoxMax();
+    Box3 bbox = Box3(boxMin, boxMax);
+    Vector3 boxSize = bbox.getSize();
+    std::string box_name = object->name().toStdString() + "_bounding_box";
+    PrimitiveBox box = PrimitiveBox(boxSize.x, boxSize.y, boxSize.z, 1, 1, 1, true, box_name);
+    Matrix4 T = Matrix4().makeTranslation(boxMin.x, boxMin.y, boxMin.z);
+    box.applyMatrix(T);
+    std::shared_ptr<MeshObject> box_object = std::make_shared<MeshObject>(MeshObject(box));
+    m_engine->addHelperObjectToScene(box_object);
+    m_engine->updateRenderedObjects();
+}
+
+void SurfaceEvolverGUI::ActionRenderGridBox()
+{
+    /*
+    std::shared_ptr<MeshObject> object = m_engine->getLibraryObject(m_engine->selectedId());
+    Vector3 boxMin = object->getBoxMin();
+    Vector3 boxMax = object->getBoxMax();
+    Box3 bbox = Box3(boxMin, boxMax);
+    Vector3 boxSize = bbox.getSize();
+    std::string box_name = object->name().toStdString() + "_bounding_box";
+    PrimitiveBox box = PrimitiveBox(boxSize.x, boxSize.y, boxSize.z, 1, 1, 1, true, box_name);
+    Matrix4 T = Matrix4().makeTranslation(boxMin.x, boxMin.y, boxMin.z);
+    box.applyMatrix(T);
+    std::shared_ptr<MeshObject> box_object = std::make_shared<MeshObject>(MeshObject(box));
+    m_engine->addHelperObjectToScene(box_object);
+    m_engine->updateRenderedObjects();*/
+}
+
+void SurfaceEvolverGUI::ActionCloseSDFWindow()
+{
+    clearAllHelpers();
+    ui->sceneObjectsGroupBox->setEnabled(true);
+    ui->menuBar->setEnabled(true);
+}
+
 void SurfaceEvolverGUI::setColorIcon(QToolButton* button, QColor color)
 {
     QPixmap px(QSize(20, 20));
@@ -175,6 +215,11 @@ void SurfaceEvolverGUI::removeSelectedObjects()
         qDeleteAll(ui->libraryListWidget->selectedItems());
         reIndexLibraryItems();
     }
+}
+
+void SurfaceEvolverGUI::clearAllHelpers()
+{
+    m_engine->clearHelperObjects();
 }
 
 bool SurfaceEvolverGUI::eventFilter(QObject* object, QEvent* event)
@@ -296,11 +341,10 @@ void SurfaceEvolverGUI::actionOpen_File()
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "../../models", "VTK files (*.vtk)");
     if (!fileName.isEmpty()) {
         vtkSmartPointer<vtkPolyData> polyData = ReadPolyData(fileName.toStdString().c_str());
-        m_engine->addPolyDataObjectToScene(polyData);
-        m_engine->updateRenderedObjects();
-
         int lastrow = ui->libraryListWidget->count();
         QString name = fileName.split("/").last();
+        m_engine->addPolyDataObjectToScene(polyData, name);
+        m_engine->updateRenderedObjects();
 
         addListItem(name, lastrow);        
     }
@@ -317,25 +361,40 @@ void SurfaceEvolverGUI::actionSave_File()
     }
 }
 
+// ============== SDF =================================
+
 void SurfaceEvolverGUI::actionSigned_Distance_Function()
 {
     int selectedId = filterSelectionForProcessing();
 
     if (selectedId >= 0) {
-        m_sdfWidget = new SDFWidget(this);
-        m_sdfWidget->processMesh(m_engine->getLibraryObject(selectedId));
-        m_sdfWidget->show();
+        SDFWidget* sdfWidget = new SDFWidget(this);
+        sdfWidget->processMeshInfo(m_engine->getLibraryObject(selectedId));
+        connect(sdfWidget, SIGNAL(closeSDF()), this, SLOT(ActionCloseSDFWindow()));
+        ui->sceneObjectsGroupBox->setEnabled(false);
+        ui->menuBar->setEnabled(false);
+
+        sdfWidget->show();
+
+        m_engine->setSelectedObjectId(selectedId);
+        ActionRenderBoundingBox();
     }
 }
+
+// ---------------------------------------------------
+
+// ============== EVOLUTION ==========================
 
 void SurfaceEvolverGUI::actionSurface_Evolution()
 {
     int selectedId = filterSelectionForProcessing();
 
     if (selectedId >= 0) {
-
+        m_engine->setSelectedObjectId(selectedId);
     }
 }
+
+// ----------------------------------------------------
 
 /**/
 namespace {

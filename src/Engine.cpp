@@ -18,12 +18,16 @@ void Engine::updateRenderedObjects()
 {
 	m_renderer->RemoveAllViewProps();
 
-	for (const std::shared_ptr<MeshObject>& obj : m_objects) {
+	for (const std::shared_ptr<MeshObject>& obj : m_libObjects) {
 		if (obj->isVisible()) {
 			if (obj->vertexRender()) m_renderer->AddActor(obj->getVertexActor());
 			if (obj->edgeRender()) m_renderer->AddActor(obj->getEdgeActor());
 			if (obj->surfaceRender()) m_renderer->AddActor(obj->getSurfaceActor());
 		}
+	}
+
+	for (const std::shared_ptr<MeshObject>& help : m_helperObjects) {
+		m_renderer->AddActor(help->getEdgeActor());
 	}
 
 	m_renderer->ResetCamera();
@@ -44,13 +48,13 @@ void Engine::setBackgroundColor(QColor color)
 void Engine::setVertexColorToObjects(QColor color, std::vector<int> selectedIds)
 {
 	if (selectedIds.empty()) {
-		for (const std::shared_ptr<MeshObject>& obj : m_objects) {
+		for (const std::shared_ptr<MeshObject>& obj : m_libObjects) {
 			obj->setVertexColor(color);
 		}
 	}
 	else {
 		for (int id : selectedIds) {
-			m_objects[id]->setVertexColor(color);
+			m_libObjects[id]->setVertexColor(color);
 		}
 	}
 
@@ -60,13 +64,13 @@ void Engine::setVertexColorToObjects(QColor color, std::vector<int> selectedIds)
 void Engine::setEdgeColorToObjects(QColor color, std::vector<int> selectedIds)
 {
 	if (selectedIds.empty()) {
-		for (const std::shared_ptr<MeshObject>& obj : m_objects) {
+		for (const std::shared_ptr<MeshObject>& obj : m_libObjects) {
 			obj->setEdgeColor(color);
 		}
 	}
 	else {
 		for (int id : selectedIds) {
-			m_objects[id]->setEdgeColor(color);
+			m_libObjects[id]->setEdgeColor(color);
 		}
 	}
 
@@ -76,13 +80,13 @@ void Engine::setEdgeColorToObjects(QColor color, std::vector<int> selectedIds)
 void Engine::setSurfaceColorToObjects(QColor color, std::vector<int> selectedIds)
 {
 	if (selectedIds.empty()) {
-		for (const std::shared_ptr<MeshObject>& obj : m_objects) {
+		for (const std::shared_ptr<MeshObject>& obj : m_libObjects) {
 			obj->setSurfaceColor(color);
 		}
 	}
 	else {
 		for (int id : selectedIds) {
-			m_objects[id]->setSurfaceColor(color);
+			m_libObjects[id]->setSurfaceColor(color);
 		}
 	}
 
@@ -92,56 +96,68 @@ void Engine::setSurfaceColorToObjects(QColor color, std::vector<int> selectedIds
 void Engine::setOpacityToObjects(double opacity, std::vector<int> selectedIds)
 {
 	if (selectedIds.empty()) {
-		for (const std::shared_ptr<MeshObject>& obj : m_objects) {
+		for (const std::shared_ptr<MeshObject>& obj : m_libObjects) {
 			obj->setOpacity(opacity);
 		}
 	}
 	else {
 		for (int id : selectedIds) {
-			m_objects[id]->setOpacity(opacity);
+			m_libObjects[id]->setOpacity(opacity);
 		}
 	}
 
 	m_renderWindow->Render();
 }
 
-void Engine::addPolyDataObjectToScene(vtkSmartPointer<vtkPolyData> model)
+void Engine::addPolyDataObjectToScene(vtkSmartPointer<vtkPolyData> model, QString filename)
 {
-	std::shared_ptr<MeshObject> mObj = std::make_shared<MeshObject>(MeshObject(model));
-	m_objects.push_back(mObj);
+	std::shared_ptr<MeshObject> mObj = std::make_shared<MeshObject>(MeshObject(model, filename));
+	m_libObjects.push_back(mObj);
 }
 
 void Engine::removeMeshObjectFromLibrary(int id)
 {
-	if (id < 0 || id >= m_objects.size()) return;
+	if (id < 0 || id >= m_libObjects.size()) return;
 
-	m_objects.erase(m_objects.begin() + id);
+	m_libObjects.erase(m_libObjects.begin() + id);
 	updateRenderedObjects();
 }
 
 void Engine::clearMeshObjectLibrary()
 {
-	m_objects.clear();
+	m_libObjects.clear();
 	updateRenderedObjects();
 }
 
 std::shared_ptr<MeshObject> Engine::getLibraryObject(int id)
 {
-	if (id < 0 || id >= m_objects.size()) return nullptr;
+	if (id < 0 || id >= m_libObjects.size()) return nullptr;
 
-	return m_objects[id];
+	return m_libObjects[id];
+}
+
+void Engine::addHelperObjectToScene(std::shared_ptr<MeshObject> helper, QColor helper_color)
+{
+	helper->setEdgeColor(helper_color);
+	m_helperObjects.push_back(helper);
+}
+
+void Engine::clearHelperObjects()
+{
+	m_helperObjects.clear();
+	updateRenderedObjects();
 }
 
 void Engine::setVertexRepresentationOfObjects(bool representation, std::vector<int> selectedIds)
 {
 	if (selectedIds.empty()) {
-		for (const std::shared_ptr<MeshObject>& obj : m_objects) {
+		for (const std::shared_ptr<MeshObject>& obj : m_libObjects) {
 			obj->setVertexRepresentation(representation);
 		}
 	}
 	else {
 		for (int id : selectedIds) {
-			m_objects[id]->setVertexRepresentation(representation);
+			m_libObjects[id]->setVertexRepresentation(representation);
 		}
 	}
 
@@ -150,13 +166,13 @@ void Engine::setVertexRepresentationOfObjects(bool representation, std::vector<i
 void Engine::setWireframeRepresentationOfObjects(bool representation, std::vector<int> selectedIds)
 {
 	if (selectedIds.empty()) {
-		for (const std::shared_ptr<MeshObject>& obj : m_objects) {
+		for (const std::shared_ptr<MeshObject>& obj : m_libObjects) {
 			obj->setWireframeRepresentation(representation);
 		}
 	}
 	else {
 		for (int id : selectedIds) {
-			m_objects[id]->setWireframeRepresentation(representation);
+			m_libObjects[id]->setWireframeRepresentation(representation);
 		}
 	}
 }
@@ -164,13 +180,13 @@ void Engine::setWireframeRepresentationOfObjects(bool representation, std::vecto
 void Engine::setSurfaceRepresentationOfObjects(bool representation, std::vector<int> selectedIds)
 {
 	if (selectedIds.empty()) {
-		for (const std::shared_ptr<MeshObject>& obj : m_objects) {
+		for (const std::shared_ptr<MeshObject>& obj : m_libObjects) {
 			obj->setSurfaceRepresentation(representation);
 		}
 	}
 	else {
 		for (int id : selectedIds) {
-			m_objects[id]->setSurfaceRepresentation(representation);
+			m_libObjects[id]->setSurfaceRepresentation(representation);
 		}
 	}
 }
@@ -182,29 +198,29 @@ void Engine::setSelectedObjectId(int id)
 
 void Engine::setVisibilityOfObject(bool visible, int id)
 {
-	if (id < 0 || id >= m_objects.size()) return;
+	if (id < 0 || id >= m_libObjects.size()) return;
 
-	m_objects.at(id)->setVisible(visible);
+	m_libObjects.at(id)->setVisible(visible);
 	updateRenderedObjects();
 }
 
 void Engine::setVertexRepresentationOfObject(bool representation, int id)
 {
-	if (id < 0 || id >= m_objects.size()) return;
+	if (id < 0 || id >= m_libObjects.size()) return;
 
-	m_objects.at(id)->setVertexRepresentation(representation);
+	m_libObjects.at(id)->setVertexRepresentation(representation);
 }
 
 void Engine::setWireframeRepresentationOfObject(bool representation, int id)
 {
-	if (id < 0 || id >= m_objects.size()) return;
+	if (id < 0 || id >= m_libObjects.size()) return;
 
-	m_objects.at(id)->setWireframeRepresentation(representation);
+	m_libObjects.at(id)->setWireframeRepresentation(representation);
 }
 
 void Engine::setSurfaceRepresentationOfObject(bool representation, int id)
 {
-	if (id < 0 || id >= m_objects.size()) return;
+	if (id < 0 || id >= m_libObjects.size()) return;
 
-	m_objects.at(id)->setSurfaceRepresentation(representation);
+	m_libObjects.at(id)->setSurfaceRepresentation(representation);
 }

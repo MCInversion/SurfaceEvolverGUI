@@ -22,11 +22,12 @@
 #include <vtksys/SystemTools.hxx>
 
 #include "Engine.h"
+#include "PrimitiveBox.h"
+#include "Box3.h"
 #include "ui_SurfaceEvolverGUI.h"
 #include "SDFWidget.h"
 
 class Engine;
-class SDFWidget;
 
 class SurfaceEvolverGUI : public QMainWindow
 {
@@ -62,6 +63,11 @@ public slots:
 
   void ActionObjectVisibility(QListWidgetItem* item);
 
+  void ActionRenderBoundingBox();
+  void ActionRenderGridBox();
+
+  void ActionCloseSDFWindow();
+
 private:
     // Engine
     std::shared_ptr<Engine> m_engine;
@@ -70,7 +76,6 @@ private:
 
     // Designer form
     Ui_SurfaceEvolverGUI* ui;
-    SDFWidget* m_sdfWidget = nullptr;
 
     void setColorIcon(QToolButton* button, QColor color);
     void setToolIcon(QToolButton* button, QString name, QString extension = ".ico");
@@ -78,6 +83,7 @@ private:
     void setActionIcon(QAction* action, QString name, QString extension = ".ico");
 
     void removeSelectedObjects();
+    void clearAllHelpers();
     bool eventFilter(QObject* object, QEvent* event);
 
     void addListItem(QString name, int row);
@@ -87,7 +93,8 @@ private:
 
     std::vector<int> getSelectionIndices();
 
-    int filterSelectionForProcessing();    
+    int filterSelectionForProcessing();   
+
 };
 
 /**/

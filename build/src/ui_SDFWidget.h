@@ -37,8 +37,8 @@ public:
     QLabel *label_8;
     QLabel *label_9;
     QLabel *label_10;
-    QLabel *label;
-    QLabel *label_2;
+    QLabel *targetObjectLabel;
+    QLabel *objectName;
     QSpacerItem *verticalSpacer;
     QGroupBox *meshStatsBox;
     QGridLayout *gridLayout_2;
@@ -47,12 +47,12 @@ public:
     QLabel *vertCountLabel;
     QLabel *verticesCount;
     QLabel *polyCountLabel;
-    QLabel *label_4;
-    QLabel *label_3;
+    QLabel *bboxMin;
+    QLabel *bboxMinLabel;
     QSpacerItem *verticalSpacer_2;
     QLabel *polygonCount;
-    QLabel *label_6;
-    QLabel *label_7;
+    QLabel *bboxMaxLabel;
+    QLabel *bboxMax;
     QFrame *line_2;
     QGroupBox *fastSweepParams;
     QGridLayout *gridLayout_5;
@@ -125,15 +125,15 @@ public:
 
         gridLayout->addWidget(groupBox_2, 2, 1, 1, 1);
 
-        label = new QLabel(sdfWidget);
-        label->setObjectName(QString::fromUtf8("label"));
+        targetObjectLabel = new QLabel(sdfWidget);
+        targetObjectLabel->setObjectName(QString::fromUtf8("targetObjectLabel"));
 
-        gridLayout->addWidget(label, 0, 0, 1, 1);
+        gridLayout->addWidget(targetObjectLabel, 0, 0, 1, 1);
 
-        label_2 = new QLabel(sdfWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        objectName = new QLabel(sdfWidget);
+        objectName->setObjectName(QString::fromUtf8("objectName"));
 
-        gridLayout->addWidget(label_2, 0, 1, 1, 1);
+        gridLayout->addWidget(objectName, 0, 1, 1, 1);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -169,15 +169,15 @@ public:
 
         gridLayout_2->addWidget(polyCountLabel, 2, 0, 1, 1);
 
-        label_4 = new QLabel(meshStatsBox);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        bboxMin = new QLabel(meshStatsBox);
+        bboxMin->setObjectName(QString::fromUtf8("bboxMin"));
 
-        gridLayout_2->addWidget(label_4, 3, 1, 1, 1);
+        gridLayout_2->addWidget(bboxMin, 3, 1, 1, 1);
 
-        label_3 = new QLabel(meshStatsBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        bboxMinLabel = new QLabel(meshStatsBox);
+        bboxMinLabel->setObjectName(QString::fromUtf8("bboxMinLabel"));
 
-        gridLayout_2->addWidget(label_3, 3, 0, 1, 1);
+        gridLayout_2->addWidget(bboxMinLabel, 3, 0, 1, 1);
 
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -188,15 +188,15 @@ public:
 
         gridLayout_2->addWidget(polygonCount, 2, 1, 1, 1);
 
-        label_6 = new QLabel(meshStatsBox);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        bboxMaxLabel = new QLabel(meshStatsBox);
+        bboxMaxLabel->setObjectName(QString::fromUtf8("bboxMaxLabel"));
 
-        gridLayout_2->addWidget(label_6, 4, 0, 1, 1);
+        gridLayout_2->addWidget(bboxMaxLabel, 4, 0, 1, 1);
 
-        label_7 = new QLabel(meshStatsBox);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        bboxMax = new QLabel(meshStatsBox);
+        bboxMax->setObjectName(QString::fromUtf8("bboxMax"));
 
-        gridLayout_2->addWidget(label_7, 4, 1, 1, 1);
+        gridLayout_2->addWidget(bboxMax, 4, 1, 1, 1);
 
 
         gridLayout->addWidget(meshStatsBox, 2, 0, 1, 1);
@@ -268,19 +268,19 @@ public:
         label_8->setText(QCoreApplication::translate("sdfWidget", "grid expansion factor:", nullptr));
         label_9->setText(QCoreApplication::translate("sdfWidget", "total grid resolution:", nullptr));
         label_10->setText(QCoreApplication::translate("sdfWidget", "80 x 80 x 80", nullptr));
-        label->setText(QCoreApplication::translate("sdfWidget", "target object:", nullptr));
-        label_2->setText(QCoreApplication::translate("sdfWidget", "---", nullptr));
+        targetObjectLabel->setText(QCoreApplication::translate("sdfWidget", "target object:", nullptr));
+        objectName->setText(QCoreApplication::translate("sdfWidget", "---", nullptr));
         meshStatsBox->setTitle(QCoreApplication::translate("sdfWidget", "Mesh stats:", nullptr));
         triCountLabel->setText(QCoreApplication::translate("sdfWidget", "triangle count:", nullptr));
         triangleCount->setText(QCoreApplication::translate("sdfWidget", "0", nullptr));
         vertCountLabel->setText(QCoreApplication::translate("sdfWidget", "vertices count:", nullptr));
         verticesCount->setText(QCoreApplication::translate("sdfWidget", "0", nullptr));
         polyCountLabel->setText(QCoreApplication::translate("sdfWidget", "polygon count:", nullptr));
-        label_4->setText(QCoreApplication::translate("sdfWidget", "(0, 0, 0)", nullptr));
-        label_3->setText(QCoreApplication::translate("sdfWidget", "bounding box min:", nullptr));
+        bboxMin->setText(QCoreApplication::translate("sdfWidget", "(0, 0, 0)", nullptr));
+        bboxMinLabel->setText(QCoreApplication::translate("sdfWidget", "bounding box min:", nullptr));
         polygonCount->setText(QCoreApplication::translate("sdfWidget", "0", nullptr));
-        label_6->setText(QCoreApplication::translate("sdfWidget", "bounding box max:", nullptr));
-        label_7->setText(QCoreApplication::translate("sdfWidget", "(0, 0, 0)", nullptr));
+        bboxMaxLabel->setText(QCoreApplication::translate("sdfWidget", "bounding box max:", nullptr));
+        bboxMax->setText(QCoreApplication::translate("sdfWidget", "(0, 0, 0)", nullptr));
         fastSweepParams->setTitle(QCoreApplication::translate("sdfWidget", "Fast-Sweep parameters:", nullptr));
 #if QT_CONFIG(tooltip)
         NsweepsLabel->setToolTip(QCoreApplication::translate("sdfWidget", "Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.", nullptr));

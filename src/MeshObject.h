@@ -10,6 +10,7 @@
 #include <vtkPoints.h>
 #include <vtkPolyData.h>
 #include <vtkTriangle.h>
+#include <vtkTriangleFilter.h>
 #include <vtkPolygon.h>
 #include <vtkActor.h>
 #include <vtkProperty.h>
@@ -19,7 +20,8 @@
 class MeshObject
 {
 public:
-	MeshObject(vtkSmartPointer<vtkPolyData> polyData);
+
+	MeshObject(vtkSmartPointer<vtkPolyData> polyData, QString name);
 	MeshObject(Geometry& geometryData);
 
 	const vtkSmartPointer<vtkActor>& getVertexActor() const;
@@ -50,8 +52,20 @@ public:
 	inline bool surfaceRender() { return m_surface; };
 
 	int vertexCount();
+	int triangleCount();
 	int polyCount();
+	Vector3 getBoxMin();
+	Vector3 getBoxMax();
+
+	QString getBoxMinOutput();
+	QString getBoxMaxOutput();
+
+	inline QString name() { return m_name; };
+	inline vtkSmartPointer<vtkPolyData> getPolyData() { return m_polyData; };
+
 private:
+
+	QString m_name = "MeshObject";
 	vtkSmartPointer<vtkPolyData> m_polyData;
 
 	// visibility

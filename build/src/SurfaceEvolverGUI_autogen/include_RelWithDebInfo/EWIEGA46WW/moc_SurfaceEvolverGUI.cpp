@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SurfaceEvolverGUI_t {
-    QByteArrayData data[21];
-    char stringdata0[396];
+    QByteArrayData data[24];
+    char stringdata0[461];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -52,7 +52,10 @@ QT_MOC_LITERAL(16, 301, 27), // "ActionRemoveSelectedObjects"
 QT_MOC_LITERAL(17, 329, 21), // "ActionClearAllObjects"
 QT_MOC_LITERAL(18, 351, 22), // "ActionObjectVisibility"
 QT_MOC_LITERAL(19, 374, 16), // "QListWidgetItem*"
-QT_MOC_LITERAL(20, 391, 4) // "item"
+QT_MOC_LITERAL(20, 391, 4), // "item"
+QT_MOC_LITERAL(21, 396, 23), // "ActionRenderBoundingBox"
+QT_MOC_LITERAL(22, 420, 19), // "ActionRenderGridBox"
+QT_MOC_LITERAL(23, 440, 20) // "ActionCloseSDFWindow"
 
     },
     "SurfaceEvolverGUI\0slotExit\0\0actionOpen_File\0"
@@ -65,7 +68,8 @@ QT_MOC_LITERAL(20, 391, 4) // "item"
     "ActionOpacity\0ActionSelectLibraryObject\0"
     "ActionRemoveSelectedObjects\0"
     "ActionClearAllObjects\0ActionObjectVisibility\0"
-    "QListWidgetItem*\0item"
+    "QListWidgetItem*\0item\0ActionRenderBoundingBox\0"
+    "ActionRenderGridBox\0ActionCloseSDFWindow"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,7 +79,7 @@ static const uint qt_meta_data_SurfaceEvolverGUI[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      20,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -83,23 +87,26 @@ static const uint qt_meta_data_SurfaceEvolverGUI[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   99,    2, 0x0a /* Public */,
-       3,    0,  100,    2, 0x0a /* Public */,
-       4,    0,  101,    2, 0x0a /* Public */,
-       5,    0,  102,    2, 0x0a /* Public */,
-       6,    0,  103,    2, 0x0a /* Public */,
-       7,    0,  104,    2, 0x0a /* Public */,
-       8,    0,  105,    2, 0x0a /* Public */,
-       9,    0,  106,    2, 0x0a /* Public */,
-      10,    0,  107,    2, 0x0a /* Public */,
-      11,    0,  108,    2, 0x0a /* Public */,
-      12,    0,  109,    2, 0x0a /* Public */,
-      13,    0,  110,    2, 0x0a /* Public */,
-      14,    0,  111,    2, 0x0a /* Public */,
-      15,    0,  112,    2, 0x0a /* Public */,
-      16,    0,  113,    2, 0x0a /* Public */,
-      17,    0,  114,    2, 0x0a /* Public */,
-      18,    1,  115,    2, 0x0a /* Public */,
+       1,    0,  114,    2, 0x0a /* Public */,
+       3,    0,  115,    2, 0x0a /* Public */,
+       4,    0,  116,    2, 0x0a /* Public */,
+       5,    0,  117,    2, 0x0a /* Public */,
+       6,    0,  118,    2, 0x0a /* Public */,
+       7,    0,  119,    2, 0x0a /* Public */,
+       8,    0,  120,    2, 0x0a /* Public */,
+       9,    0,  121,    2, 0x0a /* Public */,
+      10,    0,  122,    2, 0x0a /* Public */,
+      11,    0,  123,    2, 0x0a /* Public */,
+      12,    0,  124,    2, 0x0a /* Public */,
+      13,    0,  125,    2, 0x0a /* Public */,
+      14,    0,  126,    2, 0x0a /* Public */,
+      15,    0,  127,    2, 0x0a /* Public */,
+      16,    0,  128,    2, 0x0a /* Public */,
+      17,    0,  129,    2, 0x0a /* Public */,
+      18,    1,  130,    2, 0x0a /* Public */,
+      21,    0,  133,    2, 0x0a /* Public */,
+      22,    0,  134,    2, 0x0a /* Public */,
+      23,    0,  135,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -119,6 +126,9 @@ static const uint qt_meta_data_SurfaceEvolverGUI[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 19,   20,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -146,6 +156,9 @@ void SurfaceEvolverGUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 14: _t->ActionRemoveSelectedObjects(); break;
         case 15: _t->ActionClearAllObjects(); break;
         case 16: _t->ActionObjectVisibility((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 17: _t->ActionRenderBoundingBox(); break;
+        case 18: _t->ActionRenderGridBox(); break;
+        case 19: _t->ActionCloseSDFWindow(); break;
         default: ;
         }
     }
@@ -180,13 +193,13 @@ int SurfaceEvolverGUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 20;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 17)
+        if (_id < 20)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 17;
+        _id -= 20;
     }
     return _id;
 }
