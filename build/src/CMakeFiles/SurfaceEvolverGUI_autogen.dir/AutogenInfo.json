@@ -123,6 +123,11 @@
 			"EWIEGA46WW/moc_SDF.cpp"
 		],
 		[
+			"D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.h",
+			"Mu",
+			"EWIEGA46WW/moc_SDFWidget.cpp"
+		],
+		[
 			"D:/VS_Projects/SurfaceEvolverGUI/src/SurfaceEvolverGUI.h",
 			"Mu",
 			"EWIEGA46WW/moc_SurfaceEvolverGUI.cpp"
@@ -196,6 +201,7 @@
 	"MOC_SKIP" : 
 	[
 		"D:/VS_Projects/SurfaceEvolverGUI/build/src/POLY2TRI_autogen/mocs_compilation.cpp",
+		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h",
 		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SurfaceEvolverGUI.h"
 	],
 	"MULTI_CONFIG" : true,
@@ -236,6 +242,7 @@
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/PrimitiveBox.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Quaternion.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/SDF.cpp", "Mu" ],
+		[ "D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/SurfaceEvolverGUI.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/VTKExporter.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Vector3.cpp", "Mu" ],

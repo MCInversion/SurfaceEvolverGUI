@@ -13,6 +13,7 @@ D:/VS_Projects/SurfaceEvolverGUI/src/FastSweep3D.h
 D:/VS_Projects/SurfaceEvolverGUI/src/Evolver.cpp
 D:/VS_Projects/SurfaceEvolverGUI/src/Grid.h
 D:/VS_Projects/SurfaceEvolverGUI/src/Geometry.h
+D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.cpp
 D:/VS_Projects/SurfaceEvolverGUI/src/OBJImporter.cpp
 D:/VS_Projects/SurfaceEvolverGUI/src/VTKExporter.h
 D:/VS_Projects/SurfaceEvolverGUI/src/LinearSolver.h
@@ -21,6 +22,8 @@ D:/VS_Projects/SurfaceEvolverGUI/src/Matrix4.h
 D:/VS_Projects/SurfaceEvolverGUI/src/MeshObject.h
 D:/VS_Projects/SurfaceEvolverGUI/src/OBJExporter.h
 D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionRemesher.cpp
+D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.h
+ mmc:Q_OBJECT
 D:/VS_Projects/SurfaceEvolverGUI/src/OBJImporter.h
 D:/VS_Projects/SurfaceEvolverGUI/src/Octree.h
 D:/VS_Projects/SurfaceEvolverGUI/src/Deform.cpp

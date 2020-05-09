@@ -293,7 +293,7 @@ int SurfaceEvolverGUI::filterSelectionForProcessing()
 
 void SurfaceEvolverGUI::actionOpen_File()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "VTK files (*.vtk)");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "../../models", "VTK files (*.vtk)");
     if (!fileName.isEmpty()) {
         vtkSmartPointer<vtkPolyData> polyData = ReadPolyData(fileName.toStdString().c_str());
         m_engine->addPolyDataObjectToScene(polyData);
@@ -308,7 +308,7 @@ void SurfaceEvolverGUI::actionOpen_File()
 
 void SurfaceEvolverGUI::actionSave_File()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save VTK file"), "", tr("VTK file (*.vtk)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save VTK file"), "../../models", tr("VTK file (*.vtk)"));
     if (fileName.isEmpty()) {
         return;
     }
@@ -322,7 +322,9 @@ void SurfaceEvolverGUI::actionSigned_Distance_Function()
     int selectedId = filterSelectionForProcessing();
 
     if (selectedId >= 0) {
-
+        m_sdfWidget = new SDFWidget(this);
+        m_sdfWidget->processMesh(m_engine->getLibraryObject(selectedId));
+        m_sdfWidget->show();
     }
 }
 

@@ -95,6 +95,16 @@ void MeshObject::setOpacity(double opacity)
 	m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
 }
 
+int MeshObject::vertexCount()
+{
+	return m_polyData->GetNumberOfPoints();
+}
+
+int MeshObject::polyCount()
+{
+	return m_polyData->GetNumberOfPolys();
+}
+
 void MeshObject::initProperties()
 {
 	m_vertexMapper = vtkSmartPointer<vtkPolyDataMapper>::New();

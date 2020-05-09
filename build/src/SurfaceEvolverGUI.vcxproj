@@ -372,6 +372,62 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\src\SDFWidget.ui">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating ui_SDFWidget.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SDFWidget.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating ui_SDFWidget.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SDFWidget.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Generating ui_SDFWidget.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SDFWidget.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Generating ui_SDFWidget.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SDFWidget.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
     <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\src\SurfaceEvolverGUI.ui">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating ui_SurfaceEvolverGUI.h</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
@@ -506,10 +562,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\PrimitiveBox.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\Quaternion.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\SDF.cpp" />
+    <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\SDFWidget.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\SurfaceEvolverGUI.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\VTKExporter.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\Vector3.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\main.cpp" />
+    <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SDFWidget.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SurfaceEvolverGUI.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\Box3.h" />
@@ -534,6 +592,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\PrimitiveBox.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\Quaternion.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\SDF.h" />
+    <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\SDFWidget.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\SurfaceEvolverGUI.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\VTKExporter.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\Vector3.h" />

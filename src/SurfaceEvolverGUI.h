@@ -23,8 +23,10 @@
 
 #include "Engine.h"
 #include "ui_SurfaceEvolverGUI.h"
+#include "SDFWidget.h"
 
 class Engine;
+class SDFWidget;
 
 class SurfaceEvolverGUI : public QMainWindow
 {
@@ -68,6 +70,7 @@ private:
 
     // Designer form
     Ui_SurfaceEvolverGUI* ui;
+    SDFWidget* m_sdfWidget = nullptr;
 
     void setColorIcon(QToolButton* button, QColor color);
     void setToolIcon(QToolButton* button, QString name, QString extension = ".ico");
@@ -84,7 +87,7 @@ private:
 
     std::vector<int> getSelectionIndices();
 
-    int filterSelectionForProcessing();
+    int filterSelectionForProcessing();    
 };
 
 /**/

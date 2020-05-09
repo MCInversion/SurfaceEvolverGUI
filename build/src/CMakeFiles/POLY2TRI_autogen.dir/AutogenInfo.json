@@ -76,7 +76,11 @@
 	"MOC_PREDEFS_CMD" : [],
 	"MOC_PREDEFS_FILE" : "",
 	"MOC_RELAXED_MODE" : false,
-	"MOC_SKIP" : [ "D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SurfaceEvolverGUI.h" ],
+	"MOC_SKIP" : 
+	[
+		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h",
+		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SurfaceEvolverGUI.h"
+	],
 	"MULTI_CONFIG" : true,
 	"PARALLEL" : 4,
 	"PARSE_CACHE_FILE" : "D:/VS_Projects/SurfaceEvolverGUI/build/src/CMakeFiles/POLY2TRI_autogen.dir/ParseCache.txt",

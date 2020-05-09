@@ -48,6 +48,9 @@ public:
 	inline bool vertexRender() { return m_vertex; };
 	inline bool edgeRender() { return m_wireframe; };
 	inline bool surfaceRender() { return m_surface; };
+
+	int vertexCount();
+	int polyCount();
 private:
 	vtkSmartPointer<vtkPolyData> m_polyData;
 
