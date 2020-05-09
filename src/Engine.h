@@ -26,6 +26,8 @@ private:
 	QColor m_edgeColor = QColor(0, 74, 194);
 	QColor m_surfaceColor = QColor(237, 224, 206);
 
+	double m_opacity = 1.0;
+
 	std::vector<std::shared_ptr<MeshObject>> m_objects;
 
 	int m_objId = 0;
@@ -52,9 +54,9 @@ public:
 
 	std::shared_ptr<MeshObject> getLibraryObject(int id);
 
-	void setVertexRepresentationOfAllObjects(bool representation);
-	void setWireframeRepresentationOfAllObjects(bool representation);
-	void setSurfaceRepresentationOfAllObjects(bool representation);
+	void setVertexRepresentationOfObjects(bool representation, std::vector<int> selectedIds = {});
+	void setWireframeRepresentationOfObjects(bool representation, std::vector<int> selectedIds = {});
+	void setSurfaceRepresentationOfObjects(bool representation, std::vector<int> selectedIds = {});
 
 	void setSelectedObjectId(int id);
 	void setVisibilityOfObject(bool visible, int id);
@@ -62,10 +64,16 @@ public:
 	void setWireframeRepresentationOfObject(bool representation, int id);
 	void setSurfaceRepresentationOfObject(bool representation, int id);
 
+	inline bool vertexRender() { return m_vertex; };
+	inline bool edgeRender() { return m_wireframe; };
+	inline bool surfaceRender() { return m_surface; };
+
 	inline QColor bgColor() { return m_bgColor; };
 	inline QColor vertexColor() { return m_vertexColor; };
 	inline QColor edgeColor() { return m_edgeColor; };
 	inline QColor surfaceColor() { return m_surfaceColor; };
+
+	inline double opacity() { return m_opacity; };
 
 	// === vtk ====
 	vtkSmartPointer<vtkGenericOpenGLRenderWindow> m_renderWindow;

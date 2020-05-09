@@ -71,16 +71,19 @@ const vtkSmartPointer<vtkActor>& MeshObject::getSurfaceActor() const
 
 void MeshObject::setVertexColor(QColor& color)
 {
+	m_vertexColor = color;
 	m_vertexActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
 }
 
 void MeshObject::setEdgeColor(QColor& color)
 {
+	m_edgeColor = color;
 	m_edgeActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
 }
 
 void MeshObject::setSurfaceColor(QColor& color)
 {
+	m_surfaceColor = color;
 	m_surfaceActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
 }
 
@@ -109,9 +112,9 @@ void MeshObject::initProperties()
 	m_vertexActor->SetMapper(m_vertexMapper);
 	m_edgeActor->SetMapper(m_edgeMapper);
 	m_surfaceActor->SetMapper(m_surfaceMapper);
-	setVertexColor(m_defaultVertexColor);
-	setEdgeColor(m_defaultEdgeColor);
-	setSurfaceColor(m_defaultSurfaceColor);
+	setVertexColor(m_vertexColor);
+	setEdgeColor(m_edgeColor);
+	setSurfaceColor(m_surfaceColor);
 
 	m_vertexActor->GetProperty()->SetRepresentationToPoints();
 

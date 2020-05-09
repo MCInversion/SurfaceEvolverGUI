@@ -48,19 +48,19 @@ void SurfaceEvolverGUI::ActionRendererBackgroundColor()
 
 void SurfaceEvolverGUI::ActionRenderVertices()
 {
-    m_engine->setVertexRepresentationOfAllObjects(ui->checkBoxVertices->isChecked());
+    m_engine->setVertexRepresentationOfObjects(ui->checkBoxVertices->isChecked(), getSelectionIndices());
     m_engine->updateRenderedObjects();
 }
 
 void SurfaceEvolverGUI::ActionRenderWireframe()
 {
-    m_engine->setWireframeRepresentationOfAllObjects(ui->checkBoxWireframe->isChecked());
+    m_engine->setWireframeRepresentationOfObjects(ui->checkBoxWireframe->isChecked(), getSelectionIndices());
     m_engine->updateRenderedObjects();
 }
 
 void SurfaceEvolverGUI::ActionRenderSurface()
 {
-    m_engine->setSurfaceRepresentationOfAllObjects(ui->checkBoxSurface->isChecked());
+    m_engine->setSurfaceRepresentationOfObjects(ui->checkBoxSurface->isChecked(), getSelectionIndices());
     m_engine->updateRenderedObjects();
 }
 
@@ -68,35 +68,39 @@ void SurfaceEvolverGUI::ActionVertexColor()
 {
     QColor newColor = QColorDialog::getColor(m_engine->vertexColor(), this);
     setColorIcon(ui->vertexColorButton, newColor);
-    m_engine->setVertexColorToObjects(newColor);
+    m_engine->setVertexColorToObjects(newColor, getSelectionIndices());
 }
 
 void SurfaceEvolverGUI::ActionEdgeColor()
 {
     QColor newColor = QColorDialog::getColor(m_engine->edgeColor(), this);
     setColorIcon(ui->edgeColorButton, newColor);
-    m_engine->setEdgeColorToObjects(newColor);
+    m_engine->setEdgeColorToObjects(newColor, getSelectionIndices());
 }
 
 void SurfaceEvolverGUI::ActionSurfaceColor()
 {
     QColor newColor = QColorDialog::getColor(m_engine->surfaceColor(), this);
     setColorIcon(ui->surfaceColorButton, newColor);
-    m_engine->setSurfaceColorToObjects(newColor);
+    m_engine->setSurfaceColorToObjects(newColor, getSelectionIndices());
 }
 
 void SurfaceEvolverGUI::ActionOpacity()
 {
-    m_engine->setOpacityToObjects(ui->opacitySpinBox->value());
+    m_engine->setOpacityToObjects(ui->opacitySpinBox->value(), getSelectionIndices());
 }
 
 void SurfaceEvolverGUI::ActionSelectLibraryObject()
-{
-    int id = ui->libraryListWidget->currentIndex().data().toInt();
-    m_engine->setSelectedObjectId(id);
-    std::shared_ptr<MeshObject> selectedObj = m_engine->getLibraryObject(id);
-
-    // TODO: current state of mesh render props should be a reflection of selectedObj props
+{    
+    QList<QListWidgetItem*> selection = ui->libraryListWidget->selectedItems();
+    if (!selection.isEmpty()) {
+        auto found = m_itemValuedObjectIds.find(selection.last());
+        int id = found->second;
+        std::shared_ptr<MeshObject> selectedObj = m_engine->getLibraryObject(id);
+        updateMeshUiFromObject(selectedObj);
+    } else {
+        updateMeshUiToDefault();
+    }
 }
 
 void SurfaceEvolverGUI::ActionRemoveSelectedObjects()
@@ -189,6 +193,43 @@ void SurfaceEvolverGUI::reIndexLibraryItems()
     for (auto&& item : m_itemValuedObjectIds) {
         item.second = id++;
     }
+}
+
+void SurfaceEvolverGUI::updateMeshUiFromObject(std::shared_ptr<MeshObject> selectedObj)
+{
+    ui->checkBoxVertices->setChecked(selectedObj->vertexRender());
+    ui->checkBoxWireframe->setChecked(selectedObj->edgeRender());
+    ui->checkBoxSurface->setChecked(selectedObj->surfaceRender());
+
+    setColorIcon(ui->vertexColorButton, selectedObj->vertexColor());
+    setColorIcon(ui->edgeColorButton, selectedObj->edgeColor());
+    setColorIcon(ui->surfaceColorButton, selectedObj->surfaceColor());
+
+    ui->opacitySpinBox->setValue(selectedObj->opacity());
+}
+
+void SurfaceEvolverGUI::updateMeshUiToDefault()
+{
+    ui->checkBoxVertices->setChecked(m_engine->vertexRender());
+    ui->checkBoxWireframe->setChecked(m_engine->edgeRender());
+    ui->checkBoxSurface->setChecked(m_engine->surfaceRender());
+
+    setColorIcon(ui->vertexColorButton, m_engine->vertexColor());
+    setColorIcon(ui->edgeColorButton, m_engine->edgeColor());
+    setColorIcon(ui->surfaceColorButton, m_engine->surfaceColor());
+
+    ui->opacitySpinBox->setValue(m_engine->opacity());
+}
+
+std::vector<int> SurfaceEvolverGUI::getSelectionIndices()
+{
+    QList<QListWidgetItem*> selection = ui->libraryListWidget->selectedItems();
+    std::vector<int> selectionIds = std::vector<int>(selection.count());
+    for (int i = 0; i < selectionIds.size(); i++) {
+        auto found = m_itemValuedObjectIds.find(selection[i]);
+        selectionIds[i] = found->second;
+    }
+    return selectionIds;
 }
 
 void SurfaceEvolverGUI::actionOpen_File()

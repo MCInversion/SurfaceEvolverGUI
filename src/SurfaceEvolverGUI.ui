@@ -520,7 +520,7 @@
   </connection>
   <connection>
    <sender>libraryListWidget</sender>
-   <signal>currentRowChanged(int)</signal>
+   <signal>itemClicked(QListWidgetItem*)</signal>
    <receiver>SurfaceEvolverGUI</receiver>
    <slot>ActionSelectLibraryObject()</slot>
    <hints>

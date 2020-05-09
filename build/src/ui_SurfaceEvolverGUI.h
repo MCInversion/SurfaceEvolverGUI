@@ -306,7 +306,7 @@ public:
         QObject::connect(edgeColorButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionEdgeColor()));
         QObject::connect(surfaceColorButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionSurfaceColor()));
         QObject::connect(opacitySpinBox, SIGNAL(valueChanged(double)), SurfaceEvolverGUI, SLOT(ActionOpacity()));
-        QObject::connect(libraryListWidget, SIGNAL(currentRowChanged(int)), SurfaceEvolverGUI, SLOT(ActionSelectLibraryObject()));
+        QObject::connect(libraryListWidget, SIGNAL(itemClicked(QListWidgetItem*)), SurfaceEvolverGUI, SLOT(ActionSelectLibraryObject()));
         QObject::connect(deleteButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionRemoveSelectedObjects()));
         QObject::connect(clearButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionClearAllObjects()));
 

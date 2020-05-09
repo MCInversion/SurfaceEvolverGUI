@@ -59,7 +59,7 @@ public slots:
 private:
     // Engine
     std::shared_ptr<Engine> m_engine;
-
+    // for engine access to library objects through list widget items
     std::map<QListWidgetItem*, int> m_itemValuedObjectIds;
 
     // Designer form
@@ -74,6 +74,10 @@ private:
 
     void addListItem(QString name, int row);
     void reIndexLibraryItems();
+    void updateMeshUiFromObject(std::shared_ptr<MeshObject> selectedObj);
+    void updateMeshUiToDefault();
+
+    std::vector<int> getSelectionIndices();
 };
 
 /**/
