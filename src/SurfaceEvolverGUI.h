@@ -14,6 +14,7 @@
 #include <vtkDataReader.h>
 #include <vtkSimpleReader.h>
 #include <vtkPolyDataReader.h>
+#include <vtkXMLImageDataReader.h>
 #include <vtkCamera.h>
 #include <vtkSmartPointer.h>
 #include <vtkGenericOpenGLRenderWindow.h>
@@ -26,6 +27,7 @@
 #include "Box3.h"
 #include "ui_SurfaceEvolverGUI.h"
 #include "SDFWidget.h"
+#include "SDF.h"
 
 class Engine;
 
@@ -64,8 +66,8 @@ public slots:
   void ActionObjectVisibility(QListWidgetItem* item);
 
   void ActionRenderBoundingBox();
-  void ActionRenderGridBox();
 
+  void ActionComputeSDF();
   void ActionCloseSDFWindow();
 
 private:
@@ -86,14 +88,14 @@ private:
     void clearAllHelpers();
     bool eventFilter(QObject* object, QEvent* event);
 
-    void addListItem(QString name, int row);
+    void addListItem(QString name, int row, QString icon);
     void reIndexLibraryItems();
-    void updateMeshUiFromObject(std::shared_ptr<MeshObject> selectedObj);
+    void updateMeshUiFromObject(SceneObject* selectedObj);
     void updateMeshUiToDefault();
 
     std::vector<int> getSelectionIndices();
 
-    int filterSelectionForProcessing();   
+    int filterSelectionForProcessing();
 
 };
 
@@ -101,6 +103,7 @@ private:
 namespace
 {
     vtkSmartPointer<vtkPolyData> ReadPolyData(const char* fileName);
+    vtkSmartPointer<vtkImageData> ReadImageData(const char* fileName);
 }
 
 #endif

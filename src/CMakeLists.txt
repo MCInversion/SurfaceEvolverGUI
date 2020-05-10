@@ -6,13 +6,20 @@ find_package(VTK REQUIRED
   vtkGUISupportQt
   vtkCommonColor
   vtkCommonCore
+  vtkCommonDataModel
+  #vtkHybrid
   vtkIOCore
   vtkIOLegacy
   vtkIOImport
   vtkIOExport
+  vtkIOImage
+  vtkIOXML
+  vtkImagingCore
+  vtkImagingHybrid
   vtkFiltersSources
   vtkInteractionStyle
   vtkRenderingContextOpenGL2
+  vtkRenderingVolumeOpenGL2
   vtkRenderingCore
   vtkRenderingFreeType
   vtkRenderingGL2PSOpenGL2

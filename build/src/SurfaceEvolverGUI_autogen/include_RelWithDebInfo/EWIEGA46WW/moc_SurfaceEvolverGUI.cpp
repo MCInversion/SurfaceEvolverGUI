@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SurfaceEvolverGUI_t {
     QByteArrayData data[24];
-    char stringdata0[461];
+    char stringdata0[458];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -54,8 +54,8 @@ QT_MOC_LITERAL(18, 351, 22), // "ActionObjectVisibility"
 QT_MOC_LITERAL(19, 374, 16), // "QListWidgetItem*"
 QT_MOC_LITERAL(20, 391, 4), // "item"
 QT_MOC_LITERAL(21, 396, 23), // "ActionRenderBoundingBox"
-QT_MOC_LITERAL(22, 420, 19), // "ActionRenderGridBox"
-QT_MOC_LITERAL(23, 440, 20) // "ActionCloseSDFWindow"
+QT_MOC_LITERAL(22, 420, 16), // "ActionComputeSDF"
+QT_MOC_LITERAL(23, 437, 20) // "ActionCloseSDFWindow"
 
     },
     "SurfaceEvolverGUI\0slotExit\0\0actionOpen_File\0"
@@ -69,7 +69,7 @@ QT_MOC_LITERAL(23, 440, 20) // "ActionCloseSDFWindow"
     "ActionRemoveSelectedObjects\0"
     "ActionClearAllObjects\0ActionObjectVisibility\0"
     "QListWidgetItem*\0item\0ActionRenderBoundingBox\0"
-    "ActionRenderGridBox\0ActionCloseSDFWindow"
+    "ActionComputeSDF\0ActionCloseSDFWindow"
 };
 #undef QT_MOC_LITERAL
 
@@ -157,7 +157,7 @@ void SurfaceEvolverGUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 15: _t->ActionClearAllObjects(); break;
         case 16: _t->ActionObjectVisibility((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         case 17: _t->ActionRenderBoundingBox(); break;
-        case 18: _t->ActionRenderGridBox(); break;
+        case 18: _t->ActionComputeSDF(); break;
         case 19: _t->ActionCloseSDFWindow(); break;
         default: ;
         }

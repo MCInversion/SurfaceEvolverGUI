@@ -65,9 +65,9 @@ Grid::~Grid()
 	this->cleanGrad();
 }
 
-void Grid::exportToVTI(std::string filename)
+void Grid::exportToVTI(std::string filename, std::string path)
 {
-	std::fstream vti(filename + ".vti", std::fstream::out);
+	std::fstream vti(path + filename + ".vti", std::fstream::out);
 
 	Vector3 o = bbox.min; // origin
 	uint nx = Nx - 1;

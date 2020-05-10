@@ -46,7 +46,7 @@ public:
     QAction *actionSigned_Distance_Function;
     QAction *actionSurface_Evolution;
     QWidget *centralwidget;
-    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout_3;
     QVBoxLayout *verticalLayout_2;
     QVTKOpenGLNativeWidget *qvtkWidget;
     QVBoxLayout *verticalLayout;
@@ -85,8 +85,10 @@ public:
     {
         if (SurfaceEvolverGUI->objectName().isEmpty())
             SurfaceEvolverGUI->setObjectName(QString::fromUtf8("SurfaceEvolverGUI"));
+        SurfaceEvolverGUI->setWindowModality(Qt::NonModal);
         SurfaceEvolverGUI->resize(1185, 766);
         SurfaceEvolverGUI->setMaximumSize(QSize(16777213, 16777215));
+        SurfaceEvolverGUI->setDocumentMode(true);
         actionOpenFile = new QAction(SurfaceEvolverGUI);
         actionOpenFile->setObjectName(QString::fromUtf8("actionOpenFile"));
         actionOpenFile->setEnabled(true);
@@ -113,8 +115,8 @@ public:
         centralwidget = new QWidget(SurfaceEvolverGUI);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setMaximumSize(QSize(16777215, 16777215));
-        horizontalLayout = new QHBoxLayout(centralwidget);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        gridLayout_3 = new QGridLayout(centralwidget);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setSizeConstraint(QLayout::SetMaximumSize);
@@ -124,7 +126,7 @@ public:
         verticalLayout_2->addWidget(qvtkWidget);
 
 
-        horizontalLayout->addLayout(verticalLayout_2);
+        gridLayout_3->addLayout(verticalLayout_2, 0, 0, 1, 1);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(7);
@@ -278,7 +280,7 @@ public:
         verticalLayout->addItem(horizontalSpacer);
 
 
-        horizontalLayout->addLayout(verticalLayout);
+        gridLayout_3->addLayout(verticalLayout, 0, 1, 1, 1);
 
         SurfaceEvolverGUI->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(SurfaceEvolverGUI);
@@ -344,7 +346,7 @@ public:
         actionSurface_Evolution->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Surface Evolution", nullptr));
         bgColorButton->setText(QString());
         bgColorLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Background color", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Mesh render:", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Object render properties:", nullptr));
         checkBoxVertices->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Vertices", nullptr));
         checkBoxWireframe->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Wireframe", nullptr));
         checkBoxSurface->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Surface", nullptr));

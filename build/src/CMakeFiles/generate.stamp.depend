@@ -58,6 +58,8 @@ D:/VTK/lib/cmake/vtk-8.2/Modules/vtkIOXML.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkIOXMLParser.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkImagingCore.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkImagingFourier.cmake
+D:/VTK/lib/cmake/vtk-8.2/Modules/vtkImagingHybrid.cmake
+D:/VTK/lib/cmake/vtk-8.2/Modules/vtkImagingMath.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkInteractionStyle.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkMetaIO.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkRenderingContext2D.cmake
@@ -66,6 +68,8 @@ D:/VTK/lib/cmake/vtk-8.2/Modules/vtkRenderingCore.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkRenderingFreeType.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkRenderingGL2PSOpenGL2.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkRenderingOpenGL2.cmake
+D:/VTK/lib/cmake/vtk-8.2/Modules/vtkRenderingVolume.cmake
+D:/VTK/lib/cmake/vtk-8.2/Modules/vtkRenderingVolumeOpenGL2.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkdoubleconversion.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkeigen.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkexpat.cmake

@@ -12,8 +12,9 @@
 
 #include <QVTKOpenGLNativeWidget.h>
 #include <vtksys/SystemTools.hxx>
+#include <vtkIndent.h>
 
-#include "MeshObject.h"
+#include "SceneObject.h"
 
 class Engine
 {
@@ -28,8 +29,8 @@ private:
 
 	double m_opacity = 1.0;
 
-	std::vector<std::shared_ptr<MeshObject>> m_libObjects;
-	std::vector<std::shared_ptr<MeshObject>> m_helperObjects;
+	std::vector<SceneObject> m_libObjects;
+	std::vector<SceneObject> m_helperObjects;
 
 	int m_objId = 0;
 
@@ -53,12 +54,14 @@ public:
 	void setOpacityToObjects(double opacity, std::vector<int> selectedIds = {});
 
 	void addPolyDataObjectToScene(vtkSmartPointer<vtkPolyData> model, QString filename);
-	void removeMeshObjectFromLibrary(int id);
-	void clearMeshObjectLibrary();
+	void addImageDataObjectToScene(vtkSmartPointer<vtkImageData> img, QString filename);
+	void addGridDataObjectToScene(Grid* grid, QString name);
+	void removeObjectFromLibrary(int id);
+	void clearObjectLibrary();
 
-	std::shared_ptr<MeshObject> getLibraryObject(int id);
+	SceneObject* getLibraryObject(int id);
 
-	void addHelperObjectToScene(std::shared_ptr<MeshObject> helper, QColor helper_color = QColor(52, 235, 180));
+	void addHelperObjectToScene(SceneObject helper, QColor helper_color = QColor(52, 235, 180));
 	void clearHelperObjects();
 
 	void setVertexRepresentationOfObjects(bool representation, std::vector<int> selectedIds = {});

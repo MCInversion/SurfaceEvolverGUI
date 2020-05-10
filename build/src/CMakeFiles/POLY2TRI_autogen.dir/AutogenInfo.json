@@ -55,7 +55,8 @@
 		"WIN32",
 		"vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL2)",
 		"vtkRenderingCore_INCLUDE=\"D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/vtkRenderingCore_AUTOINIT_vtkInteractionStyle_vtkRenderingFreeType_vtkRenderingOpenGL2.h\"",
-		"vtkRenderingOpenGL2_AUTOINIT=1(vtkRenderingGL2PSOpenGL2)"
+		"vtkRenderingOpenGL2_AUTOINIT=1(vtkRenderingGL2PSOpenGL2)",
+		"vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL2)"
 	],
 	"MOC_DEPEND_FILTERS" : 
 	[

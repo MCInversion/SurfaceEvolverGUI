@@ -41,7 +41,7 @@ public:
 	~Grid();
 	bool equalInDimTo(Grid& other);
 
-	void exportToVTI(std::string filename);
+	void exportToVTI(std::string filename, std::string path = "");
 	void exportGradientToVTK(std::string filename);
 
 	void initToVal(float val);

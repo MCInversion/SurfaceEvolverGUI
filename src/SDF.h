@@ -5,6 +5,7 @@
 #include "FastSweep3D.h"
 #include "Octree.h"
 #include "VTKExporter.h"
+#include "Parameters.h"
 
 enum class SDF_Method {
 	fast_sweeping = 0,
@@ -29,13 +30,16 @@ public:
 	std::string geom_properties = "";
 	std::string time_log = "";
 	std::string last_transform = "";
+	std::string grid_export_name = "";
 
 	SDF();
 	SDF(const SDF& other);
+	SDF(SDFParams* sdfParams);
 	SDF(Geometry* geom, uint resolution, bool computeSign = false, bool computeGradient = true,
 		bool saveGridStates = false, bool scaleAndInterpolate = false, SDF_Method method = SDF_Method::fast_sweeping);
 
 	void exportGrid(VTKExporter* e, std::string export_name = "");
+	void exportGrid(std::string export_name = "", std::string path = "");
 	void exportGradientField(VTKExporter* e, std::string export_name = "");
 	std::string getComputationProperties();
 

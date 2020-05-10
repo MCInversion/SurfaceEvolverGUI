@@ -38,7 +38,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="octreeResolutionSpinBox">
         <property name="toolTip">
          <string>grid cell count for geometry's bounding cube for octree construction</string>
         </property>
@@ -49,11 +49,11 @@
          <number>1000</number>
         </property>
         <property name="value">
-         <number>40</number>
+         <number>20</number>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="2" column="0">
        <spacer name="verticalSpacer_3">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -67,7 +67,7 @@
        </spacer>
       </item>
       <item row="1" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox">
+       <widget class="QDoubleSpinBox" name="offsetFactorSpinBox">
         <property name="toolTip">
          <string>a factor by which the geometry's bounding box gets expanded to extend the distance function domain</string>
         </property>
@@ -98,17 +98,44 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_9">
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QGroupBox" name="fastSweepParams">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Fast-Sweep parameters:</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="NsweepsLabel">
+        <property name="toolTip">
+         <string>Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.</string>
+        </property>
         <property name="text">
-         <string>total grid resolution:</string>
+         <string>NSweeps:</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>80 x 80 x 80</string>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="nSweepsSpinBox">
+        <property name="toolTip">
+         <string>Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>8</number>
+        </property>
+        <property name="value">
+         <number>8</number>
         </property>
        </widget>
       </item>
@@ -247,46 +274,18 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QGroupBox" name="fastSweepParams">
-     <property name="minimumSize">
+   <item row="4" column="1">
+    <spacer name="verticalSpacer_4">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
       <size>
-       <width>0</width>
-       <height>50</height>
+       <width>20</width>
+       <height>40</height>
       </size>
      </property>
-     <property name="title">
-      <string>Fast-Sweep parameters:</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="0" column="0">
-       <widget class="QLabel" name="NsweepsLabel">
-        <property name="toolTip">
-         <string>Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.</string>
-        </property>
-        <property name="text">
-         <string>NSweeps:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QSpinBox" name="nSweepsSpinBox">
-        <property name="toolTip">
-         <string>Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.</string>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>8</number>
-        </property>
-        <property name="value">
-         <number>8</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+    </spacer>
    </item>
    <item row="3" column="1">
     <widget class="QGroupBox" name="groupBox">
@@ -310,8 +309,35 @@
      </layout>
     </widget>
    </item>
+   <item row="5" column="1">
+    <widget class="QPushButton" name="computeButton">
+     <property name="text">
+      <string>Compute</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>computeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>sdfWidget</receiver>
+   <slot>ActionSDFInit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>489</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>595</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ActionSDFInit()</slot>
+ </slots>
 </ui>

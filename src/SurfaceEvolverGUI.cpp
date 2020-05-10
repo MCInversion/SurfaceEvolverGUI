@@ -103,8 +103,10 @@ void SurfaceEvolverGUI::ActionSelectLibraryObject()
     if (!selection.isEmpty()) {
         auto found = m_itemValuedObjectIds.find(selection.last());
         int id = found->second;
-        std::shared_ptr<MeshObject> selectedObj = m_engine->getLibraryObject(id);
-        updateMeshUiFromObject(selectedObj);
+        SceneObject* selectedObj = m_engine->getLibraryObject(id);
+        if (selectedObj->type() == ObjectType::Mesh) {
+            updateMeshUiFromObject(selectedObj);
+        }        
     } else {
         updateMeshUiToDefault();
     }
@@ -117,7 +119,7 @@ void SurfaceEvolverGUI::ActionRemoveSelectedObjects()
 
 void SurfaceEvolverGUI::ActionClearAllObjects()
 {
-    m_engine->clearMeshObjectLibrary();
+    m_engine->clearObjectLibrary();
     ui->libraryListWidget->clear();
 }
 
@@ -132,7 +134,7 @@ void SurfaceEvolverGUI::ActionObjectVisibility(QListWidgetItem* item)
 
 void SurfaceEvolverGUI::ActionRenderBoundingBox()
 {
-    std::shared_ptr<MeshObject> object = m_engine->getLibraryObject(m_engine->selectedId());
+    SceneObject* object = m_engine->getLibraryObject(m_engine->selectedId());
     Vector3 boxMin = object->getBoxMin();
     Vector3 boxMax = object->getBoxMax();
     Box3 bbox = Box3(boxMin, boxMax);
@@ -141,26 +143,30 @@ void SurfaceEvolverGUI::ActionRenderBoundingBox()
     PrimitiveBox box = PrimitiveBox(boxSize.x, boxSize.y, boxSize.z, 1, 1, 1, true, box_name);
     Matrix4 T = Matrix4().makeTranslation(boxMin.x, boxMin.y, boxMin.z);
     box.applyMatrix(T);
-    std::shared_ptr<MeshObject> box_object = std::make_shared<MeshObject>(MeshObject(box));
+    SceneObject box_object = SceneObject(box);
     m_engine->addHelperObjectToScene(box_object);
     m_engine->updateRenderedObjects();
 }
 
-void SurfaceEvolverGUI::ActionRenderGridBox()
+void SurfaceEvolverGUI::ActionComputeSDF()
 {
-    /*
-    std::shared_ptr<MeshObject> object = m_engine->getLibraryObject(m_engine->selectedId());
-    Vector3 boxMin = object->getBoxMin();
-    Vector3 boxMax = object->getBoxMax();
-    Box3 bbox = Box3(boxMin, boxMax);
-    Vector3 boxSize = bbox.getSize();
-    std::string box_name = object->name().toStdString() + "_bounding_box";
-    PrimitiveBox box = PrimitiveBox(boxSize.x, boxSize.y, boxSize.z, 1, 1, 1, true, box_name);
-    Matrix4 T = Matrix4().makeTranslation(boxMin.x, boxMin.y, boxMin.z);
-    box.applyMatrix(T);
-    std::shared_ptr<MeshObject> box_object = std::make_shared<MeshObject>(MeshObject(box));
-    m_engine->addHelperObjectToScene(box_object);
-    m_engine->updateRenderedObjects();*/
+    SDFWidget* sdfWidget = static_cast<SDFWidget*>(sender());
+    SDFParams params = sdfWidget->getSDFParams();
+
+    SceneObject* object = m_engine->getLibraryObject(m_engine->selectedId());
+    Geometry geom = object->translatePolyDataToGeometry();
+    params.targetGeom = &geom;
+    SDF sdf = SDF(&params);
+    std::cout << sdf.geom_properties << std::endl;
+    std::cout << sdf.time_log << std::endl;
+    // sdf.exportGrid("", "../../models/");
+    QString name = object->name() + "_SDF";
+    m_engine->addGridDataObjectToScene(sdf.grid, name);
+
+    int lastrow = ui->libraryListWidget->count();
+    m_engine->updateRenderedObjects();
+
+    addListItem(name, lastrow, "scalar-object.png");
 }
 
 void SurfaceEvolverGUI::ActionCloseSDFWindow()
@@ -208,7 +214,7 @@ void SurfaceEvolverGUI::removeSelectedObjects()
         while (!selection.isEmpty()) {
             QListWidgetItem* item = selection.first();
             auto found = m_itemValuedObjectIds.find(item);
-            m_engine->removeMeshObjectFromLibrary(found->second);
+            m_engine->removeObjectFromLibrary(found->second);
             m_itemValuedObjectIds.erase(found);
             selection.pop_front();
         }
@@ -236,10 +242,11 @@ bool SurfaceEvolverGUI::eventFilter(QObject* object, QEvent* event)
     return QWidget::eventFilter(object, event);
 }
 
-void SurfaceEvolverGUI::addListItem(QString name, int row)
+void SurfaceEvolverGUI::addListItem(QString name, int row, QString icon)
 {
     QListWidgetItem* newItem = new QListWidgetItem(name);
-    setObjectIcon(newItem, "geometry");
+    QStringList strSplt = icon.split(".");
+    setObjectIcon(newItem, strSplt.first(), "." + strSplt.last());
     newItem->setFlags(newItem->flags() | Qt::ItemIsUserCheckable);
     newItem->setCheckState(Qt::Checked);
 
@@ -255,7 +262,7 @@ void SurfaceEvolverGUI::reIndexLibraryItems()
     }
 }
 
-void SurfaceEvolverGUI::updateMeshUiFromObject(std::shared_ptr<MeshObject> selectedObj)
+void SurfaceEvolverGUI::updateMeshUiFromObject(SceneObject* selectedObj)
 {
     ui->checkBoxVertices->setChecked(selectedObj->vertexRender());
     ui->checkBoxWireframe->setChecked(selectedObj->edgeRender());
@@ -338,15 +345,30 @@ int SurfaceEvolverGUI::filterSelectionForProcessing()
 
 void SurfaceEvolverGUI::actionOpen_File()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "../../models", "VTK files (*.vtk)");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "../../models", tr("VTK files (*.vtk *.vti)"));
     if (!fileName.isEmpty()) {
-        vtkSmartPointer<vtkPolyData> polyData = ReadPolyData(fileName.toStdString().c_str());
-        int lastrow = ui->libraryListWidget->count();
         QString name = fileName.split("/").last();
-        m_engine->addPolyDataObjectToScene(polyData, name);
+        QString extension = "." + fileName.split(".").last();
+        QString icon;
+
+        if (extension == ".vtk") {
+            vtkSmartPointer<vtkPolyData> polyData = ReadPolyData(fileName.toStdString().c_str());
+            m_engine->addPolyDataObjectToScene(polyData, name);
+            icon = "geometry.ico";
+        }
+        else if (extension == ".vti") {
+            vtkSmartPointer<vtkImageData> imgData = ReadImageData(fileName.toStdString().c_str());
+            m_engine->addImageDataObjectToScene(imgData, name);
+            icon = "scalar-object.png";
+        }
+        else {
+            return;
+        }
+
+        int lastrow = ui->libraryListWidget->count();
         m_engine->updateRenderedObjects();
 
-        addListItem(name, lastrow);        
+        addListItem(name, lastrow, icon);        
     }
 }
 
@@ -369,8 +391,17 @@ void SurfaceEvolverGUI::actionSigned_Distance_Function()
 
     if (selectedId >= 0) {
         SDFWidget* sdfWidget = new SDFWidget(this);
+
+        if (m_engine->getLibraryObject(selectedId)->type() != ObjectType::Mesh) {
+            QMessageBox* msgBox = new QMessageBox();
+            msgBox->setWindowTitle("Invalid target object");
+            msgBox->setText("Selected object is not a Mesh Object! Please select a Mesh Object for processing.");
+            msgBox->setIcon(QMessageBox::Critical);
+        }
+
         sdfWidget->processMeshInfo(m_engine->getLibraryObject(selectedId));
         connect(sdfWidget, SIGNAL(closeSDF()), this, SLOT(ActionCloseSDFWindow()));
+        connect(sdfWidget, SIGNAL(sdfInit()), this, SLOT(ActionComputeSDF()));
         ui->sceneObjectsGroupBox->setEnabled(false);
         ui->menuBar->setEnabled(false);
 
@@ -401,22 +432,21 @@ namespace {
     vtkSmartPointer<vtkPolyData> ReadPolyData(const char* fileName)
     {
         vtkSmartPointer<vtkPolyData> polyData;
-
-        /**/
-        std::string extension =
-            vtksys::SystemTools::GetFilenameLastExtension(std::string(fileName));
-
-        // Drop the case of the extension
-        std::transform(extension.begin(), extension.end(),
-            extension.begin(), ::tolower);
-
-        if (extension == ".vtk") {
-            vtkSmartPointer<vtkPolyDataReader> reader = vtkSmartPointer<vtkPolyDataReader>::New();
-            reader->SetFileName(fileName);
-            reader->Update();
-            polyData = reader->GetOutput();
-        }
+        vtkSmartPointer<vtkPolyDataReader> reader = vtkSmartPointer<vtkPolyDataReader>::New();
+        reader->SetFileName(fileName);
+        reader->Update();
+        polyData = reader->GetOutput();
 
         return polyData;
+    }
+    vtkSmartPointer<vtkImageData> ReadImageData(const char* fileName)
+    {
+        vtkSmartPointer<vtkImageData> imgData;
+        vtkSmartPointer<vtkXMLImageDataReader> reader = vtkSmartPointer<vtkXMLImageDataReader>::New();
+        reader->SetFileName(fileName);
+        reader->Update();
+        imgData = reader->GetOutput();
+
+        return imgData;
     }
 }

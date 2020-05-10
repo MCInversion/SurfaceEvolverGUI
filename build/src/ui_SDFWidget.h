@@ -17,6 +17,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QWidget>
@@ -31,12 +32,14 @@ public:
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_3;
     QLabel *label_5;
-    QSpinBox *spinBox;
+    QSpinBox *octreeResolutionSpinBox;
     QSpacerItem *verticalSpacer_3;
-    QDoubleSpinBox *doubleSpinBox;
+    QDoubleSpinBox *offsetFactorSpinBox;
     QLabel *label_8;
-    QLabel *label_9;
-    QLabel *label_10;
+    QGroupBox *fastSweepParams;
+    QGridLayout *gridLayout_5;
+    QLabel *NsweepsLabel;
+    QSpinBox *nSweepsSpinBox;
     QLabel *targetObjectLabel;
     QLabel *objectName;
     QSpacerItem *verticalSpacer;
@@ -54,13 +57,11 @@ public:
     QLabel *bboxMaxLabel;
     QLabel *bboxMax;
     QFrame *line_2;
-    QGroupBox *fastSweepParams;
-    QGridLayout *gridLayout_5;
-    QLabel *NsweepsLabel;
-    QSpinBox *nSweepsSpinBox;
+    QSpacerItem *verticalSpacer_4;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_4;
     QCheckBox *comuteSignCheckBox;
+    QPushButton *computeButton;
 
     void setupUi(QWidget *sdfWidget)
     {
@@ -85,45 +86,56 @@ public:
 
         gridLayout_3->addWidget(label_5, 0, 0, 1, 1);
 
-        spinBox = new QSpinBox(groupBox_2);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setMinimum(5);
-        spinBox->setMaximum(1000);
-        spinBox->setValue(40);
+        octreeResolutionSpinBox = new QSpinBox(groupBox_2);
+        octreeResolutionSpinBox->setObjectName(QString::fromUtf8("octreeResolutionSpinBox"));
+        octreeResolutionSpinBox->setMinimum(5);
+        octreeResolutionSpinBox->setMaximum(1000);
+        octreeResolutionSpinBox->setValue(20);
 
-        gridLayout_3->addWidget(spinBox, 0, 1, 1, 1);
+        gridLayout_3->addWidget(octreeResolutionSpinBox, 0, 1, 1, 1);
 
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_3->addItem(verticalSpacer_3, 3, 0, 1, 1);
+        gridLayout_3->addItem(verticalSpacer_3, 2, 0, 1, 1);
 
-        doubleSpinBox = new QDoubleSpinBox(groupBox_2);
-        doubleSpinBox->setObjectName(QString::fromUtf8("doubleSpinBox"));
-        doubleSpinBox->setDecimals(1);
-        doubleSpinBox->setMinimum(0.100000000000000);
-        doubleSpinBox->setMaximum(10.000000000000000);
-        doubleSpinBox->setSingleStep(0.100000000000000);
-        doubleSpinBox->setValue(1.000000000000000);
+        offsetFactorSpinBox = new QDoubleSpinBox(groupBox_2);
+        offsetFactorSpinBox->setObjectName(QString::fromUtf8("offsetFactorSpinBox"));
+        offsetFactorSpinBox->setDecimals(1);
+        offsetFactorSpinBox->setMinimum(0.100000000000000);
+        offsetFactorSpinBox->setMaximum(10.000000000000000);
+        offsetFactorSpinBox->setSingleStep(0.100000000000000);
+        offsetFactorSpinBox->setValue(1.000000000000000);
 
-        gridLayout_3->addWidget(doubleSpinBox, 1, 1, 1, 1);
+        gridLayout_3->addWidget(offsetFactorSpinBox, 1, 1, 1, 1);
 
         label_8 = new QLabel(groupBox_2);
         label_8->setObjectName(QString::fromUtf8("label_8"));
 
         gridLayout_3->addWidget(label_8, 1, 0, 1, 1);
 
-        label_9 = new QLabel(groupBox_2);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-
-        gridLayout_3->addWidget(label_9, 2, 0, 1, 1);
-
-        label_10 = new QLabel(groupBox_2);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-
-        gridLayout_3->addWidget(label_10, 2, 1, 1, 1);
-
 
         gridLayout->addWidget(groupBox_2, 2, 1, 1, 1);
+
+        fastSweepParams = new QGroupBox(sdfWidget);
+        fastSweepParams->setObjectName(QString::fromUtf8("fastSweepParams"));
+        fastSweepParams->setMinimumSize(QSize(0, 50));
+        gridLayout_5 = new QGridLayout(fastSweepParams);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        NsweepsLabel = new QLabel(fastSweepParams);
+        NsweepsLabel->setObjectName(QString::fromUtf8("NsweepsLabel"));
+
+        gridLayout_5->addWidget(NsweepsLabel, 0, 0, 1, 1);
+
+        nSweepsSpinBox = new QSpinBox(fastSweepParams);
+        nSweepsSpinBox->setObjectName(QString::fromUtf8("nSweepsSpinBox"));
+        nSweepsSpinBox->setMinimum(1);
+        nSweepsSpinBox->setMaximum(8);
+        nSweepsSpinBox->setValue(8);
+
+        gridLayout_5->addWidget(nSweepsSpinBox, 0, 1, 1, 1);
+
+
+        gridLayout->addWidget(fastSweepParams, 3, 0, 1, 1);
 
         targetObjectLabel = new QLabel(sdfWidget);
         targetObjectLabel->setObjectName(QString::fromUtf8("targetObjectLabel"));
@@ -208,26 +220,9 @@ public:
 
         gridLayout->addWidget(line_2, 1, 1, 1, 1);
 
-        fastSweepParams = new QGroupBox(sdfWidget);
-        fastSweepParams->setObjectName(QString::fromUtf8("fastSweepParams"));
-        fastSweepParams->setMinimumSize(QSize(0, 50));
-        gridLayout_5 = new QGridLayout(fastSweepParams);
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        NsweepsLabel = new QLabel(fastSweepParams);
-        NsweepsLabel->setObjectName(QString::fromUtf8("NsweepsLabel"));
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_5->addWidget(NsweepsLabel, 0, 0, 1, 1);
-
-        nSweepsSpinBox = new QSpinBox(fastSweepParams);
-        nSweepsSpinBox->setObjectName(QString::fromUtf8("nSweepsSpinBox"));
-        nSweepsSpinBox->setMinimum(1);
-        nSweepsSpinBox->setMaximum(8);
-        nSweepsSpinBox->setValue(8);
-
-        gridLayout_5->addWidget(nSweepsSpinBox, 0, 1, 1, 1);
-
-
-        gridLayout->addWidget(fastSweepParams, 3, 0, 1, 1);
+        gridLayout->addItem(verticalSpacer_4, 4, 1, 1, 1);
 
         groupBox = new QGroupBox(sdfWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -242,8 +237,14 @@ public:
 
         gridLayout->addWidget(groupBox, 3, 1, 1, 1);
 
+        computeButton = new QPushButton(sdfWidget);
+        computeButton->setObjectName(QString::fromUtf8("computeButton"));
+
+        gridLayout->addWidget(computeButton, 5, 1, 1, 1);
+
 
         retranslateUi(sdfWidget);
+        QObject::connect(computeButton, SIGNAL(clicked()), sdfWidget, SLOT(ActionSDFInit()));
 
         QMetaObject::connectSlotsByName(sdfWidget);
     } // setupUi
@@ -257,17 +258,23 @@ public:
 #endif // QT_CONFIG(tooltip)
         label_5->setText(QCoreApplication::translate("sdfWidget", "octree resolution:", nullptr));
 #if QT_CONFIG(tooltip)
-        spinBox->setToolTip(QCoreApplication::translate("sdfWidget", "grid cell count for geometry's bounding cube for octree construction", nullptr));
+        octreeResolutionSpinBox->setToolTip(QCoreApplication::translate("sdfWidget", "grid cell count for geometry's bounding cube for octree construction", nullptr));
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
-        doubleSpinBox->setToolTip(QCoreApplication::translate("sdfWidget", "a factor by which the geometry's bounding box gets expanded to extend the distance function domain", nullptr));
+        offsetFactorSpinBox->setToolTip(QCoreApplication::translate("sdfWidget", "a factor by which the geometry's bounding box gets expanded to extend the distance function domain", nullptr));
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
         label_8->setToolTip(QCoreApplication::translate("sdfWidget", "a factor by which the geometry's bounding box gets expanded to extend the distance function domain", nullptr));
 #endif // QT_CONFIG(tooltip)
         label_8->setText(QCoreApplication::translate("sdfWidget", "grid expansion factor:", nullptr));
-        label_9->setText(QCoreApplication::translate("sdfWidget", "total grid resolution:", nullptr));
-        label_10->setText(QCoreApplication::translate("sdfWidget", "80 x 80 x 80", nullptr));
+        fastSweepParams->setTitle(QCoreApplication::translate("sdfWidget", "Fast-Sweep parameters:", nullptr));
+#if QT_CONFIG(tooltip)
+        NsweepsLabel->setToolTip(QCoreApplication::translate("sdfWidget", "Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.", nullptr));
+#endif // QT_CONFIG(tooltip)
+        NsweepsLabel->setText(QCoreApplication::translate("sdfWidget", "NSweeps:", nullptr));
+#if QT_CONFIG(tooltip)
+        nSweepsSpinBox->setToolTip(QCoreApplication::translate("sdfWidget", "Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.", nullptr));
+#endif // QT_CONFIG(tooltip)
         targetObjectLabel->setText(QCoreApplication::translate("sdfWidget", "target object:", nullptr));
         objectName->setText(QCoreApplication::translate("sdfWidget", "---", nullptr));
         meshStatsBox->setTitle(QCoreApplication::translate("sdfWidget", "Mesh stats:", nullptr));
@@ -281,19 +288,12 @@ public:
         polygonCount->setText(QCoreApplication::translate("sdfWidget", "0", nullptr));
         bboxMaxLabel->setText(QCoreApplication::translate("sdfWidget", "bounding box max:", nullptr));
         bboxMax->setText(QCoreApplication::translate("sdfWidget", "(0, 0, 0)", nullptr));
-        fastSweepParams->setTitle(QCoreApplication::translate("sdfWidget", "Fast-Sweep parameters:", nullptr));
-#if QT_CONFIG(tooltip)
-        NsweepsLabel->setToolTip(QCoreApplication::translate("sdfWidget", "Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.", nullptr));
-#endif // QT_CONFIG(tooltip)
-        NsweepsLabel->setText(QCoreApplication::translate("sdfWidget", "NSweeps:", nullptr));
-#if QT_CONFIG(tooltip)
-        nSweepsSpinBox->setToolTip(QCoreApplication::translate("sdfWidget", "Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.", nullptr));
-#endif // QT_CONFIG(tooltip)
         groupBox->setTitle(QCoreApplication::translate("sdfWidget", "SDF parameters:", nullptr));
 #if QT_CONFIG(tooltip)
         comuteSignCheckBox->setToolTip(QCoreApplication::translate("sdfWidget", "compute sign of distance function (negative for interior grid cells). Only works for closed mesh surfaces.", nullptr));
 #endif // QT_CONFIG(tooltip)
         comuteSignCheckBox->setText(QCoreApplication::translate("sdfWidget", "compute sign", nullptr));
+        computeButton->setText(QCoreApplication::translate("sdfWidget", "Compute", nullptr));
     } // retranslateUi
 
 };

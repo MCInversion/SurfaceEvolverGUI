@@ -6,5 +6,5 @@ if(POLICY CMP0020)
   cmake_policy(SET CMP0071 NEW)
 endif()
 
-PROJECT(SurfaceEvolverGUI)
+PROJECT(SurfaceEvolverGUI VERSION 1.0.0)
 add_subdirectory(src)

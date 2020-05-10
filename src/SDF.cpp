@@ -18,6 +18,65 @@ SDF::SDF(const SDF& other)
 	time_log = other.time_log;
 }
 
+SDF::SDF(SDFParams* sdfParams)
+{
+	this->resolution = sdfParams->octree_resolution;
+	this->geom = sdfParams->targetGeom;
+	bool computeSign = sdfParams->compute_sign;
+	int NSweeps = sdfParams->NSweeps;
+
+	auto startSDF = std::chrono::high_resolution_clock::now();
+	// === Timed code ============
+
+	auto startSDF_AABB = std::chrono::high_resolution_clock::now();
+
+	this->tri_aabb = new AABBTree(this->geom);
+
+	auto endSDF_AABB = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<float> elapsedSDF_AABB = (endSDF_AABB - startSDF_AABB);
+
+	auto startSDF_Octree = std::chrono::high_resolution_clock::now();
+	this->octree = new Octree(this->tri_aabb, this->tri_aabb->bbox, resolution);
+	auto endSDF_Octree = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<float> elapsedSDF_Octree = (endSDF_Octree - startSDF_Octree);
+
+	std::chrono::duration<float> elapsedGridScale;
+	std::chrono::duration<float> elapsedSDF_FS;
+
+	std::chrono::duration<float> elapsedSDF_Sign;
+	auto startSDF_FS = std::chrono::high_resolution_clock::now();
+
+	VTKExporter exporter = VTKExporter();
+
+	this->grid = new Grid(resolution, resolution, resolution, this->octree->bbox, this->octree->cubeBox);
+	this->grid->max_offset_factor = sdfParams->grid_expansion_factor;
+	this->octree->setLeafValueToScalarGrid(this->grid);
+
+	this->grid->expand();
+	this->fastSweep = new FastSweep3D(this->grid, NSweeps);
+
+	auto endSDF_FS = std::chrono::high_resolution_clock::now();
+	elapsedSDF_FS = (endSDF_FS - startSDF_FS);
+
+	if (computeSign) {
+		auto startSDF_Sign = std::chrono::high_resolution_clock::now();
+		this->grid->computeSignField(this->tri_aabb);
+		auto endSDF_Sign = std::chrono::high_resolution_clock::now();
+		elapsedSDF_Sign = (endSDF_Sign - startSDF_Sign);
+	}
+	auto endSDF = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<float> elapsedSDF = (endSDF - startSDF);
+
+	this->geom_properties = "=== " + this->geom->name + " === \n" + "verts: " + std::to_string(this->geom->uniqueVertices.size()) +
+		", triangles: " + std::to_string(this->tri_aabb->primitives.size()) + ", octree resolution: " + std::to_string(resolution) + "^3, grid resolution: " + std::to_string(this->grid->Nx) + "^3 ";
+	this->time_log =
+		"computation times:  AABBTree: " + std::to_string(elapsedSDF_AABB.count()) +
+		" s, Octree: (build: " + std::to_string(elapsedSDF_Octree.count()) + " s, get_leaves: " + std::to_string(this->octree->leaf_retrieve_time) +
+		" s), FastSweep3D: " + std::to_string(elapsedSDF_FS.count()) + " s, \n" +
+		(computeSign ? ("grid sign computation: " + std::to_string(elapsedSDF_Sign.count()) + "s\n") : "") +
+		"====> TOTAL: " + std::to_string(elapsedSDF.count()) + " s" + "\n\n";
+}
+
 SDF::SDF(Geometry* geom, uint resolution, bool computeSign, bool computeGradient, 
 	bool saveGridStates, bool scaleAndInterpolate, SDF_Method method)
 {
@@ -199,6 +258,16 @@ void SDF::exportGrid(VTKExporter* e, std::string export_name)
 	else {
 		this->grid->exportToVTI(export_name);
 	}		
+}
+
+void SDF::exportGrid(std::string export_name, std::string path)
+{
+	VTKExporter e();
+	std::string method_name = "_FSM_";
+	grid_export_name = (export_name.empty() ? 
+		this->geom->name + "_voxFieldSDF" + method_name + std::to_string(this->resolution) :
+		export_name);
+	this->grid->exportToVTI(grid_export_name, path);
 }
 
 void SDF::exportGradientField(VTKExporter* e, std::string export_name)

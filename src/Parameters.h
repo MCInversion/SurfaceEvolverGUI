@@ -5,6 +5,18 @@
 #include "Geometry.h"
 #include "Grid.h"
 
+struct SDFParams {
+	unsigned int octree_resolution = 40;
+	unsigned int NSweeps = 8;
+	double grid_expansion_factor = 1.0;
+
+	Geometry* targetGeom = nullptr;
+
+	bool compute_sign = true;
+
+	// other params are merely for testing on Develop
+};
+
 enum class ElementType {
 	tri = 0,
 	quad = 1

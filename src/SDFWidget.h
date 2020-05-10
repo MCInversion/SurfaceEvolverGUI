@@ -7,6 +7,7 @@
 
 #include "SurfaceEvolverGUI.h"
 #include "ui_SDFWidget.h"
+#include "Parameters.h"
 
 class SDFWidget : public QWidget
 {
@@ -14,11 +15,16 @@ class SDFWidget : public QWidget
 public:
 	SDFWidget(QWidget* parent = Q_NULLPTR);
 
-	// processes raw polydata object
-	void processMeshInfo(std::shared_ptr<MeshObject> object);
+	// processes mesh object
+	void processMeshInfo(SceneObject* object);
 	void closeEvent(QCloseEvent* event);
+
+	SDFParams getSDFParams();
+public slots:
+	void ActionSDFInit();
 signals:
 	bool closeSDF();
+	bool sdfInit();
 private:
 	Ui::sdfWidget ui;
 };

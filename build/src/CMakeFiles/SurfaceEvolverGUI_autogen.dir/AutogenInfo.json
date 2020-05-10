@@ -83,11 +83,6 @@
 			"EWIEGA46WW/moc_Matrix4.cpp"
 		],
 		[
-			"D:/VS_Projects/SurfaceEvolverGUI/src/MeshObject.h",
-			"Mu",
-			"EWIEGA46WW/moc_MeshObject.cpp"
-		],
-		[
 			"D:/VS_Projects/SurfaceEvolverGUI/src/OBJExporter.h",
 			"Mu",
 			"EWIEGA46WW/moc_OBJExporter.cpp"
@@ -128,6 +123,11 @@
 			"EWIEGA46WW/moc_SDFWidget.cpp"
 		],
 		[
+			"D:/VS_Projects/SurfaceEvolverGUI/src/SceneObject.h",
+			"Mu",
+			"EWIEGA46WW/moc_SceneObject.cpp"
+		],
+		[
 			"D:/VS_Projects/SurfaceEvolverGUI/src/SurfaceEvolverGUI.h",
 			"Mu",
 			"EWIEGA46WW/moc_SurfaceEvolverGUI.cpp"
@@ -160,7 +160,8 @@
 		"WIN32",
 		"vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL2)",
 		"vtkRenderingCore_INCLUDE=\"D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/vtkRenderingCore_AUTOINIT_vtkInteractionStyle_vtkRenderingFreeType_vtkRenderingOpenGL2.h\"",
-		"vtkRenderingOpenGL2_AUTOINIT=1(vtkRenderingGL2PSOpenGL2)"
+		"vtkRenderingOpenGL2_AUTOINIT=1(vtkRenderingGL2PSOpenGL2)",
+		"vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL2)"
 	],
 	"MOC_DEFINITIONS_Debug" : 
 	[
@@ -171,7 +172,8 @@
 		"WIN32",
 		"vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL2)",
 		"vtkRenderingCore_INCLUDE=\"D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/vtkRenderingCore_AUTOINIT_vtkInteractionStyle_vtkRenderingFreeType_vtkRenderingOpenGL2.h\"",
-		"vtkRenderingOpenGL2_AUTOINIT=1(vtkRenderingGL2PSOpenGL2)"
+		"vtkRenderingOpenGL2_AUTOINIT=1(vtkRenderingGL2PSOpenGL2)",
+		"vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL2)"
 	],
 	"MOC_DEPEND_FILTERS" : 
 	[
@@ -235,7 +237,6 @@
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/LinearSolver.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Matrix3.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Matrix4.cpp", "Mu" ],
-		[ "D:/VS_Projects/SurfaceEvolverGUI/src/MeshObject.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/OBJExporter.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/OBJImporter.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Octree.cpp", "Mu" ],
@@ -243,6 +244,7 @@
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Quaternion.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/SDF.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.cpp", "Mu" ],
+		[ "D:/VS_Projects/SurfaceEvolverGUI/src/SceneObject.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/SurfaceEvolverGUI.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/VTKExporter.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Vector3.cpp", "Mu" ],
