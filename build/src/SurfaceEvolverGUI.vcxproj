@@ -372,6 +372,62 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionWidget.ui">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating ui_EvolutionWidget.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_EvolutionWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_EvolutionWidget.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating ui_EvolutionWidget.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_EvolutionWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_EvolutionWidget.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Generating ui_EvolutionWidget.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_EvolutionWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_EvolutionWidget.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Generating ui_EvolutionWidget.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_EvolutionWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_EvolutionWidget.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
     <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\src\SDFWidget.ui">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating ui_SDFWidget.h</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
@@ -547,6 +603,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\Deform.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\Engine.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionRemesher.cpp" />
+    <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionWidget.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp" />
@@ -567,6 +624,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\VTKExporter.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\Vector3.cpp" />
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\main.cpp" />
+    <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_EvolutionWidget.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SDFWidget.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SurfaceEvolverGUI.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.h" />
@@ -576,6 +634,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\Deform.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\Engine.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionRemesher.h" />
+    <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionWidget.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.h" />
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.h" />

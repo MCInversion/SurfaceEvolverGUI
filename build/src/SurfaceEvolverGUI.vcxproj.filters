@@ -22,6 +22,9 @@
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionRemesher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,6 +87,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_EvolutionWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\build\src\ui_SDFWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -109,6 +115,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionRemesher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.h">
@@ -173,6 +182,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\src\EvolutionWidget.ui" />
     <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\src\SDFWidget.ui" />
     <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\src\SurfaceEvolverGUI.ui" />
     <CustomBuild Include="D:\VS_Projects\SurfaceEvolverGUI\src\CMakeLists.txt" />

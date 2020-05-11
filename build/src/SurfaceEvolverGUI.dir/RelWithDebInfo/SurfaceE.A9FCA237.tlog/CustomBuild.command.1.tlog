@@ -1,3 +1,13 @@
+^D:\VS_PROJECTS\SURFACEEVOLVERGUI\SRC\EVOLUTIONWIDGET.UI
+setlocal
+D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_EvolutionWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionWidget.ui
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
 ^D:\VS_PROJECTS\SURFACEEVOLVERGUI\SRC\SDFWIDGET.UI
 setlocal
 D:\Qt\5.13.2\msvc2017_64\bin\uic.exe -o D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h D:/VS_Projects/SurfaceEvolverGUI/src/SDFWidget.ui

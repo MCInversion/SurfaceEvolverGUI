@@ -79,6 +79,7 @@
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
+		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_EvolutionWidget.h",
 		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h",
 		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SurfaceEvolverGUI.h"
 	],

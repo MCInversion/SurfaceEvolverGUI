@@ -1,6 +1,256 @@
 ﻿  Automatic MOC for target SurfaceEvolverGUI
+  Generating ui_EvolutionWidget.h
+  Generating ui_SDFWidget.h
+  Generating ui_SurfaceEvolverGUI.h
+  Building Custom Rule D:/VS_Projects/SurfaceEvolverGUI/src/CMakeLists.txt
+  mocs_compilation.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  AABBTree.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(21,33): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(22,32): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(54,27): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(221,21): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(400,16): warning C4101: 't_right': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(400,8): warning C4101: 't_left': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(528,72): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(770,79): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(770,63): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(870,41): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(891,21): warning C4101: 'cMax': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\AABBTree.cpp(891,15): warning C4101: 'cMin': unreferenced local variable
+  Box3.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\Box3.cpp(90,7): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Box3.cpp(89,7): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Box3.cpp(88,7): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Box3.cpp(116,7): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Box3.cpp(115,7): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Box3.cpp(114,7): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  CubeSphere.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Deform.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Deform.cpp(21,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Engine.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  EvolutionRemesher.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.h(212,23): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+  EvolutionWidget.cpp
+  Evolver.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.h(212,23): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(20,11): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(78,30): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(79,30): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(80,30): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(111,27): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(178,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(181,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(416,34): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(444,35): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(589,56): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(706,35): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(812,35): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(806,16): warning C4101: 'gradSDFx_V': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(806,40): warning C4101: 'gradSDFz_V': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(806,28): warning C4101: 'gradSDFy_V': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(854,35): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(932,35): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(972,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(984,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(994,34): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(1027,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(1028,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(1033,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(1070,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(1070,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(1070,45): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(1124,27): warning C4244: '=': conversion from 'float' to 'unsigned int', possible loss of data
+  FastSweep3D.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(33,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(37,35): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(37,50): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(37,69): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(37,88): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(37,107): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(37,129): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(37,147): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(37,165): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(38,35): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(38,53): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(38,68): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(38,87): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(38,109): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(38,127): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(38,142): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(38,161): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(39,35): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(39,53): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(39,71): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(39,86): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(39,105): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(39,124): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(39,143): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(39,165): warning C4838: conversion from 'unsigned int' to 'const int' requires a narrowing conversion
+D:\VS_Projects\SurfaceEvolverGUI\src\FastSweep3D.cpp(45,16): warning C4018: '<': signed/unsigned mismatch
+  Geometry.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(94,127): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(105,32): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(297,55): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(576,15): warning C4101: 'e': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(767,51): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(768,57): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(780,73): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(780,73): warning C4267: 'initializing': conversion from 'size_t' to 'const unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(781,75): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(781,75): warning C4267: 'initializing': conversion from 'size_t' to 'const unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(1430,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(1441,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(609,20): warning C4244: '=': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=unsigned int
+          ]
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(623): message : see reference to function template instantiation 'void flipArray<unsigned int>(std::vector<unsigned int,std::allocator<unsigned int>>,unsigned int)' being compiled
+D:\VS_Projects\SurfaceEvolverGUI\src\Geometry.cpp(611,20): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=unsigned int
+          ]
+  Grid.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(397,18): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(398,19): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(399,20): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(373,18): warning C4101: 'i': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(459,16): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(474,23): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(476,24): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(478,25): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(504,16): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(523,14): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(524,14): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(525,14): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(533,18): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(534,19): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(535,20): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(556,16): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(587,18): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(588,19): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(589,20): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(631,18): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(632,19): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\Grid.cpp(633,20): warning C4018: '<': signed/unsigned mismatch
+  Icosphere.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS Community\VC\Tools\MSVC\14.24.28314\include\utility(149,1): warning C4267: 'initializing': conversion from 'size_t' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty2=unsigned int
+          ]
+D:\VS_Projects\SurfaceEvolverGUI\src\Icosphere.cpp(65): message : see reference to function template instantiation 'std::pair<const std::pair<unsigned int,unsigned int>,unsigned int>::pair<std::pair<unsigned int,unsigned int>&,unsigned __int64,0>(_Other1,_Other2 &&) noexcept' being compiled
+          with
+          [
+              _Other1=std::pair<unsigned int,unsigned int> &,
+              _Other2=unsigned __int64
+          ]
+D:\VS_Projects\SurfaceEvolverGUI\src\Icosphere.cpp(65): message : see reference to function template instantiation 'std::pair<const std::pair<unsigned int,unsigned int>,unsigned int>::pair<std::pair<unsigned int,unsigned int>&,unsigned __int64,0>(_Other1,_Other2 &&) noexcept' being compiled
+          with
+          [
+              _Other1=std::pair<unsigned int,unsigned int> &,
+              _Other2=unsigned __int64
+          ]
+  LinearSolver.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(42,20): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(47,20): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(49,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(76,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(78,22): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(88,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(98,22): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(110,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(112,22): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(122,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(128,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(148,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(157,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(159,22): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(173,22): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(179,21): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(191,20): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(208,32): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(220,32): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(237,32): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(243,31): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(249,32): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\SurfaceEvolverGUI\src\LinearSolver.cpp(260,20): warning C4018: '<': signed/unsigned mismatch
+  Matrix3.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\Matrix3.cpp(115,13): warning C4101: 'ex': unreferenced local variable
+  Matrix4.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\Matrix4.cpp(325,13): warning C4101: 'ex': unreferenced local variable
+  OBJExporter.cpp
+  OBJImporter.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\OBJImporter.cpp(31,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\OBJImporter.cpp(229,58): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS Community\VC\Tools\MSVC\14.24.28314\include\utility(149,1): warning C4267: 'initializing': conversion from 'size_t' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty2=unsigned int
+          ]
+D:\VS_Projects\SurfaceEvolverGUI\src\OBJImporter.cpp(200): message : see reference to function template instantiation 'std::pair<const Vector3,unsigned int>::pair<Vector3&,unsigned __int64,0>(_Other1,_Other2 &&) noexcept(false)' being compiled
+          with
+          [
+              _Other1=Vector3 &,
+              _Other2=unsigned __int64
+          ]
+D:\VS_Projects\SurfaceEvolverGUI\src\OBJImporter.cpp(200): message : see reference to function template instantiation 'std::pair<const Vector3,unsigned int>::pair<Vector3&,unsigned __int64,0>(_Other1,_Other2 &&) noexcept(false)' being compiled
+          with
+          [
+              _Other1=Vector3 &,
+              _Other2=unsigned __int64
+          ]
+  Octree.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Octree.cpp(46,18): warning C4553: '==': result of expression not used; did you intend '='?
+  PrimitiveBox.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+D:\VS_Projects\SurfaceEvolverGUI\src\Evolver.cpp(825): warning C4723: potential divide by 0
+  Compiling...
+  Quaternion.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\Quaternion.cpp(128,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\Quaternion.cpp(188,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  SDF.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\SDF.cpp(52,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\SDF.cpp(43,31): warning C4101: 'elapsedGridScale': unreferenced local variable
+D:\VS_Projects\SurfaceEvolverGUI\src\SDF.cpp(213,87): warning C4129: 'w': unrecognized character escape sequence
+D:\VS_Projects\SurfaceEvolverGUI\src\SDF.cpp(265,14): warning C4930: 'VTKExporter e(void)': prototyped function not called (was a variable definition intended?)
+  SDFWidget.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  SceneObject.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   SurfaceEvolverGUI.cpp
 D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  VTKExporter.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\VTKExporter.cpp(17,65): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\VTKExporter.cpp(56,1): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\VTKExporter.cpp(186,90): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\VS_Projects\SurfaceEvolverGUI\src\VTKExporter.cpp(222,23): warning C4018: '<=': signed/unsigned mismatch
+  Vector3.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\Vector3.cpp(178,13): warning C4101: 'e': unreferenced local variable
+  main.cpp
+D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   SurfaceEvolverGUI.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\src\RelWithDebInfo\SurfaceEvolverGUI.exe
   Win deploy qt
   D:\VS_Projects\SurfaceEvolverGUI\build\src\RelWithDebInfo\SurfaceEvolverGUI.exe 64 bit, release executable
@@ -9,27 +259,32 @@ D:\VS_Projects\SurfaceEvolverGUI\src\poly2tri\sweep\sweep_context.h(161,24): war
   All dependencies   : Qt5Core Qt5Gui Qt5Widgets
   To be deployed     : Qt5Core Qt5Gui Qt5Svg Qt5Widgets
 EXEC : warning : Cannot find Visual Studio installation directory, VCINSTALLDIR is not set.
-  Qt5Core.dll is up to date.
-  Qt5Gui.dll is up to date.
-  Qt5Svg.dll is up to date.
-  Qt5Widgets.dll is up to date.
-  libGLESV2.dll is up to date.
-  libEGL.dll is up to date.
-  D3Dcompiler_47.dll is up to date.
-  opengl32sw.dll is up to date.
+  Updating Qt5Core.dll.
+  Updating Qt5Gui.dll.
+  Updating Qt5Svg.dll.
+  Updating Qt5Widgets.dll.
+  Updating libGLESV2.dll.
+  Updating libEGL.dll.
+  Updating D3Dcompiler_47.dll.
+  Updating opengl32sw.dll.
   Patching Qt5Core.dll...
-  qsvgicon.dll is up to date.
-  qgif.dll is up to date.
-  qicns.dll is up to date.
-  qico.dll is up to date.
-  qjpeg.dll is up to date.
-  qsvg.dll is up to date.
-  qtga.dll is up to date.
-  qtiff.dll is up to date.
-  qwbmp.dll is up to date.
-  qwebp.dll is up to date.
-  qwindows.dll is up to date.
-  qwindowsvistastyle.dll is up to date.
+  Creating directory D:/VS_Projects/SurfaceEvolverGUI/build/src/RelWithDebInfo/iconengines.
+  Updating qsvgicon.dll.
+  Creating directory D:/VS_Projects/SurfaceEvolverGUI/build/src/RelWithDebInfo/imageformats.
+  Updating qgif.dll.
+  Updating qicns.dll.
+  Updating qico.dll.
+  Updating qjpeg.dll.
+  Updating qsvg.dll.
+  Updating qtga.dll.
+  Updating qtiff.dll.
+  Updating qwbmp.dll.
+  Updating qwebp.dll.
+  Creating directory D:/VS_Projects/SurfaceEvolverGUI/build/src/RelWithDebInfo/platforms.
+  Updating qwindows.dll.
+  Creating directory D:/VS_Projects/SurfaceEvolverGUI/build/src/RelWithDebInfo/styles.
+  Updating qwindowsvistastyle.dll.
+  Creating D:\VS_Projects\SurfaceEvolverGUI\build\src\RelWithDebInfo\translations...
   Creating qt_ar.qm...
   Creating qt_bg.qm...
   Creating qt_ca.qm...

@@ -1,7 +1,7 @@
 The system is: Windows - 10.0.18362 - AMD64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler:  
-Build flags: 
+Build flags: /DWIN32;/D_WINDOWS;/W3
 Id flags:  
 
 The output was:
@@ -9,7 +9,7 @@ The output was:
 Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 5/11/2020 12:01:33 AM.
+Build started 5/11/2020 2:00:10 AM.
 Project "D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\3.16.0-rc3\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
@@ -35,7 +35,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.41
+Time Elapsed 00:00:01.39
 
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -46,7 +46,7 @@ The C compiler identification is MSVC, found in "D:/VS_Projects/SurfaceEvolverGU
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler:  
-Build flags: 
+Build flags: /DWIN32;/D_WINDOWS;/W3;/GR;/EHsc
 Id flags:  
 
 The output was:
@@ -54,7 +54,7 @@ The output was:
 Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 5/11/2020 12:01:36 AM.
+Build started 5/11/2020 2:00:12 AM.
 Project "D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\3.16.0-rc3\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
@@ -80,7 +80,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.87
+Time Elapsed 00:00:00.76
 
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -92,56 +92,56 @@ The CXX compiler identification is MSVC, found in "D:/VS_Projects/SurfaceEvolver
 Determining if the C compiler works passed with the following output:
 Change Dir: D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):D:/VS Community/MSBuild/Current/Bin/MSBuild.exe cmTC_c9080.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:m && Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
+Run Build Command(s):D:/VS Community/MSBuild/Current/Bin/MSBuild.exe cmTC_facc3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:m && Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
   Microsoft (R) C/C++ Optimizing Compiler Version 19.24.28314 for x64
   testCCompiler.c
   Copyright (C) Microsoft Corporation.  All rights reserved.
-  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c9080.dir\Debug\\" /Fd"cmTC_c9080.dir\Debug\vc142.pdb" /Gd /TC /errorReport:queue D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\testCCompiler.c
-  cmTC_c9080.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\Debug\cmTC_c9080.exe
+  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_facc3.dir\Debug\\" /Fd"cmTC_facc3.dir\Debug\vc142.pdb" /Gd /TC /errorReport:queue D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\testCCompiler.c
+  cmTC_facc3.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\Debug\cmTC_facc3.exe
 
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):D:/VS Community/MSBuild/Current/Bin/MSBuild.exe cmTC_1bcdc.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:m && Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
+Run Build Command(s):D:/VS Community/MSBuild/Current/Bin/MSBuild.exe cmTC_4a374.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:m && Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
   Microsoft (R) C/C++ Optimizing Compiler Version 19.24.28314 for x64
   CMakeCCompilerABI.c
   Copyright (C) Microsoft Corporation.  All rights reserved.
-  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1bcdc.dir\Debug\\" /Fd"cmTC_1bcdc.dir\Debug\vc142.pdb" /Gd /TC /errorReport:queue "D:\Cmake\share\cmake-3.16\Modules\CMakeCCompilerABI.c"
-  cmTC_1bcdc.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\Debug\cmTC_1bcdc.exe
+  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4a374.dir\Debug\\" /Fd"cmTC_4a374.dir\Debug\vc142.pdb" /Gd /TC /errorReport:queue "D:\Cmake\share\cmake-3.16\Modules\CMakeCCompilerABI.c"
+  cmTC_4a374.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\Debug\cmTC_4a374.exe
 
 
 
 Determining if the CXX compiler works passed with the following output:
 Change Dir: D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):D:/VS Community/MSBuild/Current/Bin/MSBuild.exe cmTC_ac366.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:m && Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
+Run Build Command(s):D:/VS Community/MSBuild/Current/Bin/MSBuild.exe cmTC_5216f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:m && Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
   Microsoft (R) C/C++ Optimizing Compiler Version 19.24.28314 for x64
   testCXXCompiler.cxx
   Copyright (C) Microsoft Corporation.  All rights reserved.
-  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_ac366.dir\Debug\\" /Fd"cmTC_ac366.dir\Debug\vc142.pdb" /Gd /TP /errorReport:queue D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
-  cmTC_ac366.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\Debug\cmTC_ac366.exe
+  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_5216f.dir\Debug\\" /Fd"cmTC_5216f.dir\Debug\vc142.pdb" /Gd /TP /errorReport:queue D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
+  cmTC_5216f.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\Debug\cmTC_5216f.exe
 
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):D:/VS Community/MSBuild/Current/Bin/MSBuild.exe cmTC_3a0a0.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:m && Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
+Run Build Command(s):D:/VS Community/MSBuild/Current/Bin/MSBuild.exe cmTC_02620.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:m && Microsoft (R) Build Engine version 16.4.0+e901037fe for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
   Microsoft (R) C/C++ Optimizing Compiler Version 19.24.28314 for x64
-  CMakeCXXCompilerABI.cpp
   Copyright (C) Microsoft Corporation.  All rights reserved.
-  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_3a0a0.dir\Debug\\" /Fd"cmTC_3a0a0.dir\Debug\vc142.pdb" /Gd /TP /errorReport:queue "D:\Cmake\share\cmake-3.16\Modules\CMakeCXXCompilerABI.cpp"
-  cmTC_3a0a0.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\Debug\cmTC_3a0a0.exe
+  CMakeCXXCompilerABI.cpp
+  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_02620.dir\Debug\\" /Fd"cmTC_02620.dir\Debug\vc142.pdb" /Gd /TP /errorReport:queue "D:\Cmake\share\cmake-3.16\Modules\CMakeCXXCompilerABI.cpp"
+  cmTC_02620.vcxproj -> D:\VS_Projects\SurfaceEvolverGUI\build\CMakeFiles\CMakeTmp\Debug\cmTC_02620.exe
 
 
 

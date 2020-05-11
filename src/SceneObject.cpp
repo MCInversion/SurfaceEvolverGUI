@@ -192,9 +192,9 @@ void SceneObject::initFromGrid(Grid* grid)
 	double dy = grid->scale.y / grid->Ny;
 	double dz = grid->scale.z / grid->Nz;
 	double orig[3] = { 
-		boxMin.x /* + 0.5 * dx */,
-		boxMin.y /*+ 0.5 * dx */,
-		boxMin.z /*+ 0.5 * dx */
+		boxMin.x + dx /*0.5 * */,
+		boxMin.y + dy /* 0.5 * */,
+		boxMin.z + dz /*0.5 * */
 	};
 	m_imgData->SetOrigin(orig);
 	double spacing[3] = { dx, dy, dz };

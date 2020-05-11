@@ -43,6 +43,11 @@
 			"EWIEGA46WW/moc_EvolutionRemesher.cpp"
 		],
 		[
+			"D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionWidget.h",
+			"Mu",
+			"EWIEGA46WW/moc_EvolutionWidget.cpp"
+		],
+		[
 			"D:/VS_Projects/SurfaceEvolverGUI/src/Evolver.h",
 			"Mu",
 			"EWIEGA46WW/moc_Evolver.cpp"
@@ -203,6 +208,7 @@
 	"MOC_SKIP" : 
 	[
 		"D:/VS_Projects/SurfaceEvolverGUI/build/src/POLY2TRI_autogen/mocs_compilation.cpp",
+		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_EvolutionWidget.h",
 		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SDFWidget.h",
 		"D:/VS_Projects/SurfaceEvolverGUI/build/src/ui_SurfaceEvolverGUI.h"
 	],
@@ -229,6 +235,7 @@
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Deform.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Engine.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionRemesher.cpp", "Mu" ],
+		[ "D:/VS_Projects/SurfaceEvolverGUI/src/EvolutionWidget.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Evolver.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/FastSweep3D.cpp", "Mu" ],
 		[ "D:/VS_Projects/SurfaceEvolverGUI/src/Geometry.cpp", "Mu" ],

@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>evolutionWidget</class>
+ <widget class="QWidget" name="evolutionWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>844</width>
+    <height>893</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Surface Evolution</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>450</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Initial surface:</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_18">
+        <property name="text">
+         <string>162</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="spinBox_4">
+        <property name="toolTip">
+         <string>surface subdivision detail for IcoSphere and CubeSphere. Note that IcoSphere detail is recursive (exponential) while CubeSphere is linear.</string>
+        </property>
+        <property name="value">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLabel" name="label_24">
+        <property name="toolTip">
+         <string>mesh element type for IcoSphere and CubeSphere</string>
+        </property>
+        <property name="text">
+         <string>(surface elems)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_15">
+        <property name="toolTip">
+         <string>a percentage of an offset from SDF's zero level for inward evolution through Marching cubes iso contour.</string>
+        </property>
+        <property name="text">
+         <string>contour offset dist %:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QSpinBox" name="spinBox_3">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="toolTip">
+         <string>a percentage of an offset from SDF's zero level for inward evolution through Marching cubes iso contour.</string>
+        </property>
+        <property name="minimum">
+         <number>40</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_16">
+        <property name="toolTip">
+         <string>surface subdivision detail for IcoSphere and CubeSphere. Note that IcoSphere detail is recursive (exponential) while CubeSphere is linear.</string>
+        </property>
+        <property name="text">
+         <string>surface detail:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_19">
+        <property name="text">
+         <string>NPolys:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QComboBox" name="comboBox">
+        <item>
+         <property name="text">
+          <string>IcoSphere</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>CubeSphere</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Marching cubes contour</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Choose from file</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_17">
+        <property name="text">
+         <string>NVerts:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="text">
+         <string>show wireframe outline</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="comboBox_2">
+        <property name="toolTip">
+         <string>mesh element type for IcoSphere and CubeSphere</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>triangles</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>quads</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLabel" name="label_20">
+        <property name="text">
+         <string>320</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="checkBox_9">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>fixed Dirichlet</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QGroupBox" name="groupBox_6">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Output:</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBox_3">
+        <property name="toolTip">
+         <string>store time states as a library object</string>
+        </property>
+        <property name="text">
+         <string>store time states</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="checkBox_4">
+        <property name="toolTip">
+         <string>automatically save time states as VTK polydata</string>
+        </property>
+        <property name="text">
+         <string>save time states to .vtk</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBox_5">
+        <property name="toolTip">
+         <string>store and save unsmoothed evolution result from before applying final smoothing</string>
+        </property>
+        <property name="text">
+         <string>store and save (unsmoothed) result</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBox_6">
+        <property name="toolTip">
+         <string>generic log contains time step information as well as general evolution properties</string>
+        </property>
+        <property name="text">
+         <string>save generic log</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="checkBox_7">
+        <property name="toolTip">
+         <string>automatically save results as VTK polydata</string>
+        </property>
+        <property name="text">
+         <string>save result to .vtk</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="checkBox_8">
+        <property name="toolTip">
+         <string>time log stores computation times for individual processes</string>
+        </property>
+        <property name="text">
+         <string>save time log</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="targetObjectGroupBox">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Mesh object properties:</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>polygon count:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>triangle count:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>vertices count:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>(0, 0, 0)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>bounding box max:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>bounding box min:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>(0, 0, 0)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_28">
+        <property name="text">
+         <string>open surface?</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="label_29">
+        <property name="text">
+         <string>N/A</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="minimumSize">
+      <size>
+       <width>320</width>
+       <height>250</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Signed distance function (SDF) parameters:</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="6" column="0">
+       <widget class="Line" name="line_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="Line" name="line_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="Line" name="line_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_11">
+        <property name="toolTip">
+         <string>grid cell count for geometry's bounding cube for octree construction</string>
+        </property>
+        <property name="text">
+         <string>octree resolution:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_26">
+        <property name="toolTip">
+         <string>this constant weighs a control function which affects the surface advection rate given by the gradient field of SDF</string>
+        </property>
+        <property name="text">
+         <string>overall weight constant:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox">
+        <property name="toolTip">
+         <string>a factor by which the geometry's bounding box gets expanded to extend the distance function domain</string>
+        </property>
+        <property name="minimum">
+         <double>0.100000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>10.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_12">
+        <property name="toolTip">
+         <string>a factor by which the geometry's bounding box gets expanded to extend the distance function domain</string>
+        </property>
+        <property name="text">
+         <string>grid expansion factor:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="Line" name="line_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="spinBox">
+        <property name="toolTip">
+         <string>grid cell count for geometry's bounding cube for octree construction</string>
+        </property>
+        <property name="minimum">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <number>200</number>
+        </property>
+        <property name="value">
+         <number>30</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_13">
+        <property name="toolTip">
+         <string>Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.</string>
+        </property>
+        <property name="text">
+         <string>NSweeps (Fast Sweeping):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="Line" name="line_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="checkBox">
+        <property name="toolTip">
+         <string>compute sign of distance function (negative for interior grid cells). Only works for closed mesh surfaces.</string>
+        </property>
+        <property name="text">
+         <string>compute sign</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="spinBox_2">
+        <property name="toolTip">
+         <string>Number of iterations for fast sweeping algorithm. At least 4 sweeps required to produce decent results.</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>8</number>
+        </property>
+        <property name="value">
+         <number>8</number>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_27">
+        <property name="toolTip">
+         <string>this constant weighs the projection of the negative gradient of SDF onto the tangential plane of the surface.</string>
+        </property>
+        <property name="text">
+         <string>grad(SDF) projection weight:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="lineEdit_2">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>this constant weighs a control function which affects the surface advection rate given by the gradient field of SDF</string>
+        </property>
+        <property name="text">
+         <string>1.0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLineEdit" name="lineEdit_3">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>this constant weighs the projection of the negative gradient of SDF onto the tangential plane of the surface.</string>
+        </property>
+        <property name="text">
+         <string>0.0</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="title">
+      <string>Tangential redistribution (TR) parameters:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="maximumSize">
+      <size>
+       <width>300</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Evolution properties:</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="3" column="0">
+       <spacer name="verticalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_22">
+        <property name="toolTip">
+         <string>evolution time step (double)</string>
+        </property>
+        <property name="text">
+         <string>dt:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_21">
+        <property name="toolTip">
+         <string>number of evolution steps (uint)</string>
+        </property>
+        <property name="text">
+         <string>NSteps:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>evolution time step (double)</string>
+        </property>
+        <property name="text">
+         <string>0.03</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="spinBox_5">
+        <property name="toolTip">
+         <string>number of evolution steps (uint)</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>2000</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_23">
+        <property name="toolTip">
+         <string>stopping time for evolution (double)</string>
+        </property>
+        <property name="text">
+         <string>tStop:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_25">
+        <property name="toolTip">
+         <string>stopping time for evolution (double)</string>
+        </property>
+        <property name="text">
+         <string>1.5</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Evolve</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>250</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Mean curvature flow (MCF) parameters:</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_4">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>a constant that weighs a control function which affects the mean curvature operator of the evolving surface. Setting to zero disables mean curvature effect</string>
+        </property>
+        <property name="text">
+         <string>1.0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_30">
+        <property name="toolTip">
+         <string>a constant that weighs a control function which affects the mean curvature operator of the evolving surface. Setting to zero disables mean curvature effect</string>
+        </property>
+        <property name="text">
+         <string>overall weight constant:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_31">
+        <property name="toolTip">
+         <string>a decay radius for exponential weight function on mean curvature operator. Lable &quot;automatic&quot; takes the 80% of the object's bounding box radius.</string>
+        </property>
+        <property name="text">
+         <string>exponential decay radius:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_5">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>a decay radius for exponential weight function on mean curvature operator. Lable &quot;automatic&quot; takes the 80% of the object's bounding box radius.</string>
+        </property>
+        <property name="text">
+         <string>automatic</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <spacer name="verticalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
