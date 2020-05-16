@@ -15,6 +15,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -23,7 +24,10 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -68,6 +72,17 @@ public:
     QToolButton *edgeColorButton;
     QLabel *opacityLabel;
     QDoubleSpinBox *opacitySpinBox;
+    QGroupBox *scalarDataGroupBox;
+    QGridLayout *gridLayout_4;
+    QFrame *frame;
+    QVBoxLayout *verticalLayout_6;
+    QRadioButton *multiContoursButton;
+    QRadioButton *singleContourButton;
+    QGridLayout *gridLayout_5;
+    QLabel *contoursLabel;
+    QLabel *isoLevelLabel;
+    QSlider *horizontalSlider;
+    QSpinBox *nContoursSpinBox;
     QVBoxLayout *verticalLayout_4;
     QGroupBox *sceneObjectsGroupBox;
     QVBoxLayout *verticalLayout_5;
@@ -228,6 +243,66 @@ public:
 
         verticalLayout->addWidget(groupBox);
 
+        scalarDataGroupBox = new QGroupBox(centralwidget);
+        scalarDataGroupBox->setObjectName(QString::fromUtf8("scalarDataGroupBox"));
+        scalarDataGroupBox->setMinimumSize(QSize(0, 100));
+        scalarDataGroupBox->setMaximumSize(QSize(400, 16777215));
+        gridLayout_4 = new QGridLayout(scalarDataGroupBox);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        frame = new QFrame(scalarDataGroupBox);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        verticalLayout_6 = new QVBoxLayout(frame);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        multiContoursButton = new QRadioButton(frame);
+        multiContoursButton->setObjectName(QString::fromUtf8("multiContoursButton"));
+        multiContoursButton->setChecked(true);
+
+        verticalLayout_6->addWidget(multiContoursButton);
+
+        singleContourButton = new QRadioButton(frame);
+        singleContourButton->setObjectName(QString::fromUtf8("singleContourButton"));
+
+        verticalLayout_6->addWidget(singleContourButton);
+
+
+        gridLayout_4->addWidget(frame, 0, 0, 1, 1);
+
+        gridLayout_5 = new QGridLayout();
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        contoursLabel = new QLabel(scalarDataGroupBox);
+        contoursLabel->setObjectName(QString::fromUtf8("contoursLabel"));
+
+        gridLayout_5->addWidget(contoursLabel, 0, 0, 1, 1);
+
+        isoLevelLabel = new QLabel(scalarDataGroupBox);
+        isoLevelLabel->setObjectName(QString::fromUtf8("isoLevelLabel"));
+
+        gridLayout_5->addWidget(isoLevelLabel, 1, 0, 1, 1);
+
+        horizontalSlider = new QSlider(scalarDataGroupBox);
+        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
+        horizontalSlider->setMaximumSize(QSize(120, 16777215));
+        horizontalSlider->setMaximum(100);
+        horizontalSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout_5->addWidget(horizontalSlider, 1, 1, 1, 1);
+
+        nContoursSpinBox = new QSpinBox(scalarDataGroupBox);
+        nContoursSpinBox->setObjectName(QString::fromUtf8("nContoursSpinBox"));
+        nContoursSpinBox->setMinimum(1);
+        nContoursSpinBox->setMaximum(100);
+        nContoursSpinBox->setValue(6);
+
+        gridLayout_5->addWidget(nContoursSpinBox, 0, 1, 1, 1);
+
+
+        gridLayout_4->addLayout(gridLayout_5, 0, 1, 1, 1);
+
+
+        verticalLayout->addWidget(scalarDataGroupBox);
+
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         sceneObjectsGroupBox = new QGroupBox(centralwidget);
@@ -237,7 +312,7 @@ public:
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         libraryListWidget = new QListWidget(sceneObjectsGroupBox);
         libraryListWidget->setObjectName(QString::fromUtf8("libraryListWidget"));
-        libraryListWidget->setSelectionMode(QAbstractItemView::MultiSelection);
+        libraryListWidget->setSelectionMode(QAbstractItemView::ContiguousSelection);
         libraryListWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
         libraryListWidget->setMovement(QListView::Static);
         libraryListWidget->setSelectionRectVisible(true);
@@ -311,6 +386,8 @@ public:
         QObject::connect(libraryListWidget, SIGNAL(itemClicked(QListWidgetItem*)), SurfaceEvolverGUI, SLOT(ActionSelectLibraryObject()));
         QObject::connect(deleteButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionRemoveSelectedObjects()));
         QObject::connect(clearButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionClearAllObjects()));
+        QObject::connect(multiContoursButton, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionScalarMultipleContours()));
+        QObject::connect(singleContourButton, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionScalarMultipleContours()));
 
         QMetaObject::connectSlotsByName(SurfaceEvolverGUI);
     } // setupUi
@@ -357,6 +434,11 @@ public:
         vertexColorButton->setText(QString());
         edgeColorButton->setText(QString());
         opacityLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "opacity:", nullptr));
+        scalarDataGroupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Scalar data properties:", nullptr));
+        multiContoursButton->setText(QCoreApplication::translate("SurfaceEvolverGUI", "multiple contours", nullptr));
+        singleContourButton->setText(QCoreApplication::translate("SurfaceEvolverGUI", "single contour", nullptr));
+        contoursLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "contours:", nullptr));
+        isoLevelLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "iso-level: 0", nullptr));
         sceneObjectsGroupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Scene objects:", nullptr));
 #if QT_CONFIG(tooltip)
         deleteButton->setToolTip(QCoreApplication::translate("SurfaceEvolverGUI", "Remove Selected", nullptr));

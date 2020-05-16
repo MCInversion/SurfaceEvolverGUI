@@ -9,7 +9,7 @@ void Evolver::init()
 	// by default, initial geometry is not provided
 	if (!evolvedSurface) {
 		// radius
-		float r = (meanCurvatureFlow ? r0 : 0.4f * std::min({ sdfGrid->scale.x, sdfGrid->scale.y, sdfGrid->scale.z }));
+		double r = (meanCurvatureFlow ? r0 : 0.4 * std::min({ sdfGrid->scale.x, sdfGrid->scale.y, sdfGrid->scale.z }));
 		rDecay = r;
 
 		if (elType == ElementType::tri) {
@@ -26,7 +26,7 @@ void Evolver::init()
 		bbox = sdfGrid->bbox;
 	} else {
 		bbox = evolvedSurface->getBoundingBox();
-		bbox.expandByFactor(2.0f);
+		bbox.expandByFactor(2.0);
 	}
 
 	this->center = bbox.getCenter();
@@ -90,7 +90,7 @@ void Evolver::evolve()
 		}
 	}
 
-	sphereTestL2Error = 0.0f;
+	sphereTestL2Error = 0.0;
 
 	if (start_flag) {
 		startGlobalTime = std::chrono::high_resolution_clock::now();
@@ -110,7 +110,7 @@ void Evolver::evolve()
 
 	for (int ti = tBegin; ti < tBegin + TSteps; ti++) {
 
-		float t = (float)ti / (float)NSteps * tStop;
+		double t = (double)ti / (double)NSteps * tStop;
 		std::string timeStepLine = "-------- time step ti = " + std::to_string(ti) + ", t = " + std::to_string(t) + " -----------\n";
 		if (printStepOutput) std::cout << timeStepLine;
 		if (writeGenericLog) log << timeStepLine;
@@ -136,7 +136,7 @@ void Evolver::evolve()
 
 		if (printHappenings) std::cout << "... computed" << std::endl;
 		auto endNandCoVols = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<float> elapsedNandCoVols = (endNandCoVols - startNandCoVols);
+		std::chrono::duration<double> elapsedNandCoVols = (endNandCoVols - startNandCoVols);
 		// ===================================================================>
 
 
@@ -172,7 +172,7 @@ void Evolver::evolve()
 		auto startFillMatrix = std::chrono::high_resolution_clock::now();
 
 		if (printHappenings) std::cout << "filling sys matrix & rhs ..." << std::endl;
-		float meanArea;
+		double meanArea;
 		this->initSystem(); // prep linear system of dim NVerts * NVerts
 		if (this->elType == ElementType::tri) {
 			this->getTriangleEvolutionSystem(ti - tBegin, meanArea);
@@ -198,7 +198,7 @@ void Evolver::evolve()
 		if (writeMeanAreaLog) meanAreaLog << meanArea << std::endl;
 
 		auto endFillMatrix = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<float> elapsedFillMatrix = (endFillMatrix - startFillMatrix);
+		std::chrono::duration<double> elapsedFillMatrix = (endFillMatrix - startFillMatrix);
 		// ========================================>
 
 
@@ -214,7 +214,7 @@ void Evolver::evolve()
 			exportVectorStates(ti - 1);
 			saveInterpolatedDotValues();
 			auto endSaveVectors = std::chrono::high_resolution_clock::now();
-			std::chrono::duration<float> elapsedSaveVectors = (endSaveVectors - startSaveVectors);
+			std::chrono::duration<double> elapsedSaveVectors = (endSaveVectors - startSaveVectors);
 			saveVectTime = elapsedSaveVectors.count();
 		}
 		// ================================================>
@@ -246,7 +246,7 @@ void Evolver::evolve()
 		if (printHappenings) std::cout << "... done" << std::endl;
 
 		auto endLinSolve = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<float> elapsedLinSolve = (endLinSolve - startLinSolve);
+		std::chrono::duration<double> elapsedLinSolve = (endLinSolve - startLinSolve);
 		// ========================================>
 
 
@@ -271,8 +271,8 @@ void Evolver::evolve()
 		}
 
 		if (sphereTest) {
-			float stepErrorSq = this->getSphereStepL2Error(t);
-			float stepError = sqrt(stepErrorSq);
+			double stepErrorSq = this->getSphereStepL2Error(t);
+			double stepError = sqrt(stepErrorSq);
 
 			std::string errorLine = "step " + std::to_string(ti) + " error: " + std::to_string(stepError) + "\n";
 			if (printStepOutput) std::cout << errorLine;
@@ -283,7 +283,7 @@ void Evolver::evolve()
 		}
 
 		auto endUpdate = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<float> elapsedUpdate = (endUpdate - startUpdate);
+		std::chrono::duration<double> elapsedUpdate = (endUpdate - startUpdate);
 		// ========================================>
 
 		std::string time_log_line =
@@ -324,7 +324,7 @@ void Evolver::evolve()
 	if (smoothSteps < 0 || smoothing_flag) {
 		auto endGlobalTime = std::chrono::high_resolution_clock::now();
 		elapsedTimeTotal = (endGlobalTime - startGlobalTime);
-		std::string total_time_message = "\n Total time for " + std::to_string(NSteps + std::max(0, smoothSteps)) + " steps: " + std::to_string(elapsedTimeTotal.count()) + " s\n";
+		total_time_message = "\n Total time for " + std::to_string(NSteps + std::max(0, smoothSteps)) + " steps: " + std::to_string(elapsedTimeTotal.count()) + " s\n";
 		if (printStepOutput) std::cout << total_time_message;
 		if (writeGenericLog) log << total_time_message;
 		if (writeTimeLog) timingLog << total_time_message;
@@ -371,10 +371,10 @@ void Evolver::initSystem()
 }
 
 void Evolver::getInterpolatedSDFValuesforVertex(
-	Vector3* V, float* SDF_V, Vector3* gradSDF_V, std::vector<Vector3>& positionBuffer, std::vector<float>& valueBuffer)
+	Vector3* V, double* SDF_V, Vector3* gradSDF_V, std::vector<Vector3>& positionBuffer, std::vector<double>& valueBuffer)
 {
 	const uint Nx = sdfGrid->Nx, Ny = sdfGrid->Ny, Nz = sdfGrid->Nz;
-	float gradSDFx_V, gradSDFy_V, gradSDFz_V, norm;
+	double gradSDFx_V, gradSDFy_V, gradSDFz_V, norm;
 	// SDF value
 	positionBuffer.clear(); // for old min and max positions
 	valueBuffer.clear(); // for SDF cell vertex values
@@ -425,7 +425,7 @@ Vector3 Evolver::getAngleTangentialVelocityForVertex(Vector3& V, uint i)
 		Vector3 edge0 = normalize(*F1 - V);
 		Vector3 edge1 = normalize(*F2 - V);
 
-		vTanResult += (1.0f + dot(edge0, edge1)) * (edge0 + edge1);
+		vTanResult += (1.0 + dot(edge0, edge1)) * (edge0 + edge1);
 	}
 	vTanResult *= (omega_angle / m);
 
@@ -435,7 +435,7 @@ Vector3 Evolver::getAngleTangentialVelocityForVertex(Vector3& V, uint i)
 void Evolver::saveFVAreaScalars()
 {
 	fvAreas.clear();
-	fvAreas = std::vector<float>(N);
+	fvAreas = std::vector<double>(N);
 	std::vector<std::vector<Vector3>> fvVerts = {};
 	std::vector<std::vector<std::vector<uint>>> adjacentPolys = {};
 	evolvedSurface->getVertexFiniteVolumes(&fvVerts, &adjacentPolys);
@@ -444,7 +444,7 @@ void Evolver::saveFVAreaScalars()
 		uint m = adjacentPolys[i].size();
 		// =====================================================================>
 
-		float coVolArea = 0.0f;
+		double coVolArea = 0.0;
 
 		for (uint p = 0; p < m; p++) {
 			// vertex
@@ -460,9 +460,9 @@ void Evolver::saveFVAreaScalars()
 			Vector3* M1 = &fvVerts[i][((size_t)2 * p + 2) % fvVerts[i].size()];
 
 			// co-vol areas:
-			float cV2Area0 = cross(*M0 - Fi, *baryCenter - Fi).length();
-			float cV2Area1 = cross(*baryCenter - Fi, *M1 - Fi).length();
-			coVolArea += (0.5f * cV2Area0 + 0.5f * cV2Area1);
+			double cV2Area0 = cross(*M0 - Fi, *baryCenter - Fi).length();
+			double cV2Area1 = cross(*baryCenter - Fi, *M1 - Fi).length();
+			coVolArea += (0.5 * cV2Area0 + 0.5 * cV2Area1);
 		}
 
 		fvAreas[i] = coVolArea;
@@ -474,7 +474,7 @@ void Evolver::saveFVAreaScalars()
 void Evolver::saveInterpolatedSDFValues()
 {
 	vDistances.clear();
-	vDistances = std::vector<float>(N);
+	vDistances = std::vector<double>(N);
 	const uint Nx = sdfGrid->Nx, Ny = sdfGrid->Ny, Nz = sdfGrid->Nz;
 	for (uint i = 0; i < N; i++) {
 		// vertex
@@ -486,8 +486,8 @@ void Evolver::saveInterpolatedSDFValues()
 
 		// SDF interpolation from values surrounding V
 		std::vector<Vector3> positionBuffer = {};
-		std::vector<float> valueBuffer = {};
-		float SDF_V;
+		std::vector<double> valueBuffer = {};
+		double SDF_V;
 
 		// SDF value
 		positionBuffer.clear(); // for old min and max positions
@@ -506,7 +506,7 @@ void Evolver::saveInterpolatedDotValues()
 	if (vNormals.empty()) vNormals = evolvedSurface->getAngleWeightedVertexPseudoNormals();
 
 	vDotProducts.clear();
-	vDotProducts = std::vector<float>(N);
+	vDotProducts = std::vector<double>(N);
 	const uint Nx = sdfGrid->Nx, Ny = sdfGrid->Ny, Nz = sdfGrid->Nz;
 	for (uint i = 0; i < N; i++) {
 		// vertex
@@ -518,11 +518,11 @@ void Evolver::saveInterpolatedDotValues()
 
 		// SDF interpolation from values surrounding V
 		std::vector<Vector3> positionBuffer = {};
-		std::vector<float> valueBuffer = {};
-		float SDF_V; Vector3 gradSDF_V = Vector3();
+		std::vector<double> valueBuffer = {};
+		double SDF_V; Vector3 gradSDF_V = Vector3();
 		this->getInterpolatedSDFValuesforVertex(&Fi, &SDF_V, &gradSDF_V, positionBuffer, valueBuffer);
 
-		vDotProducts[i] = dot(-1.0f * gradSDF_V, vNormals[i]);
+		vDotProducts[i] = dot(-1.0 * gradSDF_V, vNormals[i]);
 	}
 
 	evolvedSurface->setScalarData(&vDotProducts, "negGradDotN");
@@ -547,8 +547,8 @@ void Evolver::saveInterpolatedSDFGradients()
 
 		// SDF interpolation from values surrounding V
 		std::vector<Vector3> positionBuffer = {};
-		std::vector<float> valueBuffer = {};
-		float SDF_V; Vector3 gradSDF_V = Vector3();
+		std::vector<double> valueBuffer = {};
+		double SDF_V; Vector3 gradSDF_V = Vector3();
 		this->getInterpolatedSDFValuesforVertex(&Fi, &SDF_V, &gradSDF_V, positionBuffer, valueBuffer);
 
 		vGradients[i] = gradSDF_V;
@@ -585,7 +585,7 @@ void Evolver::saveNormalVelocityVectors(int step)
 
 void Evolver::saveRedistributionPotential()
 {
-	std::vector<float> redistPotential(N);
+	std::vector<double> redistPotential(N);
 	for (int i = 0; i < N; i++) redistPotential[i] = psi[i];
 	evolvedSurface->setScalarData(&redistPotential, "Redistribution_Potential");
 }
@@ -597,34 +597,38 @@ void Evolver::saveFVNormals(int step)
 	e.exportVectorDataOnGeometry(dummyFVGeom, &fvNormals, geomName + "_fvNormals_" + std::to_string(step));
 }*/
 
-float Evolver::laplaceBeltramiCtrlFunc(float& SDF_V)
+double Evolver::laplaceBeltramiCtrlFunc(double& SDF_V)
 {
 	if (epsConstant) return C1;
 
-	return C1 * (1.0f - exp(-(SDF_V * SDF_V) / C2));
+	return C1 * (1.0 - exp(-(SDF_V * SDF_V) / C2));
 }
 
-float Evolver::laplaceBeltramiSmoothFunc(float t)
+double Evolver::laplaceBeltramiSmoothFunc(double t)
 {
 	return initSmoothRate * exp(-smoothDecay * t);
 }
 
-float Evolver::etaCtrlFunc(float& SDF_V, Vector3& gradSDF_V, Vector3& nV)
+double Evolver::etaCtrlFunc(double& SDF_V, Vector3& gradSDF_V, Vector3& nV)
 {
 	if (etaConstant) return C;
 
-	float gradDotN = dot(-1.0f * gradSDF_V, nV);
+	double gradDotN = dot(-1.0 * gradSDF_V, nV);
 	return SDF_V * (gradDotN + D * sqrt(1 - gradDotN * gradDotN)) * C;
 }
 
-float Evolver::tangentialRedistDecayFunction(float& SDF_V)
+double Evolver::tangentialRedistDecayFunction(double& SDF_V)
 {
 	return (20 * SDF_V + rDecay) / (21 * rDecay);
 }
 
-float Evolver::tangentialRedistCurvatureFunction(float& H)
+double Evolver::tanRedistCurvatureFunction(double& H)
 {
-	return exp(- H * H / 100);
+	if (curvature_redist_func == 0) return pow(fabs(H), 1. / 3.);
+	else if (curvature_redist_func == 1) return pow(fabs(H), 2. / 3.);
+	else if (curvature_redist_func == 2) exp(fabs(H));
+
+	return 1.0;
 }
 
 void Evolver::computeSurfaceNormalsAndCoVolumes()
@@ -643,17 +647,17 @@ void Evolver::computeSurfaceNormalsAndCoVolumes()
 // [2] Mikula, Remesikova, Sarkoci, Sevcovic - Manifold Evolution With Tangential Redistribution of Points (SIAM Vol 36, p. A1394)
 // [3] Tomek, Mikula - DISCRETE DUALITY FINITE VOLUME METHOD WITH TANGENTIAL REDISTRIBUTION OF POINTS FOR SURFACES EVOLVING BY MEAN CURVATURE (p. 1808)
 //
-void Evolver::getTriangleEvolutionSystem(float smoothStep, float& meanArea)
+void Evolver::getTriangleEvolutionSystem(double smoothStep, double& meanArea)
 {
 	if (sphereTest || saveAreaStates) {
 		if (!fvAreas.empty()) fvAreas.clear();
-		fvAreas = std::vector<float>(N);
+		fvAreas = std::vector<double>(N);
 	}
 
 	if (saveDistanceStates) {
 		// clear and allocate the distance buffer
 		vDistances.clear();
-		vDistances = std::vector<float>(N);
+		vDistances = std::vector<double>(N);
 	}
 
 	if (saveGradientStates) {
@@ -672,7 +676,7 @@ void Evolver::getTriangleEvolutionSystem(float smoothStep, float& meanArea)
 
 	// Vector3 overallTangentialVelocity = Vector3();
 
-	meanArea = 0.0f;
+	meanArea = 0.0;
 
 	for (uint i = 0; i < N; i++) {
 		// <=== part identical to getTriangleEvolutionSystem based on [4] =======
@@ -686,8 +690,8 @@ void Evolver::getTriangleEvolutionSystem(float smoothStep, float& meanArea)
 		double eps = 1.0;
 		// SDF interpolation from values surrounding V
 		std::vector<Vector3> positionBuffer = {};
-		std::vector<float> valueBuffer = {};
-		float SDF_V; Vector3 gradSDF_V = Vector3();
+		std::vector<double> valueBuffer = {};
+		double SDF_V; Vector3 gradSDF_V = Vector3();
 
 		if (!meanCurvatureFlow) {
 			this->getInterpolatedSDFValuesforVertex(&Fi, &SDF_V, &gradSDF_V, positionBuffer, valueBuffer);
@@ -706,7 +710,7 @@ void Evolver::getTriangleEvolutionSystem(float smoothStep, float& meanArea)
 		uint m = adjacentPolys[i].size();
 		// =====================================================================>
 		
-		float coVolArea = 0.0f;
+		double coVolArea = 0.0;
 
 		for (uint p = 0; p < m; p++) {	
 
@@ -718,8 +722,8 @@ void Evolver::getTriangleEvolutionSystem(float smoothStep, float& meanArea)
 			Vector3* M1 = &fvVerts[i][ ((size_t)2 * p + 2) % fvVerts[i].size() ];
 
 			// co-vol areas:
-			float cVArea0 = (0.5f * cross(*M0 - Fi, *baryCenter - Fi)).length();
-			float cVArea1 = (0.5f * cross(*baryCenter - Fi, *M1 - Fi)).length();
+			double cVArea0 = (0.5 * cross(*M0 - Fi, *baryCenter - Fi)).length();
+			double cVArea1 = (0.5 * cross(*baryCenter - Fi, *M1 - Fi)).length();
 
 			// tri vertices:
 			Vector3* F1prev = &evolvedSurface->uniqueVertices[adjacentPolys[i][(p > 0 ? p - 1 : m - 1)][1]];
@@ -728,8 +732,8 @@ void Evolver::getTriangleEvolutionSystem(float smoothStep, float& meanArea)
 			Vector3* F2 = &evolvedSurface->uniqueVertices[adjacentPolys[i][p][2]];
 
 			// areas:
-			float Area1 = cross(*F1prev - Fi, *F1prev - *F2prev).length();
-			float Area2 = cross(Fi - *F2, *F1 - *F2).length();
+			double Area1 = cross(*F1prev - Fi, *F1prev - *F2prev).length();
+			double Area2 = cross(Fi - *F2, *F1 - *F2).length();
 
 			if (Area1 <= FLT_EPSILON || Area2 <= FLT_EPSILON || cVArea0 <= FLT_EPSILON || cVArea1 <= FLT_EPSILON) {
 				// count and skip degenerate element occurence
@@ -740,37 +744,37 @@ void Evolver::getTriangleEvolutionSystem(float smoothStep, float& meanArea)
 			coVolArea += (cVArea0 + cVArea1);
 
 			// cotans:
-			float cotan1 = dot(*F1prev - Fi, *F1prev - *F2prev) / Area1;
-			float cotan2 = dot(Fi - *F2, *F1 - *F2) / Area2;
-			float cotan1main = dot(Fi - *F1, *F2 - *F1) / Area2;
-			float cotan2main = dot(*F1 - *F2, Fi - *F2) / Area2;
+			double cotan1 = dot(*F1prev - Fi, *F1prev - *F2prev) / Area1;
+			double cotan2 = dot(Fi - *F2, *F1 - *F2) / Area2;
+			double cotan1main = dot(Fi - *F1, *F2 - *F1) / Area2;
+			double cotan2main = dot(*F1 - *F2, Fi - *F2) / Area2;
 
-			SysMatrix[i][i] += 0.5 * ((double)cotan1main + (double)cotan2main);
-			SysMatrix[i][adjacentPolys[i][p][1]] += 0.5 * ((double)cotan1 + (double)cotan2);
+			SysMatrix[i][i] += 0.5 * (cotan1main + cotan2main);
+			SysMatrix[i][adjacentPolys[i][p][1]] += 0.5 * (cotan1 + cotan2);
 		}
 
 		meanArea += coVolArea;
 
 		// diag:
-		SysMatrix[i][i] *= ((double)dt * eps) / coVolArea; 
+		SysMatrix[i][i] *= (dt * eps) / coVolArea; 
 		SysMatrix[i][i] += 1.0;
 		// off-diag:
-		for (uint p = 0; p < m; p++) SysMatrix[i][adjacentPolys[i][p][1]] *= -((double)dt * eps) / coVolArea;
+		for (uint p = 0; p < m; p++) SysMatrix[i][adjacentPolys[i][p][1]] *= -(dt * eps) / coVolArea;
 
-		float rho = (!meanCurvatureFlow ? this->tangentialRedistDecayFunction(SDF_V) : 0.0f);
-		float beta = (redistribution_type > 0 ? this->tangentialRedistCurvatureFunction(vCurvatures[i]) : 0.0f);
+		double rho = (redistribution_type > 0 ? 0.0 : 1.0);
+		double beta = (redistribution_type > 0 ? 1.0 : 0.0);
 
 		// tangential redist:
-		Vector3 vT = (redistribution_type > -1 ? beta * getVolumeTangentialVelocityForVertex(Fi, i) + rho * getAngleTangentialVelocityForVertex(Fi, i) : Vector3());
+		Vector3 vT = (redistribution_type > -1 ? getVolumeTangentialVelocityForVertex(Fi, i) + getAngleTangentialVelocityForVertex(Fi, i) : Vector3());
 		// overallTangentialVelocity += vT;
 		if (saveTangentialVelocityStates) vTangentialVelocities[i] = vT;
 
 		// grad dist func:
-		float eta = ( meanCurvatureFlow ? 0.0f : this->etaCtrlFunc(SDF_V, gradSDF_V, vNormals[i]) );
+		double eta = ( meanCurvatureFlow ? 0.0 : this->etaCtrlFunc(SDF_V, gradSDF_V, vNormals[i]) );
 
-		sysRhsX[i] = (double)Fi.x + (double)dt * eta * vNormals[i].x + (double)dt * vT.x * rho;
-		sysRhsY[i] = (double)Fi.y + (double)dt * eta * vNormals[i].y + (double)dt * vT.y * rho;
-		sysRhsZ[i] = (double)Fi.z + (double)dt * eta * vNormals[i].z + (double)dt * vT.z * rho;
+		sysRhsX[i] = Fi.x + dt * eta * vNormals[i].x + dt * vT.x;
+		sysRhsY[i] = Fi.y + dt * eta * vNormals[i].y + dt * vT.y;
+		sysRhsZ[i] = Fi.z + dt * eta * vNormals[i].z + dt * vT.z;
 
 		if (sphereTest || saveAreaStates) {
 			fvAreas[i] = coVolArea; // save areas as weights for numerical tests
@@ -789,7 +793,7 @@ void Evolver::getTriangleEvolutionSystem(float smoothStep, float& meanArea)
 //
 // [4] M. Medla - SOLVING PARTIAL DIFFERENTIAL EQUATIONS USING FINITE VOLUME METHOD ON NON-UNIFORM GRIDS (PhD Thesis, p. 29)
 //
-void Evolver::getQuadEvolutionSystem(float smoothStep, float& meanArea)
+void Evolver::getQuadEvolutionSystem(double smoothStep, double& meanArea)
 {
 	for (uint i = 0; i < N; i++) {
 		// <=== part identical to getQuadEvolutionSystem based on [1], [2], [3] =======
@@ -802,17 +806,17 @@ void Evolver::getQuadEvolutionSystem(float smoothStep, float& meanArea)
 
 		// SDF interpolation from values surrounding V
 		std::vector<Vector3> positionBuffer = {};
-		std::vector<float> valueBuffer = {};
-		float SDF_V, gradSDFx_V, gradSDFy_V, gradSDFz_V; Vector3 gradSDF_V = Vector3();
+		std::vector<double> valueBuffer = {};
+		double SDF_V, gradSDFx_V, gradSDFy_V, gradSDFz_V; Vector3 gradSDF_V = Vector3();
 
 		this->getInterpolatedSDFValuesforVertex(&Fi, &SDF_V, &gradSDF_V, positionBuffer, valueBuffer);
 
-		float eps = laplaceBeltramiCtrlFunc(SDF_V);
+		double eps = laplaceBeltramiCtrlFunc(SDF_V);
 
 		uint m = adjacentPolys[i].size();
 		// ===========================================================================>
 
-		float coVolArea = 0.0f;
+		double coVolArea = 0.0;
 
 		for (uint p = 0; p < m; p++) {
 
@@ -828,11 +832,11 @@ void Evolver::getQuadEvolutionSystem(float smoothStep, float& meanArea)
 		Vector3 vT = Vector3();
 
 		// grad dist func:
-		float eta = (meanCurvatureFlow ? 0.0f : this->etaCtrlFunc(SDF_V, gradSDF_V, vNormals[i]));
+		double eta = (meanCurvatureFlow ? 0.0 : this->etaCtrlFunc(SDF_V, gradSDF_V, vNormals[i]));
 
-		sysRhsX[i] += (double)Fi.x + (double)dt * eta * vNormals[i].x + (double)dt * vT.x;
-		sysRhsY[i] += (double)Fi.y + (double)dt * eta * vNormals[i].y + (double)dt * vT.x;
-		sysRhsZ[i] += (double)Fi.z + (double)dt * eta * vNormals[i].z + (double)dt * vT.x;
+		sysRhsX[i] += Fi.x + dt * eta * vNormals[i].x + dt * vT.x;
+		sysRhsY[i] += Fi.y + dt * eta * vNormals[i].y + dt * vT.x;
+		sysRhsZ[i] += Fi.z + dt * eta * vNormals[i].z + dt * vT.x;
 	}
 }
 
@@ -853,7 +857,7 @@ void Evolver::getTriangleRedistributionSystem()
 		);
 		uint m = adjacentPolys[i].size();
 
-		float coVolArea = 0.0f;
+		double coVolArea = 0.0;
 
 		for (uint p = 0; p < m; p++) {
 			// fill in values from cotan scheme based on [1], [2], [3]:
@@ -864,8 +868,8 @@ void Evolver::getTriangleRedistributionSystem()
 			Vector3* F2 = &evolvedSurface->uniqueVertices[adjacentPolys[i][p][2]];
 
 			// areas:
-			float Area1 = cross(*F1prev - Fi, *F1prev - *F2prev).length();
-			float Area2 = cross(Fi - *F2, *F1 - *F2).length();
+			double Area1 = cross(*F1prev - Fi, *F1prev - *F2prev).length();
+			double Area2 = cross(Fi - *F2, *F1 - *F2).length();
 
 			if (Area1 <= FLT_EPSILON || Area2 <= FLT_EPSILON) {
 				// skip degenerate element occurence
@@ -873,22 +877,24 @@ void Evolver::getTriangleRedistributionSystem()
 			}
 
 			// cotans:
-			float cotan1 = dot(*F1prev - Fi, *F1prev - *F2prev) / Area1;
-			float cotan2 = dot(Fi - *F2, *F1 - *F2) / Area2;
-			float cotan1main = dot(Fi - *F1, *F2 - *F1) / Area2;
-			float cotan2main = dot(*F1 - *F2, Fi - *F2) / Area2;
+			double cotan1 = dot(*F1prev - Fi, *F1prev - *F2prev) / Area1;
+			double cotan2 = dot(Fi - *F2, *F1 - *F2) / Area2;
+			double cotan1main = dot(Fi - *F1, *F2 - *F1) / Area2;
+			double cotan2main = dot(*F1 - *F2, Fi - *F2) / Area2;
 
-			SysMatrix[i][i] += 0.5 * ((double)cotan1main + (double)cotan2main);
-			SysMatrix[i][adjacentPolys[i][p][1]] -= 0.5 * ((double)cotan1 + (double)cotan2);
+			SysMatrix[i][i] += 0.5 * (cotan1main + cotan2main);
+			SysMatrix[i][adjacentPolys[i][p][1]] -= 0.5 * (cotan1 + cotan2);
 		}
 
-		sysRhsX[i] = (double)(fvAreas[i] * dot(vNormalVelocityVectors[i], vCurvatureVectors[i])) -
-			(double)(fvAreas[i] / totalArea * totalCurvatureSqWeightedArea) -
-			(double)(omega_volume * (totalArea / (N - 1) - fvAreas[i]));
+		double curvatureTerm = (curvature_redist_func >= 0 ? (1.0 / tanRedistCurvatureFunction(vCurvatures[i])) / totalInvCurvatureFuncSum : 1.0);
+		sysRhsX[i] = (fvAreas[i] * dot(vNormalVelocityVectors[i], vCurvatureVectors[i])) -
+			(fvAreas[i] / totalArea * totalCurvatureSqWeightedArea) -
+			fvAreas[i] * (omega_volume * (totalArea / (fvAreas[i] * (N - 1)) * curvatureTerm - 1.0));
 		rhsSum += sysRhsX[i];
 	}
 
 	sum_rhs_log << "Sum(rhs) = " << rhsSum << std::endl;
+	std::cout << "Sum(rhs) = " << rhsSum << std::endl;
 }
 
 void Evolver::getQuadRedistributionSystem()
@@ -898,17 +904,18 @@ void Evolver::getQuadRedistributionSystem()
 void Evolver::getCurvaturesAndNormalVelocities()
 {
 	fvAreas.clear();
-	fvAreas = std::vector<float>(N);
+	fvAreas = std::vector<double>(N);
 	vCurvatureVectors.clear();
 	vCurvatureVectors = std::vector<Vector3>(N);
 	vCurvatures.clear(); vNormalVelocities.clear();
-	vCurvatures = std::vector<float>(N);
+	vCurvatures = std::vector<double>(N);
 	vNormalVelocityVectors.clear();
 	vNormalVelocityVectors = std::vector<Vector3>(N);
-	vNormalVelocities = std::vector<float>(N);
+	vNormalVelocities = std::vector<double>(N);
 
-	totalArea = 0.0f;
-	totalCurvatureSqWeightedArea = 0.0f;
+	totalArea = 0.0;
+	totalCurvatureSqWeightedArea = 0.0;
+	totalInvCurvatureFuncSum = 0.0;
 
 	for (int i = 0; i < N; i++) {
 		// vertex
@@ -921,8 +928,8 @@ void Evolver::getCurvaturesAndNormalVelocities()
 		double eps = 1.0;
 		// SDF interpolation from values surrounding V
 		std::vector<Vector3> positionBuffer = {};
-		std::vector<float> valueBuffer = {};
-		float SDF_V; Vector3 gradSDF_V = Vector3();
+		std::vector<double> valueBuffer = {};
+		double SDF_V; Vector3 gradSDF_V = Vector3();
 
 		if (!meanCurvatureFlow) {
 			this->getInterpolatedSDFValuesforVertex(&Fi, &SDF_V, &gradSDF_V, positionBuffer, valueBuffer);
@@ -932,7 +939,7 @@ void Evolver::getCurvaturesAndNormalVelocities()
 		uint m = adjacentPolys[i].size();
 		// ===========================================================================>
 
-		float coVolArea = 0.0f;
+		double coVolArea = 0.0;
 		Vector3 vCurvatureVect = Vector3();
 
 		for (uint p = 0; p < m; p++) {
@@ -942,8 +949,8 @@ void Evolver::getCurvaturesAndNormalVelocities()
 			Vector3* M1 = &fvVerts[i][((size_t)2 * p + 2) % fvVerts[i].size()];
 
 			// co-vol areas:
-			float cVArea0 = cross(*M0 - Fi, *baryCenter - Fi).length();
-			float cVArea1 = cross(*baryCenter - Fi, *M1 - Fi).length();
+			double cVArea0 = cross(*M0 - Fi, *baryCenter - Fi).length();
+			double cVArea1 = cross(*baryCenter - Fi, *M1 - Fi).length();
 
 			// tri vertices:
 			Vector3* F1prev = &evolvedSurface->uniqueVertices[adjacentPolys[i][(p > 0 ? p - 1 : m - 1)][1]];
@@ -952,38 +959,41 @@ void Evolver::getCurvaturesAndNormalVelocities()
 			Vector3* F2 = &evolvedSurface->uniqueVertices[adjacentPolys[i][p][2]];
 
 			// areas:
-			float Area1 = cross(*F1prev - Fi, *F1prev - *F2prev).length();
-			float Area2 = cross(Fi - *F2, *F1 - *F2).length();
+			double Area1 = cross(*F1prev - Fi, *F1prev - *F2prev).length();
+			double Area2 = cross(Fi - *F2, *F1 - *F2).length();
 
 			if (Area2 <= FLT_EPSILON || Area1 <= FLT_EPSILON || cVArea0 <= FLT_EPSILON || cVArea1 <= FLT_EPSILON) {
 				// skip degenerate element
 				continue;
 			}
 
-			coVolArea += (0.5f * cVArea0 + 0.5f * cVArea1);
+			coVolArea += (0.5 * cVArea0 + 0.5 * cVArea1);
 
 			// cotans:
-			float cotan1 = dot(*F1prev - Fi, *F1prev - *F2prev) / Area1;
-			float cotan2 = dot(Fi - *F2, *F1 - *F2) / Area2;
-			float cotan1main = dot(Fi - *F1, *F2 - *F1) / Area2;
-			float cotan2main = dot(*F1 - *F2, Fi - *F2) / Area2;
+			double cotan1 = dot(*F1prev - Fi, *F1prev - *F2prev) / Area1;
+			double cotan2 = dot(Fi - *F2, *F1 - *F2) / Area2;
+			double cotan1main = dot(Fi - *F1, *F2 - *F1) / Area2;
+			double cotan2main = dot(*F1 - *F2, Fi - *F2) / Area2;
 
 			// save these as well?
-			vCurvatureVect += 0.5 * ((double)cotan1 + (double)cotan2) * (Fi - *F1);
+			vCurvatureVect += 0.5 * (cotan1 + cotan2) * (Fi - *F1);
 		}
 
 		fvAreas[i] = coVolArea;
 		if (i > 0) totalArea += coVolArea;
-		vCurvatureVectors[i] = (1.0f / coVolArea) * vCurvatureVect;
+		vCurvatureVectors[i] = (1.0 / coVolArea) * vCurvatureVect;
 		vCurvatures[i] = dot(vCurvatureVectors[i], vNormals[i]);
 
 		// grad dist func:
-		float eta = (meanCurvatureFlow ? 0.0f : this->etaCtrlFunc(SDF_V, gradSDF_V, vNormals[i]));
+		double eta = (meanCurvatureFlow ? 0.0 : this->etaCtrlFunc(SDF_V, gradSDF_V, vNormals[i]));
 
 		// normal velocity magnitude (will scale surface unit normal):
 		vNormalVelocityVectors[i] = eps * vCurvatureVectors[i] + eta * vNormals[i];
 		vNormalVelocities[i] = vNormalVelocityVectors[i].length();
-		if (i > 0) totalCurvatureSqWeightedArea += coVolArea * dot(vNormalVelocityVectors[i], vCurvatureVectors[i]);
+		if (i > 0) {
+			totalCurvatureSqWeightedArea += coVolArea * dot(vNormalVelocityVectors[i], vCurvatureVectors[i]);
+			totalInvCurvatureFuncSum += (1.0 / ((double)N - 1)) / tanRedistCurvatureFunction(vCurvatures[i]);
+		}
 	}
 }
 
@@ -1009,8 +1019,8 @@ Vector3 Evolver::getVolumeTangentialVelocityForVertex(Vector3& V, uint i)
 		Vector3 fvTangent1 = (*baryCenter - *M1);
 
 		// co-volume edge lengths:
-		float fvEdge0Length = fvTangent0.length();
-		float fvEdge1Length = fvTangent1.length();
+		double fvEdge0Length = fvTangent0.length();
+		double fvEdge1Length = fvTangent1.length();
 
 		// co-volume normals:
 		Vector3 fvNormal0 = normalize(edge0 - (dot(edge0, fvTangent0) / fvTangent0.lengthSq()) * fvTangent0);
@@ -1020,12 +1030,12 @@ Vector3 Evolver::getVolumeTangentialVelocityForVertex(Vector3& V, uint i)
 		fvNormals.push_back(fvNormal0);
 		fvNormals.push_back(fvNormal1);
 
-		dummyFVGeom->uniqueVertices.push_back(0.5f * (*M0 + *baryCenter));
-		dummyFVGeom->uniqueVertices.push_back(0.5f * (*M1 + *baryCenter));*/
+		dummyFVGeom->uniqueVertices.push_back(0.5 * (*M0 + *baryCenter));
+		dummyFVGeom->uniqueVertices.push_back(0.5 * (*M1 + *baryCenter));*/
 
 		// interpolate tangential potential at co-volume edge midpoints:
-		float psi0 = (5.0f * psi[i] + 5.0f * psi[adjacentPolys[i][p][1]] + 2.0f * psi[adjacentPolys[i][p][2]]) / 12.0f;
-		float psi1 = (5.0f * psi[i] + 2.0f * psi[adjacentPolys[i][p][1]] + 5.0f * psi[adjacentPolys[i][p][2]]) / 12.0f;
+		double psi0 = (5.0 * psi[i] + 5.0 * psi[adjacentPolys[i][p][1]] + 2.0 * psi[adjacentPolys[i][p][2]]) / 12.0;
+		double psi1 = (5.0 * psi[i] + 2.0 * psi[adjacentPolys[i][p][1]] + 5.0 * psi[adjacentPolys[i][p][2]]) / 12.0;
 
 		vTanResult += ((fvEdge0Length * psi0) * fvNormal0 + (fvEdge1Length * psi1) * fvNormal1);
 	}
@@ -1093,10 +1103,10 @@ void Evolver::exportVectorStates(int step)
 	e.exportVectorDataOnGeometry(evolvedSurface, &vGradients, geomName + "_vGrads_" + std::to_string(step));
 }
 
-void Evolver::exportTestGeometry(int step, float t)
+void Evolver::exportTestGeometry(int step, double t)
 {
 	VTKExporter e = VTKExporter();
-	float r = sqrt(r0 * r0 - 4 * t);
+	double r = sqrt(r0 * r0 - 4 * t);
 	Geometry sg;
 	if (elType == ElementType::tri) {
 		uint n = 3;
@@ -1246,14 +1256,14 @@ Evolver::~Evolver()
 	delete solveX; delete solveY; delete solveZ;
 }
 
-float Evolver::getSphereStepError(float t)
+double Evolver::getSphereStepError(double t)
 {
 	// r(t) = sqrt(r0 * r0 - 4 * t);
 	// error for step t is the norm of the difference (Fi - center) - r(t), weighted by the vertex co-volume area
 	// summed through all vertices, of course
 
-	float FRadius, rt = sqrt(r0 * r0 - 4 * t);
-	float result = 0.0f;
+	double FRadius, rt = sqrt(r0 * r0 - 4 * t);
+	double result = 0.0;
 
 	for (uint i = 0; i < N; i++) {
 		FRadius = (evolvedSurface->uniqueVertices[i] - center).length();
@@ -1262,14 +1272,14 @@ float Evolver::getSphereStepError(float t)
 	return result;
 }
 
-float Evolver::getSphereStepL2Error(float t)
+double Evolver::getSphereStepL2Error(double t)
 {
 	// r(t) = sqrt(r0 * r0 - 4 * t);
 	// error for step t is the square of the difference ((Fi - center) - r(t)), weighted by the vertex co-volume area
 	// summed through all vertices, of course
 
-	float FRadius, rt = sqrt(r0 * r0 - 4 * t);
-	float result = 0.0f;
+	double FRadius, rt = sqrt(r0 * r0 - 4 * t);
+	double result = 0.0;
 
 	for (uint i = 0; i < N; i++) {
 		FRadius = (evolvedSurface->uniqueVertices[i] - center).length();

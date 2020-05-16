@@ -11,6 +11,8 @@
 
 #include <vtkActor.h>
 #include <vtkDataObject.h>
+#include <vtkAlgorithm.h>
+#include <vtkAlgorithmOutput.h>
 #include <vtkSmartPointer.h>
 
 #include <vtkPolyDataMapper.h>
@@ -142,7 +144,11 @@ private:
 	Quaternion m_orientation = Quaternion();
 	Vector3 m_scale = Vector3(1.0, 1.0, 1.0);
 
+	void initMappersFromPolyData();
+	void initMappersFromOutput(vtkSmartPointer<vtkAlgorithmOutput> out, bool scalar_visibility = true);
+
 	void initMeshProperties();
+	// void initMarchingCubesProperties(vtkSmartPointer<vtkMarchingCubes> mc);
 
 	// ======= Scalar Grid Object params ========
 	vtkSmartPointer<vtkImageData> m_imgData;

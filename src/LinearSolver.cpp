@@ -55,8 +55,8 @@ void LinearSolver::Bi_CGSTAB_Solve(double** A, double* b, double* x, bool print)
 	if (print) {
 		std::cout << "==================================================" << std::endl;
 		std::cout << "----------- Initializing Bi-CGSTAB Method --------" << std::endl;
-		printArray2("systemMatrix", A, 4);
-		printArray1("systemRhs", b, 5);
+		printArray2("systemMatrix", A, 6);
+		printArray1("systemRhs", b, 6);
 		printArray1("x0", x_curr, 2);
 		printArray1("r0", r_curr, 5);
 		std::cout << "--------------------------------------------------" << std::endl;

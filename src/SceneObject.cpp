@@ -16,9 +16,11 @@ SceneObject::SceneObject(QString name)
 
 SceneObject::SceneObject(vtkSmartPointer<vtkPolyData> polyData, QString name, bool clip_file_extension)
 {
-	m_name = (clip_file_extension ? name.split(".").last() : name);
+	m_name = (clip_file_extension ? name.split(".").first() : name);
 	m_type = ObjectType::Mesh;
 	m_polyData = polyData;
+
+	initMappersFromPolyData();
 	initMeshProperties();
 }
 
@@ -70,6 +72,7 @@ SceneObject::SceneObject(Geometry& geometryData)
 	m_polyData->SetPoints(points);
 	m_polyData->SetPolys(cells);
 
+	initMappersFromPolyData();
 	initMeshProperties();
 }
 
@@ -78,7 +81,7 @@ SceneObject::SceneObject(Geometry& geometryData)
 
 SceneObject::SceneObject(vtkSmartPointer<vtkImageData> imgData, QString name, bool clip_file_extension, bool img_data)
 {
-	m_name = (clip_file_extension ? name.split(".").last() : name);
+	m_name = (clip_file_extension ? name.split(".").first() : name);
 	m_type = ObjectType::SGrid;
 	m_imgData = imgData;
 	initVolumeProperties();
@@ -97,14 +100,10 @@ SceneObject::SceneObject(Grid* grid, QString name)
 void SceneObject::setOpacity(double opacity)
 {
 	m_opacity = opacity;
-	if (m_type == ObjectType::Mesh) {
-		m_vertexActor->GetProperty()->SetOpacity(m_opacity);
-		m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
-		m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
-	}
-	else if (m_type == ObjectType::SGrid) {
-		m_isoSurfaceActor->GetProperty()->SetOpacity(m_opacity);
-	}
+
+	m_vertexActor->GetProperty()->SetOpacity(m_opacity);
+	m_edgeActor->GetProperty()->SetOpacity(m_opacity);
+	m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
 }
 
 void SceneObject::setVertexColor(QColor& color)
@@ -125,28 +124,39 @@ void SceneObject::setSurfaceColor(QColor& color)
 	m_surfaceActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
 }
 
+void SceneObject::initMappersFromPolyData()
+{
+	m_vertexMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	m_vertexMapper->SetInputData(m_polyData);
+
+	m_edgeMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	m_edgeMapper->SetInputData(m_polyData);
+
+	m_surfaceMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	m_surfaceMapper->SetInputData(m_polyData);
+}
+
+void SceneObject::initMappersFromOutput(vtkSmartPointer<vtkAlgorithmOutput> out, bool scalar_visibility)
+{
+	m_vertexMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	m_vertexMapper->SetInputConnection(out);
+	if (!scalar_visibility) m_vertexMapper->ScalarVisibilityOff();
+
+	m_edgeMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	m_edgeMapper->SetInputConnection(out);
+	if (!scalar_visibility) m_edgeMapper->ScalarVisibilityOff();
+
+	m_surfaceMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	m_surfaceMapper->SetInputConnection(out);
+	if (!scalar_visibility) m_surfaceMapper->ScalarVisibilityOff();
+}
+
 void SceneObject::initMeshProperties()
 {
-	if (m_type != ObjectType::Mesh) return;
-
-	m_vertexMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-	m_edgeMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-	m_surfaceMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-
 	m_vertexActor = vtkSmartPointer<vtkActor>::New();
-	m_edgeActor = vtkSmartPointer<vtkActor>::New();
-	m_surfaceActor = vtkSmartPointer<vtkActor>::New();
-
-	m_vertexMapper->SetInputData(m_polyData);
-	m_edgeMapper->SetInputData(m_polyData);
-	m_surfaceMapper->SetInputData(m_polyData);
-
 	m_vertexActor->SetMapper(m_vertexMapper);
-	m_edgeActor->SetMapper(m_edgeMapper);
-	m_surfaceActor->SetMapper(m_surfaceMapper);
+
 	setVertexColor(m_vertexColor);
-	setEdgeColor(m_edgeColor);
-	setSurfaceColor(m_surfaceColor);
 
 	m_vertexActor->GetProperty()->SetRepresentationToPoints();
 
@@ -156,13 +166,21 @@ void SceneObject::initMeshProperties()
 	m_vertexActor->GetProperty()->SetPointSize(4.0);
 	m_vertexActor->GetProperty()->SetOpacity(m_opacity);
 
+	m_edgeActor = vtkSmartPointer<vtkActor>::New();
+	m_edgeActor->SetMapper(m_edgeMapper);
+	setEdgeColor(m_edgeColor);
+
 	m_edgeActor->GetProperty()->SetRepresentationToWireframe();
 
 	m_edgeActor->GetProperty()->SetAmbient(1.0);
 	m_edgeActor->GetProperty()->SetDiffuse(0.0);
 	m_edgeActor->GetProperty()->SetSpecular(0.0);
 	m_edgeActor->GetProperty()->SetLineWidth(2.0);
-	m_surfaceActor->GetProperty()->SetOpacity(m_opacity);
+	m_edgeActor->GetProperty()->SetOpacity(m_opacity);
+	
+	m_surfaceActor = vtkSmartPointer<vtkActor>::New();
+	m_surfaceActor->SetMapper(m_surfaceMapper);	
+	setSurfaceColor(m_surfaceColor);
 
 	m_surfaceActor->GetProperty()->SetRepresentationToSurface();
 	m_surfaceActor->GetProperty()->SetInterpolationToFlat();
@@ -254,7 +272,8 @@ void SceneObject::sampleIsoSurfaces(double* range, int nSamples)
 {
 	if (m_type != ObjectType::SGrid) return;
 
-	m_isoSurfaceActor = vtkSmartPointer<vtkActor>::New();
+	// ======================================================
+
 	vtkSmartPointer<vtkMarchingCubes> surface = vtkSmartPointer<vtkMarchingCubes>::New();
 	surface->SetInputData(m_imgData);
 	surface->ComputeNormalsOn();
@@ -265,15 +284,23 @@ void SceneObject::sampleIsoSurfaces(double* range, int nSamples)
 	for (vtkIdType id = 0; id < nSamples; id++) {
 		double isoValue = range[0] + (double)(id + 1) / (double)(nSamples + 1) * (newMax - range[0]);
 		surface->SetValue(id, isoValue);
-	}
+	}	
 
-	vtkSmartPointer<vtkPolyDataMapper> isoSurfMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-	isoSurfMapper->SetInputConnection(surface->GetOutputPort());
-	isoSurfMapper->ScalarVisibilityOff();
-	m_isoSurfaceActor->SetMapper(isoSurfMapper);
-	m_isoSurfaceActor->GetProperty()->SetColor((double)9 / (double)255, (double)171 / (double)255, (double)105 / (double)255);
-	// m_isoSurfaceActor->GetProperty()->SetRepresentationToWireframe();
-	m_isoSurfaceActor->GetProperty()->SetOpacity(0.3);
+	// === isosurf sampled ====================================
+	
+	initMappersFromOutput(surface->GetOutputPort(), false);
+
+	// defaults:
+	m_opacity = 0.3;
+	m_vertex = false;
+	m_wireframe = false;
+	m_surface = true;
+
+	m_vertexColor = QColor(255, 255, 255);
+	m_edgeColor = QColor(255, 255, 255);
+	m_surfaceColor = QColor(9, 171, 105);
+
+	initMeshProperties();
 }
 
 int SceneObject::vertexCount()

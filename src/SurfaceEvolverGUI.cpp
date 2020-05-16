@@ -104,9 +104,7 @@ void SurfaceEvolverGUI::ActionSelectLibraryObject()
         auto found = m_itemValuedObjectIds.find(selection.last());
         int id = found->second;
         SceneObject* selectedObj = m_engine->getLibraryObject(id);
-        if (selectedObj->type() == ObjectType::Mesh) {
-            updateMeshUiFromObject(selectedObj);
-        }        
+        updateMeshUiFromObject(selectedObj);
     } else {
         updateMeshUiToDefault();
     }
@@ -343,6 +341,21 @@ int SurfaceEvolverGUI::filterSelectionForProcessing()
     return found->second;
 }
 
+int SurfaceEvolverGUI::filterForMeshProcessing(int id)
+{
+    if (m_engine->getLibraryObject(id)->type() != ObjectType::Mesh) {
+        QMessageBox* msgBox = new QMessageBox();
+        msgBox->setWindowTitle("Invalid target object");
+        msgBox->setText("Selected object is not a Mesh Object! Please, select a Mesh Object for processing.");
+        msgBox->setIcon(QMessageBox::Critical);
+        if (msgBox->exec() == QMessageBox::Ok) {
+            return -1;
+        }
+    }
+
+    return id;
+}
+
 void SurfaceEvolverGUI::actionOpen_File()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "../../models", tr("VTK files (*.vtk *.vti)"));
@@ -387,17 +400,12 @@ void SurfaceEvolverGUI::actionSave_File()
 
 void SurfaceEvolverGUI::actionSigned_Distance_Function()
 {
-    int selectedId = filterSelectionForProcessing();
+    int selectedId = filterForMeshProcessing(
+        filterSelectionForProcessing()
+    );
 
     if (selectedId >= 0) {
         SDFWidget* sdfWidget = new SDFWidget(this);
-
-        if (m_engine->getLibraryObject(selectedId)->type() != ObjectType::Mesh) {
-            QMessageBox* msgBox = new QMessageBox();
-            msgBox->setWindowTitle("Invalid target object");
-            msgBox->setText("Selected object is not a Mesh Object! Please select a Mesh Object for processing.");
-            msgBox->setIcon(QMessageBox::Critical);
-        }
 
         sdfWidget->processMeshInfo(m_engine->getLibraryObject(selectedId));
         connect(sdfWidget, SIGNAL(closeSDF()), this, SLOT(ActionCloseSDFWindow()));
@@ -418,7 +426,7 @@ void SurfaceEvolverGUI::actionSigned_Distance_Function()
 
 void SurfaceEvolverGUI::actionSurface_Evolution()
 {
-    int selectedId = filterSelectionForProcessing();
+    int selectedId = filterForMeshProcessing(filterSelectionForProcessing());
 
     if (selectedId >= 0) {
         m_engine->setSelectedObjectId(selectedId);

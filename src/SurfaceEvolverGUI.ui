@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1185</width>
+    <width>1224</width>
     <height>766</height>
    </rect>
   </property>
@@ -197,6 +197,103 @@
        </widget>
       </item>
       <item>
+       <widget class="QGroupBox" name="scalarDataGroupBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>Scalar data properties:</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="0">
+          <widget class="QFrame" name="frame">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QRadioButton" name="multiContoursButton">
+              <property name="text">
+               <string>multiple contours</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="singleContourButton">
+              <property name="text">
+               <string>single contour</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QLabel" name="contoursLabel">
+             <property name="text">
+              <string>contours:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="isoLevelLabel">
+             <property name="text">
+              <string>iso-level: 0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSlider" name="horizontalSlider">
+             <property name="maximumSize">
+              <size>
+               <width>120</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="nContoursSpinBox">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>6</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <widget class="QGroupBox" name="sceneObjectsGroupBox">
@@ -213,7 +310,7 @@
            <item>
             <widget class="QListWidget" name="libraryListWidget">
              <property name="selectionMode">
-              <enum>QAbstractItemView::MultiSelection</enum>
+              <enum>QAbstractItemView::ContiguousSelection</enum>
              </property>
              <property name="selectionBehavior">
               <enum>QAbstractItemView::SelectRows</enum>
@@ -301,7 +398,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1185</width>
+     <width>1224</width>
      <height>26</height>
     </rect>
    </property>
@@ -425,7 +522,7 @@
    <slot>ActionRenderVertices()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>592</x>
+     <x>574</x>
      <y>134</y>
     </hint>
     <hint type="destinationlabel">
@@ -441,7 +538,7 @@
    <slot>ActionRenderWireframe()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>592</x>
+     <x>574</x>
      <y>174</y>
     </hint>
     <hint type="destinationlabel">
@@ -457,7 +554,7 @@
    <slot>ActionRenderSurface()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>592</x>
+     <x>574</x>
      <y>214</y>
     </hint>
     <hint type="destinationlabel">
@@ -473,11 +570,11 @@
    <slot>ActionVertexColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1131</x>
+     <x>1146</x>
      <y>119</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1175</x>
+     <x>1149</x>
      <y>30</y>
     </hint>
    </hints>
@@ -489,11 +586,11 @@
    <slot>ActionEdgeColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1131</x>
+     <x>1146</x>
      <y>153</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1176</x>
+     <x>1149</x>
      <y>56</y>
     </hint>
    </hints>
@@ -505,11 +602,11 @@
    <slot>ActionSurfaceColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1124</x>
+     <x>1146</x>
      <y>181</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1173</x>
+     <x>1149</x>
      <y>84</y>
     </hint>
    </hints>
@@ -521,11 +618,11 @@
    <slot>ActionOpacity()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1142</x>
+     <x>1146</x>
      <y>220</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1178</x>
+     <x>1149</x>
      <y>112</y>
     </hint>
    </hints>
@@ -578,6 +675,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>multiContoursButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionScalarMultipleContours()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>singleContourButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>SurfaceEvolverGUI</receiver>
+   <slot>ActionScalarMultipleContours()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>113</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ActionRendererBackgroundColor()</slot>
@@ -593,5 +722,6 @@
   <slot>ActionRemoveSelectedObjects()</slot>
   <slot>ActionClearAllObjects()</slot>
   <slot>ActionObjectVisibility(int)</slot>
+  <slot>ActionScalarMultipleContours()</slot>
  </slots>
 </ui>

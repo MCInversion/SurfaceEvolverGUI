@@ -96,6 +96,7 @@ private:
     std::vector<int> getSelectionIndices();
 
     int filterSelectionForProcessing();
+    int filterForMeshProcessing(int id);
 
 };
 
