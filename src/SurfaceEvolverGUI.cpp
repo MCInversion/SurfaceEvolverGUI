@@ -97,6 +97,32 @@ void SurfaceEvolverGUI::ActionOpacity()
     m_engine->setOpacityToObjects(ui->opacitySpinBox->value(), getSelectionIndices());
 }
 
+void SurfaceEvolverGUI::ActionScalarMultipleContours()
+{   
+    bool singleContour = ui->singleContourButton->isChecked();
+    ui->nContoursSpinBox->setEnabled(!singleContour);
+
+    m_engine->setSingleContourToObjects(singleContour, getSelectionIndices());
+}
+
+void SurfaceEvolverGUI::ActionNContours()
+{
+    m_engine->setNContoursToObjects(ui->nContoursSpinBox->value(), getSelectionIndices());
+}
+
+void SurfaceEvolverGUI::ActionIsolevel()
+{
+    if (!m_sliderLock) {
+        m_engine->setIsoLevelToObjects(ui->isoLevelSlider->value(), getSelectionIndices());
+        ui->isoLevelLabel->setText("iso-level: " + QString::number(m_engine->currentIsoLevel()));
+    }
+}
+
+void SurfaceEvolverGUI::ActionDIso()
+{
+    m_engine->setDIsoToObjects(ui->dIsoSpinBox->value(), getSelectionIndices());
+}
+
 void SurfaceEvolverGUI::ActionSelectLibraryObject()
 {    
     QList<QListWidgetItem*> selection = ui->libraryListWidget->selectedItems();
@@ -104,21 +130,23 @@ void SurfaceEvolverGUI::ActionSelectLibraryObject()
         auto found = m_itemValuedObjectIds.find(selection.last());
         int id = found->second;
         SceneObject* selectedObj = m_engine->getLibraryObject(id);
-        updateMeshUiFromObject(selectedObj);
+        updateUiFromObject(selectedObj);
     } else {
-        updateMeshUiToDefault();
+        updateUiToDefault();
     }
 }
 
 void SurfaceEvolverGUI::ActionRemoveSelectedObjects()
 {
     removeSelectedObjects();
+    updateUiToDefault();
 }
 
 void SurfaceEvolverGUI::ActionClearAllObjects()
 {
     m_engine->clearObjectLibrary();
     ui->libraryListWidget->clear();
+    updateUiToDefault();
 }
 
 void SurfaceEvolverGUI::ActionObjectVisibility(QListWidgetItem* item)
@@ -260,7 +288,7 @@ void SurfaceEvolverGUI::reIndexLibraryItems()
     }
 }
 
-void SurfaceEvolverGUI::updateMeshUiFromObject(SceneObject* selectedObj)
+void SurfaceEvolverGUI::updateUiFromObject(SceneObject* selectedObj)
 {
     ui->checkBoxVertices->setChecked(selectedObj->vertexRender());
     ui->checkBoxWireframe->setChecked(selectedObj->edgeRender());
@@ -271,9 +299,30 @@ void SurfaceEvolverGUI::updateMeshUiFromObject(SceneObject* selectedObj)
     setColorIcon(ui->surfaceColorButton, selectedObj->surfaceColor());
 
     ui->opacitySpinBox->setValue(selectedObj->opacity());
+
+    if (selectedObj->type() == ObjectType::SGrid) {
+        ui->scalarDataGroupBox->setEnabled(true);
+
+        ui->multiContoursButton->setChecked(!selectedObj->singleContour());
+        ui->singleContourButton->setChecked(selectedObj->singleContour());
+
+        ui->nContoursSpinBox->setValue(selectedObj->nContours());
+        double isolevel = selectedObj->isoLevel();
+        ui->isoLevelLabel->setText("iso-level: " + QString::number(isolevel));
+
+        m_sliderLock = true;
+        ui->isoLevelSlider->setSliderPosition(
+            (int)std::round((isolevel - selectedObj->valMin()) / (selectedObj->valMax() - selectedObj->valMin()) * 100)
+        );
+        m_sliderLock = false;
+        ui->dIsoSpinBox->setValue(selectedObj->dIso());
+    }
+    else {
+        ui->scalarDataGroupBox->setEnabled(false);
+    }
 }
 
-void SurfaceEvolverGUI::updateMeshUiToDefault()
+void SurfaceEvolverGUI::updateUiToDefault()
 {
     ui->checkBoxVertices->setChecked(m_engine->vertexRender());
     ui->checkBoxWireframe->setChecked(m_engine->edgeRender());
@@ -284,6 +333,8 @@ void SurfaceEvolverGUI::updateMeshUiToDefault()
     setColorIcon(ui->surfaceColorButton, m_engine->surfaceColor());
 
     ui->opacitySpinBox->setValue(m_engine->opacity());
+
+    ui->scalarDataGroupBox->setEnabled(false);
 }
 
 std::vector<int> SurfaceEvolverGUI::getSelectionIndices()
@@ -343,6 +394,8 @@ int SurfaceEvolverGUI::filterSelectionForProcessing()
 
 int SurfaceEvolverGUI::filterForMeshProcessing(int id)
 {
+    if (id < 0) return id;
+
     if (m_engine->getLibraryObject(id)->type() != ObjectType::Mesh) {
         QMessageBox* msgBox = new QMessageBox();
         msgBox->setWindowTitle("Invalid target object");

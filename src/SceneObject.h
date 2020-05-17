@@ -90,6 +90,19 @@ public:
 	inline bool edgeRender() { return m_wireframe; };
 	inline bool surfaceRender() { return m_surface; };
 
+	void updateContours();
+	inline void setSingleContour(bool singleContour) { m_singleContour = singleContour; updateContours(); };
+	inline void setNContours(int nContours) { m_nContours = nContours; updateContours(); };
+	void setIsoLevel(double isoLevel);
+	inline void setDIso(double dIso) { m_dIso = dIso; updateContours();	};
+
+	inline bool singleContour() { return m_singleContour; };
+	inline int nContours() { return m_nContours; };
+	inline double isoLevel() { return m_isoLevel; };
+	inline double dIso() { return m_dIso; };
+	inline double valMax() { return m_valMax; };
+	inline double valMin() { return m_valMin; };
+
 	int vertexCount();
 	int triangleCount();
 	int polyCount();
@@ -155,10 +168,14 @@ private:
 	vtkSmartPointer<vtkVolume> m_volume;
 	vtkSmartPointer<vtkActor> m_isoSurfaceActor;
 
-	int m_nIsoSamples = 6;
+	bool m_singleContour = false;
+	int m_nContours = 6;
+	double m_valMin = 0.; double m_valMax = 100.;
+	double m_isoLevel = 0.;
+	double m_dIso = 5.0;
 
 	void initFromGrid(Grid* grid);
-	void initVolumeProperties();
+	void initVolumeProperties(Grid* grid = nullptr);
 	void sampleIsoSurfaces(double* range, int nSamples);
 };
 

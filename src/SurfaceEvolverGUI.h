@@ -42,11 +42,15 @@ public:
 public slots:
   void slotExit();
 
+  // ---- Dialog actions ----------
+
   void actionOpen_File();
   void actionSave_File();
 
   void actionSigned_Distance_Function();
   void actionSurface_Evolution();
+
+  // ------ Render/view actions ----------
 
   void ActionRendererBackgroundColor();
   void ActionRenderVertices();
@@ -58,6 +62,13 @@ public slots:
   void ActionSurfaceColor();
 
   void ActionOpacity();
+
+  void ActionScalarMultipleContours();
+  void ActionNContours();
+  void ActionIsolevel();
+  void ActionDIso();
+
+  // ---- Library actions ----
   
   void ActionSelectLibraryObject();
   void ActionRemoveSelectedObjects();
@@ -66,6 +77,8 @@ public slots:
   void ActionObjectVisibility(QListWidgetItem* item);
 
   void ActionRenderBoundingBox();
+
+  // ---- Tool actions confirmed -------
 
   void ActionComputeSDF();
   void ActionCloseSDFWindow();
@@ -90,13 +103,15 @@ private:
 
     void addListItem(QString name, int row, QString icon);
     void reIndexLibraryItems();
-    void updateMeshUiFromObject(SceneObject* selectedObj);
-    void updateMeshUiToDefault();
+    void updateUiFromObject(SceneObject* selectedObj);
+    void updateUiToDefault();
 
     std::vector<int> getSelectionIndices();
 
     int filterSelectionForProcessing();
     int filterForMeshProcessing(int id);
+
+    bool m_sliderLock = false;
 
 };
 

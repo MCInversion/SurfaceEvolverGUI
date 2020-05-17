@@ -28,6 +28,7 @@ private:
 	QColor m_surfaceColor = QColor(237, 224, 206);
 
 	double m_opacity = 1.0;
+	double m_isoLevelVal = 0.0;
 
 	std::vector<SceneObject> m_libObjects;
 	std::vector<SceneObject> m_helperObjects;
@@ -52,6 +53,10 @@ public:
 	void setSurfaceColorToObjects(QColor color, std::vector<int> selectedIds = {});
 
 	void setOpacityToObjects(double opacity, std::vector<int> selectedIds = {});
+	void setSingleContourToObjects(bool singleContour, std::vector<int> selectedIds = {});
+	void setNContoursToObjects(int nContours, std::vector<int> selectedIds = {});
+	void setIsoLevelToObjects(double isoLevel, std::vector<int> selectedIds = {});
+	void setDIsoToObjects(double dIso, std::vector<int> selectedIds = {});
 
 	void addPolyDataObjectToScene(vtkSmartPointer<vtkPolyData> model, QString filename);
 	void addImageDataObjectToScene(vtkSmartPointer<vtkImageData> img, QString filename);
@@ -86,6 +91,7 @@ public:
 	inline QColor surfaceColor() { return m_surfaceColor; };
 
 	inline double opacity() { return m_opacity; };
+	inline double currentIsoLevel() { return m_isoLevelVal; };
 
 	inline int selectedId() { return m_objId; };
 };

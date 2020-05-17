@@ -79,10 +79,12 @@ public:
     QRadioButton *multiContoursButton;
     QRadioButton *singleContourButton;
     QGridLayout *gridLayout_5;
+    QSlider *isoLevelSlider;
+    QLabel *label;
+    QDoubleSpinBox *dIsoSpinBox;
+    QSpinBox *nContoursSpinBox;
     QLabel *contoursLabel;
     QLabel *isoLevelLabel;
-    QSlider *horizontalSlider;
-    QSpinBox *nContoursSpinBox;
     QVBoxLayout *verticalLayout_4;
     QGroupBox *sceneObjectsGroupBox;
     QVBoxLayout *verticalLayout_5;
@@ -101,7 +103,7 @@ public:
         if (SurfaceEvolverGUI->objectName().isEmpty())
             SurfaceEvolverGUI->setObjectName(QString::fromUtf8("SurfaceEvolverGUI"));
         SurfaceEvolverGUI->setWindowModality(Qt::NonModal);
-        SurfaceEvolverGUI->resize(1185, 766);
+        SurfaceEvolverGUI->resize(1201, 766);
         SurfaceEvolverGUI->setMaximumSize(QSize(16777213, 16777215));
         SurfaceEvolverGUI->setDocumentMode(true);
         actionOpenFile = new QAction(SurfaceEvolverGUI);
@@ -245,6 +247,7 @@ public:
 
         scalarDataGroupBox = new QGroupBox(centralwidget);
         scalarDataGroupBox->setObjectName(QString::fromUtf8("scalarDataGroupBox"));
+        scalarDataGroupBox->setEnabled(false);
         scalarDataGroupBox->setMinimumSize(QSize(0, 100));
         scalarDataGroupBox->setMaximumSize(QSize(400, 16777215));
         gridLayout_4 = new QGridLayout(scalarDataGroupBox);
@@ -271,23 +274,28 @@ public:
 
         gridLayout_5 = new QGridLayout();
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        contoursLabel = new QLabel(scalarDataGroupBox);
-        contoursLabel->setObjectName(QString::fromUtf8("contoursLabel"));
+        isoLevelSlider = new QSlider(scalarDataGroupBox);
+        isoLevelSlider->setObjectName(QString::fromUtf8("isoLevelSlider"));
+        isoLevelSlider->setMaximumSize(QSize(120, 16777215));
+        isoLevelSlider->setMaximum(100);
+        isoLevelSlider->setPageStep(10);
+        isoLevelSlider->setOrientation(Qt::Horizontal);
+        isoLevelSlider->setTickPosition(QSlider::NoTicks);
 
-        gridLayout_5->addWidget(contoursLabel, 0, 0, 1, 1);
+        gridLayout_5->addWidget(isoLevelSlider, 2, 1, 1, 1);
 
-        isoLevelLabel = new QLabel(scalarDataGroupBox);
-        isoLevelLabel->setObjectName(QString::fromUtf8("isoLevelLabel"));
+        label = new QLabel(scalarDataGroupBox);
+        label->setObjectName(QString::fromUtf8("label"));
 
-        gridLayout_5->addWidget(isoLevelLabel, 1, 0, 1, 1);
+        gridLayout_5->addWidget(label, 3, 0, 1, 1);
 
-        horizontalSlider = new QSlider(scalarDataGroupBox);
-        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
-        horizontalSlider->setMaximumSize(QSize(120, 16777215));
-        horizontalSlider->setMaximum(100);
-        horizontalSlider->setOrientation(Qt::Horizontal);
+        dIsoSpinBox = new QDoubleSpinBox(scalarDataGroupBox);
+        dIsoSpinBox->setObjectName(QString::fromUtf8("dIsoSpinBox"));
+        dIsoSpinBox->setMaximum(100.000000000000000);
+        dIsoSpinBox->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
+        dIsoSpinBox->setValue(5.000000000000000);
 
-        gridLayout_5->addWidget(horizontalSlider, 1, 1, 1, 1);
+        gridLayout_5->addWidget(dIsoSpinBox, 3, 1, 1, 1);
 
         nContoursSpinBox = new QSpinBox(scalarDataGroupBox);
         nContoursSpinBox->setObjectName(QString::fromUtf8("nContoursSpinBox"));
@@ -296,6 +304,16 @@ public:
         nContoursSpinBox->setValue(6);
 
         gridLayout_5->addWidget(nContoursSpinBox, 0, 1, 1, 1);
+
+        contoursLabel = new QLabel(scalarDataGroupBox);
+        contoursLabel->setObjectName(QString::fromUtf8("contoursLabel"));
+
+        gridLayout_5->addWidget(contoursLabel, 0, 0, 1, 1);
+
+        isoLevelLabel = new QLabel(scalarDataGroupBox);
+        isoLevelLabel->setObjectName(QString::fromUtf8("isoLevelLabel"));
+
+        gridLayout_5->addWidget(isoLevelLabel, 2, 0, 1, 1);
 
 
         gridLayout_4->addLayout(gridLayout_5, 0, 1, 1, 1);
@@ -360,7 +378,7 @@ public:
         SurfaceEvolverGUI->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(SurfaceEvolverGUI);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1185, 26));
+        menuBar->setGeometry(QRect(0, 0, 1201, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuTools = new QMenu(menuBar);
@@ -388,6 +406,9 @@ public:
         QObject::connect(clearButton, SIGNAL(clicked()), SurfaceEvolverGUI, SLOT(ActionClearAllObjects()));
         QObject::connect(multiContoursButton, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionScalarMultipleContours()));
         QObject::connect(singleContourButton, SIGNAL(clicked(bool)), SurfaceEvolverGUI, SLOT(ActionScalarMultipleContours()));
+        QObject::connect(nContoursSpinBox, SIGNAL(valueChanged(int)), SurfaceEvolverGUI, SLOT(ActionNContours()));
+        QObject::connect(isoLevelSlider, SIGNAL(valueChanged(int)), SurfaceEvolverGUI, SLOT(ActionIsolevel()));
+        QObject::connect(dIsoSpinBox, SIGNAL(valueChanged(double)), SurfaceEvolverGUI, SLOT(ActionDIso()));
 
         QMetaObject::connectSlotsByName(SurfaceEvolverGUI);
     } // setupUi
@@ -437,6 +458,7 @@ public:
         scalarDataGroupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Scalar data properties:", nullptr));
         multiContoursButton->setText(QCoreApplication::translate("SurfaceEvolverGUI", "multiple contours", nullptr));
         singleContourButton->setText(QCoreApplication::translate("SurfaceEvolverGUI", "single contour", nullptr));
+        label->setText(QCoreApplication::translate("SurfaceEvolverGUI", "dIso:", nullptr));
         contoursLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "contours:", nullptr));
         isoLevelLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "iso-level: 0", nullptr));
         sceneObjectsGroupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Scene objects:", nullptr));

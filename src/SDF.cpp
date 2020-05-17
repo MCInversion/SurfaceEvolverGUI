@@ -53,6 +53,7 @@ SDF::SDF(SDFParams* sdfParams)
 	this->octree->setLeafValueToScalarGrid(this->grid);
 
 	this->grid->expand();
+	this->grid->max_unclipped_isolevel = 0.5 * (this->grid->bbox.getSize() - this->octree->bbox.getSize()).length();
 	this->fastSweep = new FastSweep3D(this->grid, NSweeps);
 
 	auto endSDF_FS = std::chrono::high_resolution_clock::now();

@@ -92,7 +92,7 @@ SceneObject::SceneObject(Grid* grid, QString name)
 	m_name = name;
 	m_type = ObjectType::SGrid;
 	initFromGrid(grid);
-	initVolumeProperties();
+	initVolumeProperties(grid);
 }
 
 // ======================================================
@@ -122,6 +122,19 @@ void SceneObject::setSurfaceColor(QColor& color)
 {
 	m_surfaceColor = color;
 	m_surfaceActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
+}
+
+void SceneObject::updateContours()
+{
+	double range[2] = { m_valMin, m_valMax };
+	sampleIsoSurfaces(range, m_nContours);
+}
+
+void SceneObject::setIsoLevel(double isoLevel)
+{
+	double isoInRange = m_valMin + isoLevel / 100 * (m_valMax - m_valMin);
+	m_isoLevel = isoInRange;
+	updateContours();
 }
 
 void SceneObject::initMappersFromPolyData()
@@ -221,7 +234,7 @@ void SceneObject::initFromGrid(Grid* grid)
 	m_imgData->GetPointData()->SetScalars(dataArray);
 }
 
-void SceneObject::initVolumeProperties()
+void SceneObject::initVolumeProperties(Grid* grid)
 {
 	if (m_type != ObjectType::SGrid) return;
 
@@ -229,16 +242,37 @@ void SceneObject::initVolumeProperties()
 	m_imgData->Modified();
 	m_imgData->GetPointData()->GetScalars()->Modified();
 	m_imgData->GetScalarRange(valuesRange);
-	double valMin = valuesRange[0], valMax = valuesRange[1];
-	double valRangeLength = valMax - valMin;
+	m_valMin = valuesRange[0], m_valMax = valuesRange[1];
+	double valRangeLength = m_valMax - m_valMin;
+
+	if (!grid) {
+		m_isoLevel = 0.5 * (m_valMin + m_valMax);
+	}
+	else {
+		m_isoLevel = 0.5 * grid->max_unclipped_isolevel;
+	}
+
+	// default dIso
+	m_dIso = valRangeLength * 0.05;
+
+	// defaults:
+	m_opacity = 0.3;
+	m_vertex = false;
+	m_wireframe = false;
+	m_surface = true;
+
+	m_vertexColor = QColor(255, 255, 255);
+	m_edgeColor = QColor(255, 255, 255);
+	m_surfaceColor = QColor(9, 171, 105);
 
 	// printf("minVal = %lf, maxVal = %lf", valuesRange[0], valuesRange[1]);
+	/*
 	vtkSmartPointer<vtkSmartVolumeMapper> volumeMapper = vtkSmartPointer<vtkSmartVolumeMapper>::New();
 	volumeMapper->SetBlendModeToComposite();
 
 	// input data
 	volumeMapper->SetInputData(m_imgData);
-	/**/
+
 	// default volume property
 	vtkSmartPointer<vtkVolumeProperty> volumeProperty = vtkSmartPointer<vtkVolumeProperty>::New();
 	volumeProperty->ShadeOff();
@@ -263,9 +297,9 @@ void SceneObject::initVolumeProperties()
 	volumeMapper->SetRequestedRenderModeToRayCast();
 	m_volume = vtkSmartPointer<vtkVolume>::New();
 	m_volume->SetMapper(volumeMapper);
-	m_volume->SetProperty(volumeProperty);
+	m_volume->SetProperty(volumeProperty);*/
 
-	sampleIsoSurfaces(valuesRange, m_nIsoSamples);
+	sampleIsoSurfaces(valuesRange, m_nContours);
 }
 
 void SceneObject::sampleIsoSurfaces(double* range, int nSamples)
@@ -277,29 +311,36 @@ void SceneObject::sampleIsoSurfaces(double* range, int nSamples)
 	vtkSmartPointer<vtkMarchingCubes> surface = vtkSmartPointer<vtkMarchingCubes>::New();
 	surface->SetInputData(m_imgData);
 	surface->ComputeNormalsOn();
-	surface->SetNumberOfContours(nSamples);
 
-	double newMax = range[1] - 0.2 * (range[1] - range[0]);
+	if (m_singleContour) {
+		surface->SetNumberOfContours(1);
+		surface->SetValue(0, m_isoLevel);
+	}
+	else {
+		surface->SetNumberOfContours(nSamples);
 
-	for (vtkIdType id = 0; id < nSamples; id++) {
-		double isoValue = range[0] + (double)(id + 1) / (double)(nSamples + 1) * (newMax - range[0]);
-		surface->SetValue(id, isoValue);
-	}	
+		vtkIdType contourId = 0;
+		
+		for (vtkIdType id = nSamples / 2; id != 0; id--) {
+			double isoValue;
+			isoValue = m_isoLevel - std::floor((double)id / (double)2) * m_dIso;
+
+			if (isoValue > range[1] || isoValue < range[0]) continue;
+			surface->SetValue(contourId++, isoValue);
+		}
+
+		for (vtkIdType id = 0; id < nSamples / 2; id++) {
+			double isoValue;
+			isoValue = m_isoLevel + std::floor((double)id / (double)2) * m_dIso;
+		
+			if (isoValue > range[1] || isoValue < range[0]) continue;
+			surface->SetValue(contourId++, isoValue);
+		}
+	}
 
 	// === isosurf sampled ====================================
 	
 	initMappersFromOutput(surface->GetOutputPort(), false);
-
-	// defaults:
-	m_opacity = 0.3;
-	m_vertex = false;
-	m_wireframe = false;
-	m_surface = true;
-
-	m_vertexColor = QColor(255, 255, 255);
-	m_edgeColor = QColor(255, 255, 255);
-	m_surfaceColor = QColor(9, 171, 105);
-
 	initMeshProperties();
 }
 

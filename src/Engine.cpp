@@ -26,8 +26,6 @@ void Engine::updateRenderedObjects()
 		}
 	}
 
-	// printf("m_renderer->GetNumberOfPropsRendered() = %d\n", m_renderer->GetNumberOfPropsRendered());
-
 	for (SceneObject help : m_helperObjects) {
 		m_renderer->AddActor(help.getEdgeActor());
 	}
@@ -109,6 +107,58 @@ void Engine::setOpacityToObjects(double opacity, std::vector<int> selectedIds)
 	}
 
 	m_renderWindow->Render();
+}
+
+void Engine::setSingleContourToObjects(bool singleContour, std::vector<int> selectedIds)
+{
+	if (!selectedIds.empty()) {
+		for (int id : selectedIds) {
+			if (m_libObjects[id].type() == ObjectType::SGrid) {
+				m_libObjects[id].setSingleContour(singleContour);
+			}
+		}
+	}
+	updateRenderedObjects();
+}
+
+void Engine::setNContoursToObjects(int nContours, std::vector<int> selectedIds)
+{
+	if (!selectedIds.empty()) {
+		for (int id : selectedIds) {
+			if (m_libObjects[id].type() == ObjectType::SGrid) {
+				m_libObjects[id].setNContours(nContours);
+			}
+		}
+	}
+	updateRenderedObjects();
+}
+
+void Engine::setIsoLevelToObjects(double isoLevel, std::vector<int> selectedIds)
+{
+	if (!selectedIds.empty()) {
+		for (int id : selectedIds) {
+			if (m_libObjects[id].type() == ObjectType::SGrid) {
+				m_libObjects[id].setIsoLevel(isoLevel);
+				m_isoLevelVal = m_libObjects[id].isoLevel();
+			}
+		}
+	}
+
+	updateRenderedObjects();
+}
+
+void Engine::setDIsoToObjects(double dIso, std::vector<int> selectedIds)
+{
+	if (!selectedIds.empty()) {
+		for (int id : selectedIds) {
+			if (m_libObjects[id].type() == ObjectType::SGrid) {
+				m_libObjects[id].setDIso(dIso);
+			}
+		}
+	}
+
+	m_renderWindow->Render();
+	// updateRenderedObjects();
 }
 
 void Engine::addPolyDataObjectToScene(vtkSmartPointer<vtkPolyData> model, QString filename)

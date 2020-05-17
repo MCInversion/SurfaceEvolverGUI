@@ -68,6 +68,8 @@ public:
 
 	// fraction of the scale with which the grid should exceed the mesh bbox
 	double max_offset_factor = 0.5;
+	// maximum isolevel of a distance field which is not clipped by bbox
+	double max_unclipped_isolevel = 0.0;
 	void getSurroundingCells(Vector3& pos,
 		uint oldNx, uint oldNy, uint oldNz, double* oldField,
 		std::vector<Vector3>* positionBuffer, std::vector<double>* valueBuffer);
