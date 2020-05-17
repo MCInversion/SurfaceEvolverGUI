@@ -118,6 +118,8 @@ public:
 	// ------- scalar grid public methods ----------------
 	inline const vtkSmartPointer<vtkVolume>& getVolume() const { return m_volume; };
 	const vtkSmartPointer<vtkActor>& getIsoSurfaceActor() const { return m_isoSurfaceActor; };
+
+	vtkSmartPointer<vtkPolyData> getPolyDataFromSurfaces();
 	//
 private:
 

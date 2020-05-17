@@ -340,7 +340,7 @@ void SceneObject::sampleIsoSurfaces(double* range, int nSamples)
 
 	// === isosurf sampled ====================================
 	
-	initMappersFromOutput(surface->GetOutputPort(), false);
+	initMappersFromOutput(surface->GetOutputPort(), true);
 	initMeshProperties();
 }
 
@@ -470,4 +470,9 @@ Geometry SceneObject::translatePolyDataToGeometry()
 	result.computeNormals();
 
 	return result;
+}
+
+vtkSmartPointer<vtkPolyData> SceneObject::getPolyDataFromSurfaces()
+{
+	return m_vertexMapper->GetInput();
 }

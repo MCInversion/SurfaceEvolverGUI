@@ -276,7 +276,7 @@ public:
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         isoLevelSlider = new QSlider(scalarDataGroupBox);
         isoLevelSlider->setObjectName(QString::fromUtf8("isoLevelSlider"));
-        isoLevelSlider->setMaximumSize(QSize(120, 16777215));
+        isoLevelSlider->setMaximumSize(QSize(180, 16777215));
         isoLevelSlider->setMaximum(100);
         isoLevelSlider->setPageStep(10);
         isoLevelSlider->setOrientation(Qt::Horizontal);

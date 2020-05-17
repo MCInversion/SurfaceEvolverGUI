@@ -440,12 +440,31 @@ void SurfaceEvolverGUI::actionOpen_File()
 
 void SurfaceEvolverGUI::actionSave_File()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save VTK file"), "../../models", tr("VTK file (*.vtk)"));
-    if (fileName.isEmpty()) {
-        return;
-    }
-    else {
-        QFile file(fileName);
+    QList<QListWidgetItem*> selection = ui->libraryListWidget->selectedItems();
+    if (!selection.isEmpty() && selection.size() == 1) {
+        QString fileName = QFileDialog::getSaveFileName(this, tr("Save VTK file"), "../../models", tr("VTK file (*.vtk)"));
+        std::vector<int> selectedIds = getSelectionIndices();
+        if (fileName.isEmpty()) {
+            return;
+        }
+        else {
+            vtkSmartPointer<vtkPolyDataWriter> writer = vtkSmartPointer<vtkPolyDataWriter>::New();
+            writer->SetFileName(fileName.toStdString().c_str());
+            SceneObject* selectedObj = m_engine->getLibraryObject(selectedIds[0]);
+
+            if (selectedObj->type() == ObjectType::Mesh) {
+                writer->SetInputData(selectedObj->getPolyData());
+            }
+            else if (selectedObj->type() == ObjectType::SGrid) {
+                writer->SetInputData(selectedObj->getPolyDataFromSurfaces());
+            }
+            else {
+                return;
+            }
+            
+            // QFile file(fileName);
+            writer->Write();
+        }
     }
 }
 

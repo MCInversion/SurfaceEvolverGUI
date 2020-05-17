@@ -15,6 +15,7 @@
 #include <vtkSimpleReader.h>
 #include <vtkPolyDataReader.h>
 #include <vtkXMLImageDataReader.h>
+#include <vtkPolyDataWriter.h>
 #include <vtkCamera.h>
 #include <vtkSmartPointer.h>
 #include <vtkGenericOpenGLRenderWindow.h>

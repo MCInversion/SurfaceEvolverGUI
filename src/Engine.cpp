@@ -143,7 +143,6 @@ void Engine::setIsoLevelToObjects(double isoLevel, std::vector<int> selectedIds)
 			}
 		}
 	}
-
 	updateRenderedObjects();
 }
 
@@ -156,9 +155,7 @@ void Engine::setDIsoToObjects(double dIso, std::vector<int> selectedIds)
 			}
 		}
 	}
-
-	m_renderWindow->Render();
-	// updateRenderedObjects();
+	updateRenderedObjects();
 }
 
 void Engine::addPolyDataObjectToScene(vtkSmartPointer<vtkPolyData> model, QString filename)
