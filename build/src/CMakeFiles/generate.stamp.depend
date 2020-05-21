@@ -51,6 +51,7 @@ D:/VTK/lib/cmake/vtk-8.2/Modules/vtkFiltersStatistics.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkGUISupportQt.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkIOCore.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkIOExport.cmake
+D:/VTK/lib/cmake/vtk-8.2/Modules/vtkIOGeometry.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkIOImage.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkIOImport.cmake
 D:/VTK/lib/cmake/vtk-8.2/Modules/vtkIOLegacy.cmake

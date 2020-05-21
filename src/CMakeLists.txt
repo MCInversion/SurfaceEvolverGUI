@@ -13,6 +13,7 @@ find_package(VTK REQUIRED
   vtkIOImport
   vtkIOExport
   vtkIOImage
+  vtkIOGeometry
   vtkIOXML
   vtkImagingCore
   vtkImagingHybrid

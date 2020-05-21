@@ -16,6 +16,7 @@
 #include <vtkPolyDataReader.h>
 #include <vtkXMLImageDataReader.h>
 #include <vtkPolyDataWriter.h>
+#include <vtkObjWriter.h>
 #include <vtkCamera.h>
 #include <vtkSmartPointer.h>
 #include <vtkGenericOpenGLRenderWindow.h>
@@ -47,6 +48,7 @@ public slots:
 
   void actionOpen_File();
   void actionSave_File();
+  void actionSave_Obj_File();
 
   void actionSigned_Distance_Function();
   void actionSurface_Evolution();

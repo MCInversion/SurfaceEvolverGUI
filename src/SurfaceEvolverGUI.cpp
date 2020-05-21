@@ -21,6 +21,7 @@ SurfaceEvolverGUI::SurfaceEvolverGUI()
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(slotExit()));
     connect(ui->actionOpen_File, SIGNAL(triggered()), this, SLOT(actionOpen_File()));
     connect(ui->actionSave_File, SIGNAL(triggered()), this, SLOT(actionSave_File()));
+    connect(ui->actionSave_Obj_File, SIGNAL(triggered()), this, SLOT(actionSave_Obj_File()));
 
     connect(ui->actionSigned_Distance_Function, SIGNAL(triggered()), this, SLOT(actionSigned_Distance_Function()));
     connect(ui->actionSurface_Evolution, SIGNAL(triggered()), this, SLOT(actionSurface_Evolution()));
@@ -462,6 +463,28 @@ void SurfaceEvolverGUI::actionSave_File()
                 return;
             }
             
+            // QFile file(fileName);
+            writer->Write();
+        }
+    }
+}
+
+void SurfaceEvolverGUI::actionSave_Obj_File()
+{
+    QList<QListWidgetItem*> selection = ui->libraryListWidget->selectedItems();
+    if (!selection.isEmpty() && selection.size() == 1) {
+        QString fileName = QFileDialog::getSaveFileName(this, tr("Save OBJ file"), "../../models", tr("OBJ file (*.obj)"));
+        std::vector<int> selectedIds = getSelectionIndices();
+        if (fileName.isEmpty()) {
+            return;
+        }
+        else {
+            vtkSmartPointer<vtkOBJWriter> writer = vtkSmartPointer<vtkOBJWriter>::New();
+            SceneObject* selectedObj = m_engine->getLibraryObject(selectedIds[0]);
+            vtkSmartPointer<vtkPolyData> exportPolyData = (selectedObj->type() == ObjectType::Mesh ? selectedObj->getPolyData() : selectedObj->getPolyDataFromSurfaces());
+
+            writer->SetFileName(fileName.toStdString().c_str());
+            writer->SetInputData(exportPolyData);
             // QFile file(fileName);
             writer->Write();
         }

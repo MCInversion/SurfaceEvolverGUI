@@ -49,6 +49,7 @@ public:
     QAction *actionDoSomething;
     QAction *actionSigned_Distance_Function;
     QAction *actionSurface_Evolution;
+    QAction *actionSave_Obj_File;
     QWidget *centralwidget;
     QGridLayout *gridLayout_3;
     QVBoxLayout *verticalLayout_2;
@@ -129,6 +130,8 @@ public:
         actionSigned_Distance_Function->setObjectName(QString::fromUtf8("actionSigned_Distance_Function"));
         actionSurface_Evolution = new QAction(SurfaceEvolverGUI);
         actionSurface_Evolution->setObjectName(QString::fromUtf8("actionSurface_Evolution"));
+        actionSave_Obj_File = new QAction(SurfaceEvolverGUI);
+        actionSave_Obj_File->setObjectName(QString::fromUtf8("actionSave_Obj_File"));
         centralwidget = new QWidget(SurfaceEvolverGUI);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setMaximumSize(QSize(16777215, 16777215));
@@ -389,6 +392,7 @@ public:
         menuBar->addAction(menuTools->menuAction());
         menuFile->addAction(actionOpen_File);
         menuFile->addAction(actionSave_File);
+        menuFile->addAction(actionSave_Obj_File);
         menuTools->addAction(actionSigned_Distance_Function);
         menuTools->addAction(actionSurface_Evolution);
 
@@ -442,6 +446,7 @@ public:
         actionDoSomething->setText(QCoreApplication::translate("SurfaceEvolverGUI", "DoSomething", nullptr));
         actionSigned_Distance_Function->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Signed Distance Function", nullptr));
         actionSurface_Evolution->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Surface Evolution", nullptr));
+        actionSave_Obj_File->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Save Obj File", nullptr));
         bgColorButton->setText(QString());
         bgColorLabel->setText(QCoreApplication::translate("SurfaceEvolverGUI", "Background color", nullptr));
         groupBox->setTitle(QCoreApplication::translate("SurfaceEvolverGUI", "Object render properties:", nullptr));
