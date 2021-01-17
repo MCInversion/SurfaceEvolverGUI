@@ -734,29 +734,29 @@ void AABBTree::AABBNode::construct(std::vector<uint>* primitiveIds, uint depthLe
 // find an optimal split position using an "Adaptive Error-Bounded Heuristic" (Hunt, Mark, Stoll)
 float AABBTree::AABBNode::getSplitPosition(std::vector<uint>& primitiveIds, std::vector<uint>* out_left, std::vector<uint>* out_right)
 {
-	const double tot_BoxArea = 2.0 * (this->bbox.max.x - this->bbox.min.x) +
+	const float tot_BoxArea = 2.0 * (this->bbox.max.x - this->bbox.min.x) +
 		2.0 * (this->bbox.max.y - this->bbox.min.y) +
 		2.0 * (this->bbox.max.z - this->bbox.min.z);
-	const uint CUTS = 4; 
+	const uint CUTS = 4;
 	const uint N_primitives = primitiveIds.size();
 	uint i, j;
 
 	// === Stage 1: Initial sampling of C_L(x) and C_R(x) ========================================================
 
 	// split interval limits:
-	const double a = bbox.min.getCoordById(axis);
-	const double b = bbox.max.getCoordById(axis);
+	const float a = bbox.min.getCoordById(axis);
+	const float b = bbox.max.getCoordById(axis);
 
 	// splits:
-	std::vector<double> bCutPos = std::vector<double>(CUTS + 2);
-	for (i = 0; i <= CUTS + 1; i++) bCutPos[i] = a * (1.0 - ((double)i / (double)(CUTS + 1))) + b * ((double)i / (double)(CUTS + 1));
+	std::vector<float> bCutPos = std::vector<float>(CUTS + 2);
+	for (i = 0; i <= CUTS + 1; i++) bCutPos[i] = a * (1.0 - ((float)i / (float)(CUTS + 1))) + b * ((float)i / (float)(CUTS + 1));
 
 	// set C_L(x) = 0, C_R(x) = 0
 	auto C_L = std::vector<uint>(CUTS + 2);
 	auto C_R = std::vector<uint>(CUTS + 2);
 
-	auto primMins = std::vector<double>(N_primitives);
-	auto primMaxes = std::vector<double>(N_primitives);
+	auto primMins = std::vector<float>(N_primitives);
+	auto primMaxes = std::vector<float>(N_primitives);
 
 	for (i = 0; i < N_primitives; i++) {
 		primMins[i] = this->tree->primitives[primitiveIds[i]].getMinById(this->axis);
@@ -772,13 +772,13 @@ float AABBTree::AABBNode::getSplitPosition(std::vector<uint>& primitiveIds, std:
 
 	// ===== Stage 2: Sample range [0, N_primitives] uniformly & count the number of samples within each segment ======
 
-	auto S_L = std::vector<double>(CUTS + 1);
-	auto S_R = std::vector<double>(CUTS + 1);
+	auto S_L = std::vector<float>(CUTS + 1);
+	auto S_R = std::vector<float>(CUTS + 1);
 
-	double ran_s;
+	float ran_s;
 
 	for (i = 0; i < CUTS; i++) {
-		ran_s = (double)(i + 1) / (double)(CUTS + 1) * N_primitives;
+		ran_s = (float)(i + 1) / (float)(CUTS + 1) * N_primitives;
 
 		for (j = 0; j <= CUTS; j++) {
 			S_L[j] += (ran_s > C_L[j] && ran_s < C_L[j + 1] ? 1 : 0);
@@ -789,9 +789,9 @@ float AABBTree::AABBNode::getSplitPosition(std::vector<uint>& primitiveIds, std:
 
 	// ==== Stage 3: add more sampling positions to subdivided segments ===========================================
 
-	auto all_splt_L = std::vector<double>(2 * CUTS);
-	auto all_splt_R = std::vector<double>(2 * CUTS);
-	double segLen = (double)(b - a) / (double)(CUTS + 1);
+	auto all_splt_L = std::vector<float>(2 * CUTS);
+	auto all_splt_R = std::vector<float>(2 * CUTS);
+	float segLen = (float)(b - a) / (float)(CUTS + 1);
 	uint nSeg_L = 0, nSeg_R = 0;
 
 	for (i = 0; i <= CUTS; i++) {
@@ -809,11 +809,11 @@ float AABBTree::AABBNode::getSplitPosition(std::vector<uint>& primitiveIds, std:
 
 	// Compute surface area heuristic SAH:
 	// remaining two dimensions of the child box candidates
-	const double boxDim0 = bbox.min.getCoordById((this->axis + 1) % 3) - bbox.min.getCoordById((this->axis + 1) % 3);
-	const double boxDim1 = bbox.min.getCoordById((this->axis + 2) % 3) - bbox.min.getCoordById((this->axis + 2) % 3);
+	const float boxDim0 = bbox.min.getCoordById((this->axis + 1) % 3) - bbox.min.getCoordById((this->axis + 1) % 3);
+	const float boxDim1 = bbox.min.getCoordById((this->axis + 2) % 3) - bbox.min.getCoordById((this->axis + 2) % 3);
 
-	auto SA_L = std::vector<double>(2 * CUTS);
-	auto SA_R = std::vector<double>(2 * CUTS);
+	auto SA_L = std::vector<float>(2 * CUTS);
+	auto SA_R = std::vector<float>(2 * CUTS);
 
 	// SA_L(x) = (boxDim_L(x) + boxDim0 + boxDim1) * 2.0 / tot_BoxArea
 	// SA_R(x) = (boxDim_R(x) + boxDim0 + boxDim1) * 2.0 / tot_BoxArea
@@ -824,8 +824,8 @@ float AABBTree::AABBNode::getSplitPosition(std::vector<uint>& primitiveIds, std:
 	}
 
 	// ==== Stage 4: RESAMPLE C_L and C_R on all sample points & construct an approximation of cost(x) to minimize
-	double min, max;
-	auto cost = std::vector<double>(2 * CUTS);
+	float min, max;
+	auto cost = std::vector<float>(2 * CUTS);
 
 	// cost(x) = C_L(x) * SA_L(x) + C_R(x) * SA_R(x):
 	for (i = 0; i < N_primitives; i++) {
@@ -839,7 +839,7 @@ float AABBTree::AABBNode::getSplitPosition(std::vector<uint>& primitiveIds, std:
 
 	// ==== Stage 5: Minimize cost(x) & classify primitives  =====================================================
 
-	double bestSplit, minCost = DBL_MAX;
+	float bestSplit, minCost = DBL_MAX;
 
 	for (i = 1; i < 2 * CUTS; i++) {
 		if (cost[i] < minCost) {
@@ -864,6 +864,9 @@ float AABBTree::AABBNode::getSplitPosition(std::vector<uint>& primitiveIds, std:
 	return bestSplit;
 }
 
+// Fast kd-tree Construction with an Adaptive Error-Bounded Heuristic (Hunt, Mark, Stoll)
+// see  AABBTree::AABBNode::getAdaptivelyResampledSplitPosition for implementation
+//
 // ============ Adaptive resampling helper macros ============
 
 #define SHIFT_m256_LEFT(source, target)												\

@@ -1,4 +1,0 @@
-D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/ALL_BUILD.dir
-D:/VS_Projects/SurfaceEvolverGUI/build/CMakeFiles/ZERO_CHECK.dir
-D:/VS_Projects/SurfaceEvolverGUI/build/src/CMakeFiles/POLY2TRI.dir
-D:/VS_Projects/SurfaceEvolverGUI/build/src/CMakeFiles/SurfaceEvolverGUI.dir
