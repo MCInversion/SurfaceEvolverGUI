@@ -2,6 +2,7 @@
 #define AABBTREE_H_
 
 #include <stack>
+#include <algorithm>
 #include <nmmintrin.h>
 #include <immintrin.h>
 #include "PrimitiveBox.h"
